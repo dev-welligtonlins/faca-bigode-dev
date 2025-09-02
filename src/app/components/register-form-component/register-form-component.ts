@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-register-form-component',
@@ -8,8 +8,9 @@ import { Component } from '@angular/core';
   styleUrl: './register-form-component.scss'
 })
 export class RegisterFormComponent {
+  @Output() submitForm = new EventEmitter<void>();
 
-  registerUser() {
-    console.log('Usuário cadastrado!')
+  onSubmit() {
+    this.submitForm.emit();
   }
 }

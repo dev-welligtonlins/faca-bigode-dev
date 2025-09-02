@@ -5,8 +5,9 @@
     </div>
     <div class="section-right">
         <app-login-form-component *ngIf="isLogin"></app-login-form-component>
-        <app-register-form-component *ngIf="!isLogin"></app-register-form-component>
-        <div class="signup-link">{{!isLogin ? 'Já tem conta? Fazer'  : 'Não tem uma conta?' }}
+        <app-register-form-component *ngIf="!isLogin" (submitForm)="openModal()"></app-register-form-component>
+        <app-modal-register-component #modalRegister></app-modal-register-component>
+        <div class="signup-link">{{!isLogin ? 'Já tem conta? Fazer' : 'Não tem uma conta?' }}
             <span (click)="toggleMode()" class="create-account">{{ !isLogin ? ' Login' : ' Criar conta' }}</span>
         </div>
     </div>
