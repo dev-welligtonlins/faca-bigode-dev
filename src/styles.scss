@@ -31,12 +31,7 @@ body {
         gap: 10px;
         margin-bottom: 0px;
         width: 100%;
-        // impede que transborde para fora x
-
-        // overflow-y: auto;f
-        // /* adiciona scroll vertical */
-        // overflow-x: hidden;
-        // /* evita scroll lateral desnecessário */
+        overflow-y: auto;
 
         fieldset {
             border: 1px solid #7F62F5;
@@ -110,6 +105,24 @@ body {
                 background-color: #5f49b7;
             }
         }
+    }
+
+    form::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    /* trilho (fundo do scroll) */
+    form::-webkit-scrollbar-track {
+        //   background: transparent !important;
+        margin: 20px 0;
+    }
+
+    /* barrinha que desliza */
+    form::-webkit-scrollbar-thumb {
+        background-color: #7F62F5;
+        /* mude ou deixe transparente */
+        border-radius: 10px;
+        margin-top: 400px;
     }
 
     .section-left {

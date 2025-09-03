@@ -8,28 +8,7 @@ h2 {
 
 form {
     height: 340px;
-    overflow-y: auto;
 }
-
-form::-webkit-scrollbar {
-    width: 8px;
-}
-
-/* trilho (fundo do scroll) */
-form::-webkit-scrollbar-track {
-    //   background: transparent !important;
-     margin: 20px 0;
-}
-
-/* barrinha que desliza */
-form::-webkit-scrollbar-thumb {
-    background-color: #888;
-    /* mude ou deixe transparente */
-    border-radius: 10px;
-    margin-top: 400px;
-
-}
-
 
 .div-or {
     display: flex;
