@@ -13,15 +13,61 @@ form {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+
+        .cep {
+            width: 60%;
+        }
+
+        .number {
+            width: 25%;
+        }
     }
 
-    .cep-and-number .cep {
-        width: 50%;
+    .uf-and-city {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
 
+        .city {
+            width: 60%;
+        }
+
+        .uf {
+            width: 30%;
+        }
     }
 
-    .cep-and-number .number {
-        width: 35%;
+    .rua-bairro {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .rua {
+            width: 50%;
+        }
+
+        .bairro {
+            width: 40%;
+        }
     }
 
+
+}
+
+.signup-link {
+    margin-top: 3%;
+    gap: 1;
+    font-family: 'Inter', light;
+    font-size: 13px;
+    color: #c0c0c0;
+    text-align: center;
+}
+
+.signup-link .create-account {
+    color: #7F62F5;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 5px;
+    transition: color 0.3s ease;
 }

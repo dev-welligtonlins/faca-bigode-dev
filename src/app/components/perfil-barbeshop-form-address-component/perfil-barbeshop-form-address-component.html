@@ -1,22 +1,32 @@
 <h2>Endereço</h2>
-<!-- <span class="input-group-text icons-background">
-    <i class="bi bi-person-circle"></i>
-</span> -->
-<form>
+
+<form [formGroup]="form">
     <div class="cep-and-number">
         <fieldset class="cep">
             <legend>Cep</legend>
             <div class="input-group">
-                <input type="text" id="cep" class="form-control" placeholder="cep: xxxx-xxx" required>
+                <input formControlName="cep" type="text" id="cep" class="form-control" placeholder="" required>
             </div>
         </fieldset>
         <fieldset class="number">
             <legend>Número</legend>
             <div class="input-group">
-                <!-- <span class="input-group-text icons-background">
-                    <i class="bi bi-envelope-check-fill"></i>
-                </span> -->
-                <input type="number" id="number" class="form-control" placeholder="" required>
+                <input type="text" id="number" class="form-control" placeholder="" required>
+            </div>
+        </fieldset>
+    </div>
+    <div class="rua-bairro">
+        <fieldset class="rua">
+            <legend>Rua</legend>
+            <div class="input-group">
+                <input formControlName="logradouro" type="text" id="logradouro" class="form-control" placeholder=""
+                    required>
+            </div>
+        </fieldset>
+        <fieldset class="bairro">
+            <legend>Bairro</legend>
+            <div class="input-group">
+                <input formControlName="bairro" type="text" id="bairro" class="form-control" placeholder="" required>
             </div>
         </fieldset>
     </div>
@@ -26,25 +36,31 @@
             <!-- <span class="input-group-text icons-background">
                 <i class="bi bi-telephone-inbound-fill"></i>
             </span> -->
-            <input type="text" id="complement" class="form-control" placeholder="Ex: Sala, AP, Bloco" required>
+            <input type="text" id="complement" class="form-control" placeholder="    Ex: sala ou ap" required>
         </div>
     </fieldset>
-    <fieldset>
-        <legend>Bairro</legend>
-        <div class="input-group">
-            <!-- <span class="input-group-text icons-background">
-                <i class="bi bi-telephone-inbound-fill"></i>
-            </span> -->
-            <input type="text" id="neighborhood" class="form-control" placeholder="Bairro" required>
-        </div>
-    </fieldset>
-    <fieldset>
-        <legend>Rua</legend>
-        <div class="input-group">
-            <!-- <span class="input-group-text icons-background">
-                <i class="bi bi-telephone-inbound-fill"></i>
-            </span> -->
-            <input type="text" id="road" class="form-control" placeholder="Rua" required>
-        </div>
-    </fieldset>
+    <div class="uf-and-city">
+        <fieldset class="city">
+            <legend>Cidade</legend>
+            <div class="input-group">
+                <!-- <span class="input-group-text icons-background">
+                    <i class="bi bi-telephone-inbound-fill"></i>
+                </span> -->
+                <input formControlName="cidade" type="text" id="cidade" class="form-control" placeholder="" required>
+            </div>
+        </fieldset>
+        <fieldset class="uf">
+            <legend>UF</legend>
+            <div class="input-group">
+                <!-- <span class="input-group-text icons-background">
+                    <i class="bi bi-telephone-inbound-fill"></i>
+                </span> -->
+                <input formControlName="uf" type="text" id="uf" class="form-control" placeholder="" required>
+            </div>
+        </fieldset>
+    </div>
+    <button type="submit">Salvar Endereço</button>
 </form>
+<div class="signup-link">Se preferir,
+    <span class="create-account">deixar pra depois</span>
+</div>
