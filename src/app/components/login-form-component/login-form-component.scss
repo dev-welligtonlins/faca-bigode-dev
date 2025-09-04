@@ -39,21 +39,20 @@ h2 {
 
     // Botão do google
     .google-login {
-        width: 80%;
+        text-align: center;
         margin-top: 2%;
         display: flex;
         align-items: center;
-        gap: 8px;
-        /* espaço entre ícone e texto */
+        gap: 30px; /* espaço entre ícone e texto */
         padding: 10px;
-        background-color: #02274300;
+        background-color: #33618500;
         border: 1px solid #7F62F5;
         border-radius: 10px;
         font-family: 'Inter', light;
         font-size: 14px;
         font-weight: 500;
-        cursor: pointer;
         color: #c0c0c0;
+        min-width: 275px
     }
 
     .google-icon {
@@ -62,6 +61,3 @@ h2 {
     }
 
 }
-
-
-

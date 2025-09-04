@@ -48,8 +48,8 @@ body {
 
         fieldset legend {
             font-family: 'Inter', sans-serif;
-            font-weight: 100; /* Light */
-            font-size: 15px;
+            font-weight: 100;  /* Light */
+            font-size: 11px;
             color: #ffffff;
             margin-left: 10px;
             margin-bottom: 0px;
@@ -80,7 +80,8 @@ body {
         .form-control:focus {
             background-color: transparent !important;
             color: #ffffff;
-            border-color: #ccc; /* opcional */
+            border-color: #ccc;
+            /* opcional */
             box-shadow: none !important;
         }
 
