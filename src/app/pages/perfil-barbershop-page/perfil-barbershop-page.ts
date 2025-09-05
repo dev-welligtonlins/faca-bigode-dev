@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { PerfilBarbeshopFormAddressComponent } from '../../components/perfil-barbeshop-form-address-component/perfil-barbeshop-form-address-component';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { PerfilBarbershopFormServicesComponent } from '../../components/perfil-barbershop-form-services-component/perfil-barbershop-form-services-component';
 
 @Component({
   selector: 'app-perfil-barbershop-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, PerfilBarbeshopFormAddressComponent],
+  imports: [CommonModule, ReactiveFormsModule, PerfilBarbeshopFormAddressComponent, PerfilBarbershopFormServicesComponent],
   templateUrl: './perfil-barbershop-page.html',
   styleUrl: './perfil-barbershop-page.scss'
 })
@@ -23,6 +24,11 @@ export class PerfilBarbershopPage {
       complemento: this.fb.control('', { nonNullable: true }),
       localidade: this.fb.control('', { nonNullable: true }),
       uf: this.fb.control('', { nonNullable: true }),
+
+      descricao: this.fb.control('', {nonNullable: true}),
+      duracao: this.fb.control('', {nonNullable: true}),
+      valor: this.fb.control('', {nonNullable: true}),
+      tipo_servico: this.fb.control('', {nonNullable: true}),
     });
   }
 
@@ -39,7 +45,7 @@ export class PerfilBarbershopPage {
   }
 
   finish() {
-    const dados: PerfilBarbeshopFormAddressComponent = this.form.getRawValue();
+    const dados: any = this.form.getRawValue();
     console.log('📌 Dados finais prontos para backend:', dados);
   }
 }

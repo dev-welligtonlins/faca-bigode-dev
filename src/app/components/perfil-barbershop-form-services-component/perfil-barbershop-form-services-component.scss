@@ -1,0 +1,43 @@
+h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Inter', bold;
+    color: white;
+}
+
+form {
+    height: 340px;
+
+    .duration_and_value {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        .duration {
+            width: 25%;
+        }
+
+        .value {
+            width: 25%;
+        }
+    }
+
+}
+
+.signup-link {
+    margin-top: 3%;
+    gap: 1;
+    font-family: 'Inter', light;
+    font-size: 13px;
+    color: #c0c0c0;
+    text-align: center;
+}
+
+.signup-link .create-account {
+    color: #7F62F5;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 5px;
+    transition: color 0.3s ease;
+}
