@@ -33,7 +33,7 @@ export class PerfilBarbershopPage {
   }
 
   nextStep() {
-    if (this.start < 2) {
+    if (this.start < 3) {
       this.start++;
     } else {
       this.finish();

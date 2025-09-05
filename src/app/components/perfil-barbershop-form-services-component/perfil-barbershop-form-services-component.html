@@ -1,4 +1,4 @@
-<h2>Endereço</h2>
+<h2>Servico</h2>
 <form [formGroup]="form">
 
     <fieldset>
@@ -32,27 +32,21 @@
         </fieldset>
     </div>
     <fieldset>
-        <legend>Corte/Barba</legend>
-        <div class="input-group">
-            <!-- <span class="input-group-text icons-background">
-                <i class="bi bi-telephone-inbound-fill"></i>
-            </span> -->
-            <input type="text" formControlName="tipo_servico" id="tipo_servico" class="form-control" placeholder=""
-                required>
+        <legend>Categoria</legend>
+        <div class="tipo-servico">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                    value="option1">
+                <label class="form-check-label" for="inlineRadio1">Cabelo</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                    value="option2">
+                <label class="form-check-label" for="inlineRadio2">Barba</label>
+            </div>
         </div>
     </fieldset>
-    <!-- <div class="form-check">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-        <label class="form-check-label" for="flexRadioDefault1">
-            Default radio
-        </label>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-        <label class="form-check-label" for="flexRadioDefault2">
-            Default checked radio
-        </label>
-    </div> -->
+    <button type="submit">Adicionar +</button>
 </form>
 <div class="signup-link">Se preferir,
     <span class="create-account">deixar pra depois</span>
