@@ -3,7 +3,13 @@
         <h2>Bem-vindo</h2>
         <img src="assets/img/bigode.png" alt="Logo" class="logo" />
     </div>
-    <div class="section-right">
-        <app-perfil-barbeshop-form-address-component></app-perfil-barbeshop-form-address-component>
+    <div [ngSwitch]="start" class="section-right">
+        <app-perfil-barbeshop-form-address-component *ngSwitchCase="1" [form]="form"></app-perfil-barbeshop-form-address-component>
+    </div>
+    <div class="d-flex justify-content-between mt-3">
+        <button class="btn btn-secondary" (click)="prevStep()" [disabled]="start === 1">Voltar</button>
+        <button class="btn btn-primary" (click)="nextStep()">
+            {{ start === 2 ? 'Finalizar' : 'Próximo' }}
+        </button>
     </div>
 </section>

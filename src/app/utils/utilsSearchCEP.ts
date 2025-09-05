@@ -3,9 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AddressModel } from '../models/address-model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({  providedIn: 'root' })
 export class utilsSearchCEP {
 
   private apiUrl = 'https://viacep.com.br/ws';
