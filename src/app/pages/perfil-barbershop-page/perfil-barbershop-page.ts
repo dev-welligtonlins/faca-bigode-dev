@@ -3,11 +3,12 @@ import { PerfilBarbeshopFormAddressComponent } from '../../components/perfil-bar
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PerfilBarbershopFormServicesComponent } from '../../components/perfil-barbershop-form-services-component/perfil-barbershop-form-services-component';
+import { PerfilBarbershopFormBarberComponent } from '../../components/perfil-barbershop-form-barber-component/perfil-barbershop-form-barber-component';
 
 @Component({
   selector: 'app-perfil-barbershop-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, PerfilBarbeshopFormAddressComponent, PerfilBarbershopFormServicesComponent],
+  imports: [CommonModule, ReactiveFormsModule, PerfilBarbeshopFormAddressComponent, PerfilBarbershopFormServicesComponent, PerfilBarbershopFormBarberComponent],
   templateUrl: './perfil-barbershop-page.html',
   styleUrl: './perfil-barbershop-page.scss'
 })
@@ -29,6 +30,7 @@ export class PerfilBarbershopPage {
       duracao: this.fb.control('', {nonNullable: true}),
       valor: this.fb.control('', {nonNullable: true}),
       tipo_servico: this.fb.control('', {nonNullable: true}),
+      imagem: this.fb.control<File | null>(null),
     });
   }
 

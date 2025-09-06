@@ -1,4 +1,4 @@
-<h2>Servico</h2>
+<h2>Serviço</h2>
 <form [formGroup]="form">
 
     <fieldset>
@@ -35,12 +35,19 @@
         <legend>Categoria</legend>
         <div class="tipo-servico">
             <div class="form-check">
-                <input class="form-check-input" type="radio" [value]="'cabelo'" formControlName="tipo_servico" id="corte">
+                <input class="form-check-input" type="radio" [value]="'cabelo'" formControlName="tipo_servico"
+                    id="corte">
                 <label class="form-check-label" for="cabelo">Cabelo</label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" [value]="'barba'" formControlName="tipo_servico" id="barba">
+                <input class="form-check-input" type="radio" [value]="'barba'" formControlName="tipo_servico"
+                    id="barba">
                 <label class="form-check-label" for="barba">Barba</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" [value]="'combo'" formControlName="tipo_servico"
+                    id="barba">
+                <label class="form-check-label" for="bombom">Combo</label>
             </div>
         </div>
     </fieldset>
