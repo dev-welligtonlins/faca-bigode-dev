@@ -3,12 +3,20 @@ import { PerfilBarbeshopFormAddressComponent } from '../../components/perfil-bar
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PerfilBarbershopFormServicesComponent } from '../../components/perfil-barbershop-form-services-component/perfil-barbershop-form-services-component';
+<<<<<<< HEAD
 import { PerfilBarbershopFormBarberComponent } from '../../components/perfil-barbershop-form-barber-component/perfil-barbershop-form-barber-component';
+=======
+import { PerfilBarbershopFormPerfilComponent } from '../../components/perfil-barbershop-form-perfil-component/perfil-barbershop-form-perfil-component';
+>>>>>>> 1603834 (modificações na page de barber perfil)
 
 @Component({
   selector: 'app-perfil-barbershop-page',
   standalone: true,
+<<<<<<< HEAD
   imports: [CommonModule, ReactiveFormsModule, PerfilBarbeshopFormAddressComponent, PerfilBarbershopFormServicesComponent, PerfilBarbershopFormBarberComponent],
+=======
+  imports: [CommonModule, ReactiveFormsModule, PerfilBarbeshopFormAddressComponent, PerfilBarbershopFormServicesComponent, PerfilBarbershopFormPerfilComponent],
+>>>>>>> 1603834 (modificações na page de barber perfil)
   templateUrl: './perfil-barbershop-page.html',
   styleUrl: './perfil-barbershop-page.scss'
 })

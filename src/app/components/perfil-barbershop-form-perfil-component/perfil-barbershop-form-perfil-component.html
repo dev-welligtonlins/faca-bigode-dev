@@ -1,0 +1,25 @@
+<h2>Perfil</h2>
+<form>
+    <div class="perfil-container">
+        <div class="photo-upload">
+            <label class="photo-circle">
+                <ng-container *ngIf="previewUrl; else defaultIcon">
+                    <img [src]="previewUrl" alt="Foto de perfil" />
+                </ng-container>
+                <ng-template #defaultIcon>
+                    <i class="bi bi-person-circle"></i>
+                </ng-template>
+                <input type="file" accept="image/*" (change)="onFileSelected($event)" />
+            </label>
+        </div>
+        <p class="profile">Foto de perfil<p>
+        <fieldset>
+            <legend>Nome da Barbearia</legend>
+            <div class="input-group">
+                <input type="text" formControlName="descricao" id="descricao" class="form-control" placeholder=""
+                    required>
+            </div>
+        </fieldset>
+        <div class="signup-link">Se preferir,
+            <span class="create-account">deixar pra depois</span>
+        </div>
