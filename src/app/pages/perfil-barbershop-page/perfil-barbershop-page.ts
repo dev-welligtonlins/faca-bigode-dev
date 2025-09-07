@@ -4,11 +4,12 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CommonModule } from '@angular/common';
 import { PerfilBarbershopFormServicesComponent } from '../../components/perfil-barbershop-form-services-component/perfil-barbershop-form-services-component';
 import { PerfilBarbershopFormBarberComponent } from '../../components/perfil-barbershop-form-barber-component/perfil-barbershop-form-barber-component';
+import { PerfilBarbershopFormPerfilComponent } from '../../components/perfil-barbershop-form-perfil-component/perfil-barbershop-form-perfil-component';
 
 @Component({
   selector: 'app-perfil-barbershop-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, PerfilBarbeshopFormAddressComponent, PerfilBarbershopFormServicesComponent, PerfilBarbershopFormBarberComponent],
+  imports: [CommonModule, ReactiveFormsModule, PerfilBarbeshopFormAddressComponent, PerfilBarbershopFormServicesComponent, PerfilBarbershopFormBarberComponent, PerfilBarbershopFormPerfilComponent],
   templateUrl: './perfil-barbershop-page.html',
   styleUrl: './perfil-barbershop-page.scss'
 })
@@ -35,7 +36,7 @@ export class PerfilBarbershopPage {
   }
 
   nextStep() {
-    if (this.start < 3) {
+    if (this.start < 4) {
       this.start++;
     } else {
       this.finish();
