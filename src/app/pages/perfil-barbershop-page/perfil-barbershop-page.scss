@@ -1,0 +1,39 @@
+
+
+.buttons-step {
+    display: flex;
+    
+}
+
+button {
+    padding: 10px;
+    background-color: #7F62F5;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 3%;
+    color: white;
+
+    &:hover {
+        background-color: #5f49b7;
+    }
+}
+
+.signup-link {
+    margin-top: 3%;
+    gap: 1;
+    font-family: 'Inter', light;
+    font-size: 13px;
+    color: #c0c0c0;
+    text-align: center;
+}
+
+.signup-link .create-account {
+    color: #7F62F5;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 5px;
+    transition: color 0.3s ease;
+}

@@ -4,14 +4,20 @@
         <img src="assets/img/bigode.png" alt="Logo" class="logo" />
     </div>
     <div [ngSwitch]="start" class="section-right">
-        <app-perfil-barbeshop-form-address-component *ngSwitchCase="1" [form]="form"></app-perfil-barbeshop-form-address-component>
-        <app-perfil-barbershop-form-services-component *ngSwitchCase="2" [form]="form"></app-perfil-barbershop-form-services-component>
-        <app-perfil-barbershop-form-barber-component *ngSwitchCase="3" [form]="form"></app-perfil-barbershop-form-barber-component>
-    </div>
-    <div class="d-flex justify-content-between mt-3">
-        <button class="btn btn-secondary" (click)="prevStep()" [disabled]="start === 1">Voltar</button>
-        <button class="btn btn-primary" (click)="nextStep()">
-            {{ start === 3 ? 'Finalizar' : 'Próximo' }}
-        </button>
+        <app-perfil-barbeshop-form-address-component *ngSwitchCase="1"
+            [form]="form"></app-perfil-barbeshop-form-address-component>
+        <app-perfil-barbershop-form-services-component *ngSwitchCase="2"
+            [form]="form"></app-perfil-barbershop-form-services-component>
+        <app-perfil-barbershop-form-barber-component *ngSwitchCase="3"
+            [form]="form"></app-perfil-barbershop-form-barber-component>
+        <div class="buttons-step">
+            <button (click)="prevStep()" [disabled]="start === 1">Voltar</button>
+            <button class="btn btn-primary" (click)="nextStep()">
+                {{ start === 3 ? 'Finalizar' : 'Próximo' }}
+            </button>
+        </div>
+        <div class="signup-link">Se preferir,
+            <span class="create-account">deixar pra depois</span>
+        </div>
     </div>
 </section>
