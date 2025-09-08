@@ -32,13 +32,17 @@ body {
 
     form {
         font-family: 'Inter', sans-serif;
-        font-weight: 100; /* Light */
+        font-weight: 100;
+        /* Light */
         display: flex;
         flex-direction: column;
         padding: 20px;
         gap: 10px;
         margin-bottom: 0px;
-        width: 320px;
+        width: 90%;
+        // height: 80%;
+        max-height: 300px;
+        justify-self: center;
         overflow-y: auto;
 
         fieldset {
@@ -48,7 +52,8 @@ body {
 
         fieldset legend {
             font-family: 'Inter', sans-serif;
-            font-weight: 100;  /* Light */
+            font-weight: 100;
+            /* Light */
             font-size: 11px;
             color: #ffffff;
             margin-left: 10px;
@@ -170,7 +175,7 @@ body {
         height: 70vh;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: first baseline;
         align-items: center;
         background-color: #141519;
         border-radius: 0px 45px 45px 0px;

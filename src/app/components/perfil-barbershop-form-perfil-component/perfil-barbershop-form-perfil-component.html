@@ -3,7 +3,8 @@
     <div class="perfil-container">
         <div class="photo-upload">
             <label class="photo-circle">
-                <ng-container *ngIf="previewUrl; ngIfNgIfElse defaultIcon">
+                <ng-container >
+                <!-- <ng-container *ngIf="previewUrl; *ngIfNgIfElse defaultIcon"> -->
                     <img [src]="previewUrl" alt="Foto de perfil" />
                 </ng-container>
                 <ng-template #defaultIcon>
@@ -20,8 +21,5 @@
                     required>
             </div>
         </fieldset>
-        <div class="signup-link">Se preferir,
-            <span class="create-account">deixar pra depois</span>
-        </div>
     </div>
 </form>

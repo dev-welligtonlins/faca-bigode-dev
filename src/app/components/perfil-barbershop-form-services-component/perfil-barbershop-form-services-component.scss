@@ -7,8 +7,7 @@ h2 {
 }
 
 form {
-    height: 340px;
-
+    
     .duration_and_value {
         display: flex;
         flex-direction: row;
@@ -29,5 +28,6 @@ form {
         justify-content: center;
         gap: 10%;
     }
+
 
 }
