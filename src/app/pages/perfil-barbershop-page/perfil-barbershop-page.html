@@ -2,20 +2,23 @@
     <div class="section-left">
         <h2>Bem-vindo</h2>
         <img src="assets/img/bigode.png" alt="Logo" class="logo" />
+
     </div>
     <div [ngSwitch]="start" class="section-right">
         <app-perfil-barbershop-form-perfil-component *ngSwitchCase="1"></app-perfil-barbershop-form-perfil-component>
         <app-perfil-barbeshop-form-address-component *ngSwitchCase="2" [form]="form"></app-perfil-barbeshop-form-address-component>
         <app-perfil-barbershop-form-barber-component *ngSwitchCase="3" [form]="form"></app-perfil-barbershop-form-barber-component>
         <app-perfil-barbershop-form-services-component *ngSwitchCase="4" [form]="form"></app-perfil-barbershop-form-services-component>
-        <div class="buttons-step">
-            <button (click)="prevStep()" *ngIf="start > 1">Voltar</button>
-            <button class="btn btn-primary" (click)="nextStep()">
-                {{ start === 4 ? 'Finalizar' : 'Próximo' }}
-            </button>
-        </div>
-        <div class="signup-link">Se preferir,
-            <span class="create-account">deixar pra depois</span>
+        <div class="end-component">        
+            <div class="buttons-step">
+                <button (click)="prevStep()" *ngIf="start > 1">Voltar</button>
+                <button class="btn btn-primary" (click)="nextStep()">
+                    {{ start === 4 ? 'Finalizar' : 'Próximo' }}
+                </button>
+            </div>
+            <div class="signup-link">Se preferir,
+                <span class="create-account">deixar pra depois</span>
+            </div>
         </div>
     </div>
 </section>

@@ -31,7 +31,12 @@ export class PerfilBarbershopPage {
       duracao: this.fb.control('', {nonNullable: true}),
       valor: this.fb.control('', {nonNullable: true}),
       tipo_servico: this.fb.control('', {nonNullable: true}),
-      imagem: this.fb.control<File | null>(null),
+
+      barber_photo: this.fb.control('', {nonNullable: true}),
+      barber_nome: this.fb.control('', {nonNullable: true}),
+      barber_midia_social: this.fb.control('', {nonNullable: true}),
+      barber_tipo_servico: this.fb.control('', {nonNullable: true}),
+
     });
   }
 
