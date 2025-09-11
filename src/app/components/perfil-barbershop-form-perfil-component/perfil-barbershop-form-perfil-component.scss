@@ -76,3 +76,34 @@ form {
     color: rgb(255, 255, 255);
   }
 }
+
+.amenities-section h5 {
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  color: white;
+  font-size: 14px;
+  font-weight: 450;
+  margin-bottom: 0.5rem;
+  margin-bottom: 5%;
+}
+
+/* Botão padrão (não selecionado) */
+.amenities-section .btn-outline-primary {
+  border-color: #7F62F5;
+  color: #7F62F5;
+}
+
+/* Hover no botão não selecionado */
+.amenities-section .btn-outline-primary:hover {
+  background-color: #7F62F5;
+  color: #fff;
+  border-color: #7F62F5;
+}
+
+/* Botão selecionado */
+.amenities-section .btn-primary {
+  background-color: #7F62F5;
+  border-color: #7F62F5;
+  color: #fff;
+}
