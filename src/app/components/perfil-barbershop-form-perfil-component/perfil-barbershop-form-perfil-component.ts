@@ -5,7 +5,7 @@ import { ModalTimeComponent } from '../modal-time-component/modal-time-component
 @Component({
   selector: 'app-perfil-barbershop-form-perfil-component',
   standalone: true,
-  imports: [CommonModule, ModalTimeComponent],
+  imports: [CommonModule],
   templateUrl: './perfil-barbershop-form-perfil-component.html',
   styleUrls: ['./perfil-barbershop-form-perfil-component.scss']
 })

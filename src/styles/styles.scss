@@ -1,3 +1,5 @@
+@use '_fonts' as fonts;
+
 html,
 body {
     font-family: 'Inter', sans-serif;
@@ -19,6 +21,9 @@ body {
         font-size: 14px;
         margin-left: 10rem;
         margin-right: 10rem;
+        // font-family: fonts.$font-primary;
+        // font-weight: fonts.$font-weight-regular;
+        // color: #333;
     }
 
     /* Sessão generica para todas "section" */
@@ -184,7 +189,8 @@ body {
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Inter', bold;
+            font-family: fonts.$font-primary;
+            font-weight: fonts.$font-weight-regular;
             color: white;
             margin-top: 10px;
         }
