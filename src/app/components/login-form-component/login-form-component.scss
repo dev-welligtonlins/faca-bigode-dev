@@ -1,12 +1,3 @@
-h2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Inter', bold;
-    height: 1px;
-    color: white;
-}
-
 // div da linha or até o final de section-right de
 .div-or {
     display: flex;
@@ -37,27 +28,5 @@ h2 {
         margin-left: 0.75em;
     }
 
-    // Botão do google
-    .google-login {
-        text-align: center;
-        margin-top: 2%;
-        display: flex;
-        align-items: center;
-        gap: 30px; /* espaço entre ícone e texto */
-        padding: 10px;
-        background-color: #33618500;
-        border: 1px solid #7F62F5;
-        border-radius: 10px;
-        font-family: 'Inter', light;
-        font-size: 14px;
-        font-weight: 500;
-        color: #c0c0c0;
-        min-width: 275px
-    }
-
-    .google-icon {
-        width: 18px;
-        height: 18px;
-    }
 
 }
