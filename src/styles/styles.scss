@@ -185,11 +185,12 @@ body {
         h2 {
             margin-top: 4%;
             display: flex;
-            justify-content: center;
+            justify-content: start;
             align-items: center;
             font-family: fonts.$font-primary;
             font-weight: fonts.$font-weight-bold;
             color: white;
+            margin-left: 2rem;
         }
 
         // Botão do google

@@ -30,9 +30,9 @@ export class PerfilBarbershopFormPerfilComponent {
   // Lista de formas de pagamento
   payments = [
     { name: 'Dinheiro', icon: 'bi-cash', selected: false },
-    { name: 'Cartão de Crédito', icon: 'bi-credit-card', selected: false },
     { name: 'Pix', icon: 'bi-piggy-bank', selected: false },
-   
+    { name: 'Cartão de Crédito', icon: 'bi-credit-card', selected: false },
+
   ];
 
   onFileSelected(event: Event): void {
