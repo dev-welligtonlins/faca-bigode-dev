@@ -1,13 +1,16 @@
 <h2>Barbeiros</h2>
 <form [formGroup]="form">
-    <div class="mb-3">
-        <input type="file" formControlName="barber_photo" class="form-control" id="imagem" accept="image/*" (change)="uploadFile($event)">
-    </div>
-    <div *ngIf="!preview">
-        <img [src]="preview" src="assets/img/3333.jpg" alt="Preview" class="photo-perfil">
-    </div>
-    <div *ngIf="preview">
-        <img [src]="preview" src="assets/img/bigode.png" alt="Preview" class="photo-perfil">
+    <div class="photo-upload">
+        <label class="photo-circle">
+            <ng-container>
+                <!-- <ng-container *ngIf="previewUrl; *ngIfNgIfElse defaultIcon"> -->
+                <img [src]="previewUrl" alt="Foto de perfil" />
+            </ng-container>
+            <ng-template #defaultIcon>
+                <i class="bi bi-person-circle"></i>
+            </ng-template>
+            <input type="file" accept="image/*" (change)="onFileSelected($event)" />
+        </label>
     </div>
     <fieldset>
         <legend>Nome</legend>
@@ -15,7 +18,8 @@
             <!-- <span class="input-group-text icons-background">
                 <i class="bi bi-telephone-inbound-fill"></i>
             </span> -->
-            <input type="text" formControlName="barber_nome" id="barber_nome" class="form-control" placeholder="" required>
+            <input type="text" formControlName="barber_nome" id="barber_nome" class="form-control" placeholder=""
+                required>
         </div>
     </fieldset>
     <fieldset>
@@ -24,8 +28,8 @@
             <!-- <span class="input-group-text icons-background">
                 <i class="bi bi-telephone-inbound-fill"></i>
             </span> -->
-            <input type="text" formControlName="midia_social" id="barber_midia_social" class="form-control" placeholder=""
-                required>
+            <input type="text" formControlName="barber_midia_social" id="barber_midia_social" class="form-control"
+                placeholder="" required>
         </div>
     </fieldset>
     <fieldset>
@@ -39,7 +43,7 @@
             <div class="form-check">
                 <input class="form-check-input" type="radio" [value]="'barba'" formControlName="barber_tipo_servico"
                     id="barba">
-                <label class="form-check-label" for="barba" >Barba</label>
+                <label class="form-check-label" for="barba">Barba</label>
             </div>
         </div>
     </fieldset>

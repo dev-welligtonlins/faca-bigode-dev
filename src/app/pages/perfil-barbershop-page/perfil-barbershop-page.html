@@ -1,17 +1,30 @@
-<section>
-    <div class="section-left">
+<section [ngSwitch]="start">
+    <div class="section-left" *ngSwitchCase="1">
         <h2>Bem-vindo</h2>
         <img src="assets/img/bigode.png" alt="Logo" class="logo" />
 
     </div>
-    <div [ngSwitch]="start" class="section-right">
+    <div class="section-left" *ngSwitchCase="2">
+        <h2>Bem-vindo</h2>
+        <img src="assets/img/bigode.png" alt="Logo" class="logo" />
+
+    </div>
+    <div class="section-left" *ngSwitchCase="3">
+        <h2>Bem-vindo</h2>
+        <img src="assets/img/bigode.png" alt="Logo" class="logo" />
+
+    </div>
+    <div class="section-left" *ngSwitchCase="4">
+        <app-service-list-component></app-service-list-component>
+    </div>
+    <div class="section-right">
         <app-perfil-barbershop-form-perfil-component *ngSwitchCase="1"></app-perfil-barbershop-form-perfil-component>
         <app-perfil-barbeshop-form-address-component *ngSwitchCase="2"
             [form]="form"></app-perfil-barbeshop-form-address-component>
         <app-perfil-barbershop-form-barber-component *ngSwitchCase="3"
             [form]="form"></app-perfil-barbershop-form-barber-component>
         <app-perfil-barbershop-form-services-component *ngSwitchCase="4"
-            [form]="form"></app-perfil-barbershop-form-services-component>
+            ></app-perfil-barbershop-form-services-component>
 
 
 

@@ -6,10 +6,11 @@ import { PerfilBarbershopFormServicesComponent } from '../../components/perfil-b
 import { PerfilBarbershopFormBarberComponent } from '../../components/perfil-barbershop-form-barber-component/perfil-barbershop-form-barber-component';
 import { PerfilBarbershopFormPerfilComponent } from '../../components/perfil-barbershop-form-perfil-component/perfil-barbershop-form-perfil-component';
 import { ModalTimeComponent } from '../../components/modal-time-component/modal-time-component';
+import { ServiceListComponent } from '../../components/service-list-component/service-list-component';
 @Component({
   selector: 'app-perfil-barbershop-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, PerfilBarbeshopFormAddressComponent, PerfilBarbershopFormServicesComponent, PerfilBarbershopFormBarberComponent, PerfilBarbershopFormPerfilComponent, ModalTimeComponent],
+  imports: [CommonModule, ReactiveFormsModule, PerfilBarbeshopFormAddressComponent, PerfilBarbershopFormServicesComponent, PerfilBarbershopFormBarberComponent, PerfilBarbershopFormPerfilComponent, ModalTimeComponent, ServiceListComponent],
   templateUrl: './perfil-barbershop-page.html',
   styleUrl: './perfil-barbershop-page.scss'
 })
