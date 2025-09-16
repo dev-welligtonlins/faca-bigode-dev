@@ -1,9 +1,9 @@
 <h2>Barbeiros</h2>
-<form [formGroup]="form">
-    <div class="photo-upload">
+<form [formGroup]="form" (ngSubmit)="addBarber()">
+    <!-- <div class="photo-upload">
         <label class="photo-circle">
             <ng-container>
-                <!-- <ng-container *ngIf="previewUrl; *ngIfNgIfElse defaultIcon"> -->
+                <ng-container *ngIf="previewUrl; *ngIfNgIfElse defaultIcon"> 
                 <img [src]="previewUrl" alt="Foto de perfil" />
             </ng-container>
             <ng-template #defaultIcon>
@@ -11,14 +11,14 @@
             </ng-template>
             <input type="file" accept="image/*" (change)="onFileSelected($event)" />
         </label>
-    </div>
+    </div> -->
     <fieldset>
         <legend>Nome</legend>
         <div class="input-group">
             <!-- <span class="input-group-text icons-background">
                 <i class="bi bi-telephone-inbound-fill"></i>
             </span> -->
-            <input type="text" formControlName="barber_nome" id="barber_nome" class="form-control" placeholder=""
+            <input type="text" formControlName="nome" id="nome" class="form-control" placeholder=""
                 required>
         </div>
     </fieldset>
@@ -28,11 +28,11 @@
             <!-- <span class="input-group-text icons-background">
                 <i class="bi bi-telephone-inbound-fill"></i>
             </span> -->
-            <input type="text" formControlName="barber_midia_social" id="barber_midia_social" class="form-control"
+            <input type="text" formControlName="midia_social" id="midia_social" class="form-control"
                 placeholder="" required>
         </div>
     </fieldset>
-    <fieldset>
+    <!-- <fieldset>
         <legend>Especialidade</legend>
         <div class="tipo-servico">
             <div class="form-check">
@@ -46,7 +46,7 @@
                 <label class="form-check-label" for="barba">Barba</label>
             </div>
         </div>
-    </fieldset>
+    </fieldset> -->
     <button type="submit">Adicionar +</button>
 
 </form>

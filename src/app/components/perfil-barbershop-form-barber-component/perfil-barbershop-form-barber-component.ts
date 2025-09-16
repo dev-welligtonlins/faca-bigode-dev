@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { sBarber } from '../../services/sBarber';
+import { BarberModel } from '../../models/barber-model';
 
 @Component({
   selector: 'app-perfil-barbershop-form-barber-component',
@@ -10,25 +12,24 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './perfil-barbershop-form-barber-component.scss'
 })
 export class PerfilBarbershopFormBarberComponent {
-  @Input() form!: FormGroup;
+  private fb = inject(FormBuilder);
+  private barberService = inject(sBarber);
 
-  previewUrl: string | null = null;   // prévia da foto
-  selectedFile: File | null = null;   // arquivo selecionado
+  @Output() barberAddEvent = new EventEmitter<BarberModel>();
 
-  onFileSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
+  form: FormGroup = this.fb.group({
+    nome: ['', Validators.required],
+    midia_social: ['', [Validators.required]],
+  });
 
-    if (!input.files || input.files.length === 0) {
-      return;
+  // função para adicionar o form na lista de serviços
+  addBarber(): void {
+    if (this.form.valid) {
+      const newBarber = this.form.value as BarberModel;
+      this.barberService.addBarber(newBarber);
+      this.barberAddEvent.emit(newBarber);
+      this.form.reset({ nome: '', midia_social: '' });
     }
-
-    this.selectedFile = input.files[0];
-
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.previewUrl = reader.result as string;
-    };
-    reader.readAsDataURL(this.selectedFile);
   }
 
 }

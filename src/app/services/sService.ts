@@ -16,7 +16,7 @@ export class sService {
     addService(service: ServiceModel): void {
         this.servicesSubject.next([...this.services, service]);
     }
-
+    
     removeService(index: number): void {
         const updated = this.services.filter((_, i) => i !== index);
         this.servicesSubject.next(updated);

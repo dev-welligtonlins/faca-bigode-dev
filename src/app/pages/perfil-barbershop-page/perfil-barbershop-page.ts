@@ -34,15 +34,10 @@ export class PerfilBarbershopPage {
       valor: this.fb.control('', {nonNullable: true}),
       tipo_servico: this.fb.control('', {nonNullable: true}),
 
-      barber_photo: this.fb.control('', {nonNullable: true}),
-      barber_nome: this.fb.control('', {nonNullable: true}),
-      barber_midia_social: this.fb.control('', {nonNullable: true}),
-      barber_tipo_servico: this.fb.control('', {nonNullable: true}),
-
     });
   }
 
-  nexttep() {
+  nextStep() {
     if (this.start < 4) {
       this.start++;
     } else {

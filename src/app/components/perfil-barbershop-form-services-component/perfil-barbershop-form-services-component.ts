@@ -27,7 +27,7 @@ export class PerfilBarbershopFormServicesComponent {
   // função para adicionar o form na lista de serviços
   addService(): void {
     if(this.form.valid) {
-      const newService = this.form.value as ServiceModel
+      const newService = this.form.value as ServiceModel;
       this.service.addService(newService);
       this.serviceAddEvent.emit(newService);
       this.form.reset({duracao: 30, valor:0 });
