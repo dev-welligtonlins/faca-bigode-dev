@@ -33,7 +33,7 @@
         <div class="end-component">
             <div class="buttons-step">
                 <button (click)="prevStep()" *ngIf="start > 1">Voltar</button>
-                <button class=" q" (click)="nextStep()">
+                <button (click)="nextStep()">
                     {{ start === 4 ? 'Finalizar' : 'Próximo' }}
                 </button>
             </div>

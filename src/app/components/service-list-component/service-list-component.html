@@ -1,4 +1,5 @@
 <div class="clearfix xx">
+    <img src="assets/img/bigode.png" alt="Logo" class="logo" />
     <div class="view-option">
         <h5>Serviços</h5>
         <h5>Produtos</h5>
@@ -20,20 +21,14 @@
     <div class="card-component">
 
         <div *ngFor="let service of servicesService.services$ | async; let i = index" class="card-service">
-            <p>Nome: {{ service.descricao }}</p> 
-            <p>Nome: {{ service.categoria }}</p>
+            <div class="desc-x">
+                <p>{{ service.categoria }} - {{ service.descricao }}</p>
+                <button (click)="remove(i)"><i class="bi bi-x-square-fill"></i></button>
+            </div>
             <div class="duration-value">
                 <p>Duração(min): {{ service.duracao }}</p>
                 <p>Valor(R$): {{ service.valor }}</p>
             </div>
-             <button (click)="remove(i)">X</button>
         </div>
     </div>
 </div>
-
-    <!-- <ul>
-      <li *ngFor="let service of servicesService.services$ | async; let i = index">
-        {{ service.descricao }} - {{ service.valor | currency:'BRL' }}
-        <button (click)="remove(i)">X</button>
-      </li>
-    </ul> -->
