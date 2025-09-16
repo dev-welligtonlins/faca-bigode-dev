@@ -7,10 +7,11 @@ import { PerfilBarbershopFormBarberComponent } from '../../components/perfil-bar
 import { PerfilBarbershopFormPerfilComponent } from '../../components/perfil-barbershop-form-perfil-component/perfil-barbershop-form-perfil-component';
 import { ModalTimeComponent } from '../../components/modal-time-component/modal-time-component';
 import { ServiceListComponent } from '../../components/service-list-component/service-list-component';
+import { BarberListComponent } from '../../components/barber-list-component/barber-list-component';
 @Component({
   selector: 'app-perfil-barbershop-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, PerfilBarbeshopFormAddressComponent, PerfilBarbershopFormServicesComponent, PerfilBarbershopFormBarberComponent, PerfilBarbershopFormPerfilComponent, ModalTimeComponent, ServiceListComponent],
+  imports: [CommonModule, ReactiveFormsModule, PerfilBarbeshopFormAddressComponent, PerfilBarbershopFormServicesComponent, PerfilBarbershopFormBarberComponent, PerfilBarbershopFormPerfilComponent, ModalTimeComponent, ServiceListComponent, BarberListComponent],
   templateUrl: './perfil-barbershop-page.html',
   styleUrl: './perfil-barbershop-page.scss'
 })
@@ -41,7 +42,7 @@ export class PerfilBarbershopPage {
     });
   }
 
-  nextStep() {
+  nexttep() {
     if (this.start < 4) {
       this.start++;
     } else {
