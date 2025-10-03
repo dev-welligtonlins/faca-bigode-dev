@@ -1,6 +1,7 @@
 import { BehaviorSubject } from "rxjs";
 import { BarberModel } from "../models/barber-model";
 import { Injectable } from "@angular/core";
+import { HttpResponse } from "@angular/common/http";
 
 @Injectable({
     providedIn: 'root'

@@ -74,3 +74,60 @@ Publish Directory:  dist/my-portfolio/browser
 
 
 
+https://www.postgresql.org/download/windows/
+https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
+
+knife-and-mustache
+
+Lista de comandos SQL mais comuns
+-- Listar todos os bancos de dados
+\l
+
+-- Conectar a um banco de dados
+\c meu_banco
+
+-- Criar tabela
+CREATE TABLE clientes (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(150) UNIQUE,
+    idade INT
+);
+
+-- Listar todas as tabelas
+\dt
+
+-- Ver estrutura de uma tabela
+\d clientes
+
+-- Apagar tabela
+DROP TABLE clientes;
+
+-- Inserir
+INSERT INTO clientes (nome, email, idade)
+VALUES ('Maria Silva', 'maria@email.com', 28);
+
+-- Selecionar todos
+SELECT * FROM clientes;
+
+-- Selecionar filtrando
+SELECT nome, idade FROM clientes WHERE idade > 25;
+
+-- Atualizar
+UPDATE clientes SET idade = 29 WHERE id = 1;
+
+-- Deletar
+DELETE FROM clientes WHERE id = 1;
+
+-- Criar usuário
+CREATE USER meu_usuario WITH PASSWORD 'minha_senha';
+
+-- Dar permissão ao usuário em um banco
+GRANT ALL PRIVILEGES ON DATABASE meu_banco TO meu_usuario;
+
+
+No pgAdmin você não precisa do prefixo \l, \dt, \d (esses são do terminal psql).
+Se quiser rodar direto no pgAdmin, use os comandos SQL puros, como
+
+SELECT datname FROM pg_database;   -- lista bancos
+SELECT * FROM information_schema.tables; -- lista tabelas
