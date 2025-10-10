@@ -1,59 +1,49 @@
-# FacaBigodeDev
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.3.
 
-## Development server
 
-To start a local development server, run:
 
-```bash
-ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
 
-```bash
-ng generate component component-name
-```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
 
-```bash
-ng generate --help
-```
+## JAVA
+    Acesse: https://www.oracle.com/br/java/technologies/downloads/#java21
 
-## Building
+    Download
+    Instalador x64: https://download.oracle.com/java/21/latest/jdk-21_windows-x64_bin.exe
 
-To build the project run:
+    Variavel de ambiente
+    Crie uma nova variavel de ambiente de nome: JAVA_HOME e valor: C:\Program Files\Java\jdk-21.
+    Em seguinda, adicione %JAVA_HOME%\bin na variavel PATH.
 
-```bash
-ng build
-```
+    Tutorial
+    https://mkyong.com/java/how-to-set-java_home-on-windows-10/
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+    Teste 
+    javac -version
+        javac 21.0.7
 
-## Running unit tests
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## MAVEN
 
-```bash
-ng test
-```
+    Acesse: https://maven.apache.org/download.cgi
 
-## Running end-to-end tests
+    Versão estável 3.9.11
+        Instalador ZIP: https://dlcdn.apache.org/maven/maven-3/3.9.11/binaries/apache-maven-3.9.11-bin.zip
 
-For end-to-end (e2e) testing, run:
+    Variavel de ambiente
+        Crie uma nova variavel de ambiente de nome: MAVEN_HOME e valor:C:\Program Files\apache-maven-3.8.8.
+        Em seguinda, adicione MAVEN_HOME%\bin na variavel PATH. 
 
-```bash
-ng e2e
-```
+    Tutorial
+        https://mkyong.com/maven/how-to-install-maven-in-windows/
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+    Teste 
+        mvn -version
+            Apache Maven 3.9.11 (3e54c93a704957b63ee3494413a2b544fd3d825b)
+            Maven home: C:\Program Files\apache-maven-3.9.11
+            Java version: 21.0.8, vendor: Oracle Corporation, runtime: C:\Program Files\Java\jdk-21
+            Default locale: pt_BR, platform encoding: UTF-8
+            OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"
