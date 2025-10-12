@@ -1,0 +1,46 @@
+/* Modal inteiro */
+#modal-register .modal-content {
+    border-radius: 12px;
+    border: 2px solid #7F62F5;
+    /* verde sucesso */
+}
+
+/* Cabeçalho */
+#modal-register .modal-header {
+    background-color: #7F62F5;
+    /* verde Bootstrap */
+    color: #fff;
+    /* título branco */
+}
+
+/* Título */
+#modal-register .modal-title {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* Corpo do modal */
+#modal-register .modal-body {
+    font-size: 16px;
+    color: #fff;
+    line-height: 1.5;
+    background-color: #141519;
+}
+
+/* Botões */
+#modal-register .btn-primary {
+    background-color: #7F62F5;
+    border-color: #7F62F5;
+}
+
+#modal-register .btn-primary:hover {
+    background-color: #7F62F5;
+    border-color: #7F62F5;
+}
+
+#modal-register .modal-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #141519;
+}

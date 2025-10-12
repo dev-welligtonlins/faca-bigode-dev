@@ -1,0 +1,133 @@
+git status  (informa ultimas alterações no projeto)
+
+git add . (adiciona todos os arquivos alterados no projeto)
+
+git commit -m ""resumo sobre o que foi feito" 
+
+git push (envia ao repósitorio)
+
+git pull (O comando básico para atualizar seu repositório local com as alterações do repositório remoto)
+
+CRIAR NOVA PAGE
+
+ng g c pages/nome-page --standalone
+
+p
+Criar uma nova branch: git branch nome-da-branch
+Trocar para uma branch: git checkout nome-da-branch
+(ou no Git mais recente): git switch nome-da-branch
+Criar e já trocar:git checkout -b nome-da-branch
+Ver todas as branches: git branch
+Deletar uma branch local: git branch -d nome-da-branch
+
+
+git stash         # guarda as mudanças temporariamente
+git switch outra-branch   # ou git checkout outra-branch
+git stash pop     # aplica as mudanças na nova branch
+
+🔹 Opção B – git merge (juntar toda a branch)
+git switch outra-branch
+git merge branch-de-origem
+
+
+## ANGULAR
+Inicia o projeto:
+    npm start
+
+Instalação do bootstrap e bootstrap-icons
+    npm install bootstrap bootstrap-icons
+    no arquivo angular.json precisa fazer 
+        "styles": [
+            "src/styles.scss",
+            "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+            "node_modules/bootstrap/dist/css/bootstrap.min.css"
+        ],
+        "scripts": [
+            "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+        ],
+
+
+## DEPLOY ANGULAR NO RENDER ##
+
+No projeto ANGULAR
+
+    ng build
+
+isso vai criar a pasta dist/nome-do-projeto
+em seguida, no terminal aberto dentro do projeto:
+
+    tree dist
+
+vai listar todas as pastas do diretório dist 
+-> dist é todo nosso projeto compactado para ser hospedado no RENDER
+
+exemplo:   Output location: /opt/render/project/src/dist/my-portfolio
+
+faça commit do projeto e abra o RENDER
+
+Repository: https://github.com/dev-welligtonlins/my-portfolio
+Branch:     main
+Root Directory: vazio
+Build Command:   ng build
+Publish Directory:  dist/my-portfolio/browser
+
+
+
+
+https://www.postgresql.org/download/windows/
+https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
+
+knife-and-mustache
+
+Lista de comandos SQL mais comuns
+-- Listar todos os bancos de dados
+\l
+
+-- Conectar a um banco de dados
+\c meu_banco
+
+-- Criar tabela
+CREATE TABLE clientes (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(150) UNIQUE,
+    idade INT
+);
+
+-- Listar todas as tabelas
+\dt
+
+-- Ver estrutura de uma tabela
+\d clientes
+
+-- Apagar tabela
+DROP TABLE clientes;
+
+-- Inserir
+INSERT INTO clientes (nome, email, idade)
+VALUES ('Maria Silva', 'maria@email.com', 28);
+
+-- Selecionar todos
+SELECT * FROM clientes;
+
+-- Selecionar filtrando
+SELECT nome, idade FROM clientes WHERE idade > 25;
+
+-- Atualizar
+UPDATE clientes SET idade = 29 WHERE id = 1;
+
+-- Deletar
+DELETE FROM clientes WHERE id = 1;
+
+-- Criar usuário
+CREATE USER meu_usuario WITH PASSWORD 'minha_senha';
+
+-- Dar permissão ao usuário em um banco
+GRANT ALL PRIVILEGES ON DATABASE meu_banco TO meu_usuario;
+
+
+No pgAdmin você não precisa do prefixo \l, \dt, \d (esses são do terminal psql).
+Se quiser rodar direto no pgAdmin, use os comandos SQL puros, como
+
+SELECT datname FROM pg_database;   -- lista bancos
+SELECT * FROM information_schema.tables; -- lista tabelas

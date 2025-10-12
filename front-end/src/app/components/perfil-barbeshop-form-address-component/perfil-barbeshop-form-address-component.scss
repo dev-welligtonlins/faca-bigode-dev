@@ -1,0 +1,45 @@
+form {
+    .cep-and-number {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .cep {
+            width: 60%;
+        }
+
+        .number {
+            width: 25%;
+        }
+    }
+
+    .uf-and-city {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .city {
+            width: 60%;
+        }
+
+        .uf {
+            width: 30%;
+        }
+    }
+
+    .rua-bairro {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .rua {
+            width: 50%;
+        }
+
+        .bairro {
+            width: 40%;
+        }
+    }
+
+
+}

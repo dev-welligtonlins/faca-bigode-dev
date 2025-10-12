@@ -1,0 +1,34 @@
+form {
+    height: 340px;
+}
+
+.div-or {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .line-or {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #555;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .line-or::before,
+    .line-or::after {
+        content: "";
+        flex: 1;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .line-or:not(:empty)::before {
+        margin-right: 0.75em;
+    }
+
+    .line-or:not(:empty)::after {
+        margin-left: 0.75em;
+    }
+}

@@ -1,0 +1,58 @@
+<h2>Serviço</h2>
+<div class="adc">
+    <form [formGroup]="form" (ngSubmit)="addService()">
+        <fieldset>
+            <legend>Descrição</legend>
+            <div class="input-group">
+                <!-- <span class="input-group-text icons-background">
+                <i class="bi bi-telephone-inbound-fill"></i>
+            </span> -->
+                <input type="text" formControlName="descricao" id="descricao" class="form-control" placeholder=""
+                    required>
+            </div>
+        </fieldset>
+        <div class="duration_and_value">
+            <fieldset class="duration">
+                <legend>Duração</legend>
+                <div class="input-group">
+                    <!-- <span class="input-group-text icons-background">
+                    <i class="bi bi-telephone-inbound-fill"></i>
+                </span> -->
+                    <input type="text" formControlName="duracao" id="duracao" class="form-control" placeholder=""
+                        required>
+                </div>
+            </fieldset>
+
+            <fieldset class="value">
+                <legend>Valor</legend>
+                <div class="input-group">
+                    <!-- <span class="input-group-text icons-background">
+                    <i class="bi bi-telephone-inbound-fill"></i>
+                </span> -->
+                    <input type="text" formControlName="valor" id="valor" class="form-control" placeholder="" required>
+                </div>
+            </fieldset>
+        </div>
+        <fieldset>
+            <legend>Categoria</legend>
+            <div class="tipo-servico">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" [value]="'cabelo'" formControlName="categoria"
+                        id="corte">
+                    <label class="form-check-label" for="cabelo">Cabelo</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" [value]="'barba'" formControlName="categoria"
+                        id="barba">
+                    <label class="form-check-label" for="barba">Barba</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" [value]="'combo'" formControlName="categoria"
+                        id="barba">
+                    <label class="form-check-label" for="bombom">Combo</label>
+                </div>
+            </div>
+        </fieldset>
+        <button type="submit">Adicionar +</button>
+    </form>
+</div>

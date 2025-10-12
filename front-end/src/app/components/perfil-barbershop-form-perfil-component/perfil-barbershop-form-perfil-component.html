@@ -1,0 +1,49 @@
+<h2>Perfil</h2>
+<form>
+    <div class="perfil-container">
+        <div class="photo-upload">
+            <label class="photo-circle">
+                <ng-container>
+                    <!-- <ng-container *ngIf="previewUrl; *ngIfNgIfElse defaultIcon"> -->
+                    <img [src]="previewUrl" alt="Foto de perfil" />
+                </ng-container>
+                <ng-template #defaultIcon>
+                    <i class="bi bi-person-circle"></i>
+                </ng-template>
+                <input type="file" accept="image/*" (change)="onFileSelected($event)" />
+            </label>
+        </div>
+        <fieldset>
+            <legend>Nome da Barbearia</legend>
+            <div class="input-group">
+                <input type="text" formControlName="descricao" id="descricao" class="form-control" placeholder=""
+                    required>
+            </div>
+        </fieldset>
+    </div>
+    <button type="submit" data-bs-toggle="modal" data-bs-target="#modal-time"> <i
+            class="bi bi-calendar-range"></i>Adicionar horário</button>
+    <app-perfil-barbershop-form-perfil-component *ngIf="!isLogin" (submitForm)="openModal()">
+    </app-perfil-barbershop-form-perfil-component>
+
+    <div class="amenities-section">
+        <h5>Acomodações da Barbearia</h5>
+        <div class="d-flex flex-wrap gap-2 mt-2">
+            <button type="button" *ngFor="let amenity of amenities" class="btn"
+                [ngClass]="amenity.selected ? 'btn-primary' : 'btn-outline-primary'" (click)="toggleAmenity(amenity)"
+                [title]="amenity.name" aria-pressed="{{ amenity.selected }}">
+                <i class="bi {{ amenity.icon }} me-1"></i>
+                {{ amenity.name }}
+            </button>
+        </div>
+    </div>
+    <div class="amenities-section">
+        <h5>Formas de Pagamento</h5>
+        <div class="d-flex gap-2 flex-wrap">
+            <button *ngFor="let payment of payments" type="button" class="btn" [class.btn-primary]="payment.selected"
+                [class.btn-outline-primary]="!payment.selected" (click)="togglePayment(payment)">
+                <i class="bi {{payment.icon}}"></i> {{payment.name}}
+            </button>
+        </div>
+    </div>
+</form>

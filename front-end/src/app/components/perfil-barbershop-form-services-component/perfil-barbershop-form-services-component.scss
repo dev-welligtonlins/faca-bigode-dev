@@ -1,0 +1,25 @@
+form {
+    
+    .duration_and_value {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 40px;
+        .duration {
+            width: 40%;
+        }
+
+        .value {
+            width: 40%;
+        }
+    }
+
+    .tipo-servico {
+        color: floralwhite;
+        display: flex;
+        justify-content: center;
+        gap: 10%;
+    }
+
+
+}

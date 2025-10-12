@@ -1,0 +1,31 @@
+<p>barber-list-component works!</p>
+<div class="clearfix xx">
+    <img src="assets/img/bigode.png" alt="Logo" class="logo" />
+    <div class="view-option">
+        <h5>Serviços</h5>
+        <h5>Produtos</h5>
+    </div>
+    <div class="filter-services">
+        <div class="form-check">
+            <input class="form-check-input" type="radio" id="todos">
+            <label class="form-check-label" for="todos">Todos</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" id="cabelo">
+            <label class="form-check-label" for="cabelo">Cabelo</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" id="barba">
+            <label class="form-check-label" for="barba">Barba</label>
+        </div>
+    </div>
+    <div class="card-component">
+
+        <div *ngFor="let barber of barberService.barbers$ | async; let i = index" class="card-service">
+            <div class="desc-x">
+                <p>{{ barber.nome }} - {{ barber.midia_social }}</p>
+                <button (click)="remove(i)"><i class="bi bi-x-square-fill"></i></button>
+            </div>
+        </div>
+    </div>
+</div>

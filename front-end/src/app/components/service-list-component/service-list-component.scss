@@ -1,0 +1,72 @@
+.xx {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+img {
+    width: 200px;
+    height: 100px;
+}
+
+.view-option {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+    h5 {
+        width: 50%;
+    }
+}
+
+.filter-services {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+// Card onde os serviços vão ser carregados
+
+.card-component {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 200px;
+    overflow-y: auto;
+
+    .card-service {
+        display: flex;
+        flex-direction: column;
+        background-color: darkgrey;
+        width: 300px;
+        height: 50px;
+        border-radius: 10px;
+        padding-left: 15px;
+
+        .desc-x {
+            display: flex;
+            width: 100%;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .duration-value {
+            display: flex;
+            flex-direction: row;
+            justify-content: start;
+            gap: 30px;
+        }
+
+        p {
+            margin-bottom: 2px;
+        }
+
+        button {
+            border: 0;
+            color: red;
+            background-color: darkgrey;
+        }
+    }
+}

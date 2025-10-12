@@ -1,0 +1,52 @@
+<h2>Barbeiros</h2>
+<form [formGroup]="form" (ngSubmit)="addBarber()">
+    <!-- <div class="photo-upload">
+        <label class="photo-circle">
+            <ng-container>
+                <ng-container *ngIf="previewUrl; *ngIfNgIfElse defaultIcon"> 
+                <img [src]="previewUrl" alt="Foto de perfil" />
+            </ng-container>
+            <ng-template #defaultIcon>
+                <i class="bi bi-person-circle"></i>
+            </ng-template>
+            <input type="file" accept="image/*" (change)="onFileSelected($event)" />
+        </label>
+    </div> -->
+    <fieldset>
+        <legend>Nome</legend>
+        <div class="input-group">
+            <!-- <span class="input-group-text icons-background">
+                <i class="bi bi-telephone-inbound-fill"></i>
+            </span> -->
+            <input type="text" formControlName="nome" id="nome" class="form-control" placeholder=""
+                required>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Rede social</legend>
+        <div class="input-group">
+            <!-- <span class="input-group-text icons-background">
+                <i class="bi bi-telephone-inbound-fill"></i>
+            </span> -->
+            <input type="text" formControlName="midia_social" id="midia_social" class="form-control"
+                placeholder="" required>
+        </div>
+    </fieldset>
+    <!-- <fieldset>
+        <legend>Especialidade</legend>
+        <div class="tipo-servico">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" [value]="'cabelo'" formControlName="barber_tipo_servico"
+                    id="corte">
+                <label class="form-check-label" for="cabelo">Cabelo</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" [value]="'barba'" formControlName="barber_tipo_servico"
+                    id="barba">
+                <label class="form-check-label" for="barba">Barba</label>
+            </div>
+        </div>
+    </fieldset> -->
+    <button type="submit">Adicionar +</button>
+
+</form>
