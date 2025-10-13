@@ -7,8 +7,6 @@ import com.awsft.knifeandmustache.model.Services;
 
 public interface ServicesRepository extends JpaRepository<Services, Long>{
 
-    // List<Services> findAll();
-
     List<Services> getByServiceCategoryId(Long id);
 } 
 
