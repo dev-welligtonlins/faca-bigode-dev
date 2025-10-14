@@ -7,6 +7,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -24,15 +26,16 @@ public class Payments {
     @Enumerated(EnumType.STRING)
     private PaymentMethods paymentMethods;
 
-    @Column(name = "appointment_id")   
-    private Long appointment;
+    @ManyToOne
+    @JoinColumn(name = "appointment_id")
+    private Appointments appointment;
 
 
     public Payments() {
         
     }
 
-    public Payments(Double value, Boolean statusPayment, PaymentMethods paymentMethods, Long appointment) {
+    public Payments(Double value, Boolean statusPayment, PaymentMethods paymentMethods, Appointments appointment) {
         this.value = value;
         this.statusPayment = statusPayment;
         this.paymentMethods = paymentMethods;
@@ -67,11 +70,11 @@ public class Payments {
         this.paymentMethods = paymentMethods;
     }
 
-    public Long getAppointment() {
+    public Appointments getAppointment() {
         return appointment;
     }
 
-    public void setAppointment(Long appointment) {
+    public void setAppointment(Appointments appointment) {
         this.appointment = appointment;
     }
 

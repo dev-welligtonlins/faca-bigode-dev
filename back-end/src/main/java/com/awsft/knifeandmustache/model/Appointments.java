@@ -1,12 +1,16 @@
 package com.awsft.knifeandmustache.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,6 +24,11 @@ public class Appointments {
     private String clienteName;
     @Column(name = "appointment_time")
     private LocalDateTime appointmentTime;
+    
+
+    @OneToMany
+    @JoinColumn(name = "payments")
+    private List<Payments> payments = new ArrayList<Payments>();
 
     public Appointments() {
 
