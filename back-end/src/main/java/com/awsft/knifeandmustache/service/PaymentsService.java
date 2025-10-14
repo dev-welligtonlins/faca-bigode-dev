@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.awsft.knifeandmustache.model.PaymentMethods;
 import com.awsft.knifeandmustache.model.Payments;
 import com.awsft.knifeandmustache.repository.PaymentsRepository;
 
