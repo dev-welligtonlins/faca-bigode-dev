@@ -126,35 +126,22 @@ INSERT INTO agenda (service_appointments_id, barber_id)
 
 
 -- ##########
--- MÉTODOS DE PAGAMENTO
--- ##########
-INSERT INTO payment_methods (payment_methods_description)
-		VALUES ('CARTÃO DE CRÉDITO');
-
-INSERT INTO payment_methods (payment_methods_description)
-		VALUES ('CARTÃO DE DÉBITO');
-
-INSERT INTO payment_methods (payment_methods_description)
-		VALUES ('DINHEIRO');
-
-INSERT INTO payment_methods (payment_methods_description)
-		VALUES ('PIX');
 
 
 -- ##########
 -- PAGAMENTOS
 -- ##########
-INSERT INTO payments (appointment_id, payment_method_id, payment_status)
-		VALUES (1, 4, FALSE);
+INSERT INTO payments (appointment_id, payment_value, payment_method, payment_status)
+		VALUES (1, 4, 'PIX', FALSE);
 
-INSERT INTO payments (appointment_id, payment_method_id, payment_status)
-		VALUES (2, 3, FALSE);
+INSERT INTO payments (appointment_id, payment_value, payment_method, payment_status)
+		VALUES (2, 3, 'PIX', FALSE);
 
-INSERT INTO payments (appointment_id, payment_method_id, payment_status)
-		VALUES (3, 4, FALSE);
+INSERT INTO payments (appointment_id, payment_value, payment_method, payment_status)
+		VALUES (3, 4, 'PIX', FALSE);
 
-INSERT INTO payments (appointment_id, payment_method_id, payment_status)
-		VALUES (4, 1, FALSE);
+INSERT INTO payments (appointment_id, payment_value, payment_method, payment_status)
+		VALUES (4, 1, 'PIX', FALSE);
 
 
 

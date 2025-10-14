@@ -13,41 +13,41 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.awsft.knifeandmustache.model.Services;
-import com.awsft.knifeandmustache.service.ServicesService;
+import com.awsft.knifeandmustache.model.Payments;
+import com.awsft.knifeandmustache.service.PaymentsService;
 
 
 @RestController
-@RequestMapping("/services")
-public class ServicesController implements  ICrud<Services>{
+@RequestMapping("/payments")
+public class PaymentsController implements  ICrud<Payments>{
        
-    private final ServicesService service;
+    private final PaymentsService service;
 
-    public ServicesController(ServicesService service){
+    public PaymentsController(PaymentsService service){
         this.service = service;
     }
 
     @PostMapping("/")
-    public ResponseEntity<Services> insert(@RequestBody Services obj){
-        Services record = service.save(obj);
+    public ResponseEntity<Payments> insert(@RequestBody Payments obj){
+        Payments record = service.save(obj);
         return new ResponseEntity<>(record, HttpStatus.CREATED);
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<Services>> findAll(){
-        List<Services> allRecors = service.findAll();
+    public ResponseEntity<List<Payments>> findAll(){
+        List<Payments> allRecors = service.findAll();
         return new ResponseEntity<>(allRecors, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Services> getById(@PathVariable("id") Long id){
-        Services record = service.getById(id);
+    public ResponseEntity<Payments> getById(@PathVariable("id") Long id){
+        Payments record = service.getById(id);
         return new ResponseEntity<>(record, HttpStatus.OK);
     }
 
     @PutMapping("/")
-    public ResponseEntity<Services> update(@RequestBody Services obj){
-        Services record = service.save(obj);
+    public ResponseEntity<Payments> update(@RequestBody Payments obj){
+        Payments record = service.save(obj);
         return new ResponseEntity<>(record, HttpStatus.OK);
     }
 
@@ -58,10 +58,5 @@ public class ServicesController implements  ICrud<Services>{
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/categories/{id}")
-    public ResponseEntity<List<Services>> getByServiceCategoryId(@PathVariable Long id) {
-        List<Services> allRecors = service.getByServiceCategoryId(id);
-        return new ResponseEntity<>(allRecors, HttpStatus.OK); 
-    }
     
 }

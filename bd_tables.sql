@@ -1,4 +1,5 @@
 
+
 -- Database: knifeandmustache
 
 -- DROP DATABASE IF EXISTS "knifeandmustache";
@@ -142,25 +143,16 @@ CREATE TABLE IF NOT EXISTS agenda (
 		ON DELETE CASCADE
 );
 
--- MÉTODOS DE PAGAMENTO
-CREATE TABLE IF NOT EXISTS payment_methods (
-	id SERIAL PRIMARY KEY,
-	payment_methods_description VARCHAR(25) NOT NULL
-);
-
 -- PAGAMENTOS
 CREATE TABLE IF NOT EXISTS payments (
 	appointment_id INT NOT NULL,
-	payment_method_id INT NOT NULL,
+	payment_value FLOAT NOT NULL,
+	payment_method VARCHAR(15) NOT NULL,
 	payment_status BOOLEAN NOT NULL,
 
 	CONSTRAINT fk_appointment
 		FOREIGN KEY (appointment_id)
-		REFERENCES appointments(id),
-
-	CONSTRAINT fk_payment_methods
-		FOREIGN KEY (payment_method_id)
-		REFERENCES payment_methods(id)
+		REFERENCES appointments(id)
 );
 
 

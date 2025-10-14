@@ -1,14 +1,14 @@
-// package com.awsft.knifeandmustache;
+package com.awsft.knifeandmustache;
 
-// import com.awsft.knifeandmustache.model.Service;
+import com.awsft.knifeandmustache.model.PaymentMethods;
+import com.awsft.knifeandmustache.model.Payments;
 
-// public class Main {
-//     public static void main(String[] args) {
+public class Main {
+    public static void main(String[] args) {
 
-//         Service s1 = new Service();
+        Payments pa1 = new Payments(100.00, false, PaymentMethods.PIX);
 
-//         s1.setDescription("corte social");
-
-//         System.out.println(s1.getDescription());
-//     }
-// }
+        System.out.println(pa1.getStatusPayment());
+        System.out.println(pa1.getPaymentMethods());
+    }
+}
