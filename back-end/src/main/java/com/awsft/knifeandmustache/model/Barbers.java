@@ -1,10 +1,17 @@
 package com.awsft.knifeandmustache.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -24,6 +31,11 @@ public class Barbers {
     @Column(name = "is_beard")
     private Boolean isBeard;
 
+
+    @OneToMany(mappedBy = "barbers", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
+    private List<ServiceAppointments> serviceAppointments = new ArrayList<ServiceAppointments>();
+
     public Barbers() {
 
     }
@@ -35,6 +47,7 @@ public class Barbers {
         this.isBeard = isBeard;
     }
 
+    
     public Long getId() {
         return id;
     }
@@ -69,6 +82,14 @@ public class Barbers {
 
     public void setIsBeard(Boolean isBeard) {
         this.isBeard = isBeard;
+    }
+
+    public List<ServiceAppointments> getServiceAppointments() {
+        return serviceAppointments;
+    }
+
+    public void setServiceAppointments(List<ServiceAppointments> serviceAppointments) {
+        this.serviceAppointments = serviceAppointments;
     }
 
     

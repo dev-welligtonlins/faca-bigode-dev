@@ -4,12 +4,14 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -26,9 +28,15 @@ public class Appointments {
     private LocalDateTime appointmentTime;
     
 
-    @OneToMany
-    @JoinColumn(name = "payments")
+    @OneToMany(mappedBy = "appointments", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Payments> payments = new ArrayList<Payments>();
+
+    @OneToMany(mappedBy = "appointments", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<ServiceAppointments> serviceAppointments = new ArrayList<ServiceAppointments>();
+
+
 
     public Appointments() {
 
@@ -58,6 +66,22 @@ public class Appointments {
     public void setAppointmentTime(LocalDateTime appointmentTime) {
         this.appointmentTime = appointmentTime;
     }
+
+    public List<Payments> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(List<Payments> payments) {
+        this.payments = payments;
+    }
+
+    public List<ServiceAppointments> getServiceAppointments() {
+        return serviceAppointments;
+    }
+
+    public void setServiceAppointments(List<ServiceAppointments> serviceAppointments) {
+        this.serviceAppointments = serviceAppointments;
+    }
     
-       
+    
 }

@@ -1,5 +1,7 @@
 package com.awsft.knifeandmustache.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -28,18 +30,19 @@ public class Payments {
 
     @ManyToOne
     @JoinColumn(name = "appointment_id")
-    private Appointments appointment;
+    @JsonBackReference
+    private Appointments appointments;
 
 
     public Payments() {
         
     }
 
-    public Payments(Double value, Boolean statusPayment, PaymentMethods paymentMethods, Appointments appointment) {
+    public Payments(Double value, Boolean statusPayment, PaymentMethods paymentMethods, Appointments appointments) {
         this.value = value;
         this.statusPayment = statusPayment;
         this.paymentMethods = paymentMethods;
-        this.appointment = appointment;
+        this.appointments = appointments;
     }
 
     public Long getId() {
@@ -70,12 +73,12 @@ public class Payments {
         this.paymentMethods = paymentMethods;
     }
 
-    public Appointments getAppointment() {
-        return appointment;
+    public Appointments getAppointments() {
+        return appointments;
     }
 
-    public void setAppointment(Appointments appointment) {
-        this.appointment = appointment;
+    public void setAppointment(Appointments appointments) {
+        this.appointments = appointments;
     }
 
     
