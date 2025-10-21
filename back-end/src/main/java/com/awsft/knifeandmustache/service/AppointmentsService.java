@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.awsft.knifeandmustache.model.Appointments;
+import com.awsft.knifeandmustache.model.ServiceAppointments;
 import com.awsft.knifeandmustache.repository.AppointmentsRepository;
 
 @Service
@@ -35,7 +36,7 @@ public class AppointmentsService implements ICrud<Appointments>{
         repo.delete(obj);
     }
 
-    public List<Appointments> findBarbersByAppointments(Long id){
+    public List<ServiceAppointments> findBarbersByAppointments(Long id){
         return repo.findBarbersAppointments(id);
     }
 }

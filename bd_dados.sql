@@ -90,29 +90,29 @@ INSERT INTO appointments (client_name, appointment_time, barbershop_id)
 -- ##########################
 -- SERVICOS DE UM AGENDAMENTO
 -- ##########################
-INSERT INTO service_appointments (barber_id, service_id, appointment_id)
-		VALUES (1, 1, 1);
+INSERT INTO service_appointments (barber_id, service_id, appointment_id, service_time)
+		VALUES (1, 1, 1, '14:30');
 
-INSERT INTO service_appointments (barber_id, service_id, appointment_id)
-		VALUES (1, 2, 1);
+INSERT INTO service_appointments (barber_id, service_id, appointment_id, service_time)
+		VALUES (1, 2, 1, '15:00');
 
-INSERT INTO service_appointments (barber_id, service_id, appointment_id)
-		VALUES (2, 5, 3);
+INSERT INTO service_appointments (barber_id, service_id, appointment_id, service_time)
+		VALUES (2, 5, 3, '15:30');
 
-INSERT INTO service_appointments (barber_id, service_id, appointment_id)
-		VALUES (1, 4, 4);
+INSERT INTO service_appointments (barber_id, service_id, appointment_id, service_time)
+		VALUES (1, 4, 4, '16:00');
 
-INSERT INTO service_appointments (barber_id, service_id, appointment_id)
-		VALUES (3, 6, 2);
+INSERT INTO service_appointments (barber_id, service_id, appointment_id, service_time)
+		VALUES (3, 6, 2, '16:30');
 
-INSERT INTO service_appointments (barber_id, service_id, appointment_id)
-		VALUES (2, 1, 3);
+INSERT INTO service_appointments (barber_id, service_id, appointment_id, service_time)
+		VALUES (2, 1, 3, '17:00');
 
-INSERT INTO service_appointments (barber_id, service_id, appointment_id)
-		VALUES (2, 4, 3);
+INSERT INTO service_appointments (barber_id, service_id, appointment_id, service_time)
+		VALUES (2, 4, 3, '17:30');
 
-INSERT INTO service_appointments (barber_id, service_id, appointment_id)
-		VALUES (3, 2, 4);
+INSERT INTO service_appointments (barber_id, service_id, appointment_id, service_time)
+		VALUES (3, 2, 4, '18:00');
 
 
 

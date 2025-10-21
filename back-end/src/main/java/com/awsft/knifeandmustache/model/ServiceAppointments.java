@@ -1,8 +1,12 @@
 package com.awsft.knifeandmustache.model;
 
+import java.time.LocalTime;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,6 +22,10 @@ public class ServiceAppointments {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "service_time")
+    @JsonFormat(pattern = "HH:mm")
+    private LocalTime time;
 
     @ManyToOne
     @JoinColumn(name = "barber_id")
@@ -65,6 +73,14 @@ public class ServiceAppointments {
         this.appointments = appointments;
     }
 
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalTime time) {
+        this.time = time;
+    }
+    
     
 
 }

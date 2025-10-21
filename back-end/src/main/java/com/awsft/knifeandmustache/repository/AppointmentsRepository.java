@@ -7,14 +7,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.awsft.knifeandmustache.model.Appointments;
+import com.awsft.knifeandmustache.model.ServiceAppointments;
 
 public interface AppointmentsRepository extends JpaRepository<Appointments, Long>{
     
     @Query(value = 
-        "SELECT a.* FROM service_appointments sa " + 
-        " JOIN appointments a ON sa.appointment_id = a.id" + 
+        "SELECT sa.* FROM appointments a " + 
+        " JOIN service_appointments sa ON sa.appointment_id = a.id" + 
         " JOIN barbers b ON sa.barber_id = b.id" + 
         " WHERE sa.barber_id = :i", nativeQuery = true)
-    List<Appointments> findBarbersAppointments(Long i);
+    List<ServiceAppointments> findBarbersAppointments(Long i);
 } 
 

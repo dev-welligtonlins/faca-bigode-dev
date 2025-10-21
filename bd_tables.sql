@@ -121,6 +121,7 @@ CREATE TABLE IF NOT EXISTS appointments (
 -- ITENS DE UM AGENDAMENTO
 CREATE TABLE IF NOT EXISTS service_appointments (
 	id SERIAL PRIMARY KEY,
+	service_time TIME NOT NULL,
 	barber_id INT NOT NULL,
 	service_id INT NOT NULL,
 	appointment_id INT NOT NULL,
