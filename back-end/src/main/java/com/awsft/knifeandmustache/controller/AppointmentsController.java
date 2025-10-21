@@ -1,5 +1,6 @@
 package com.awsft.knifeandmustache.controller;
 
+import java.time.DayOfWeek;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -57,4 +58,10 @@ public class AppointmentsController implements  ICrud<Appointments>{
         return new ResponseEntity<>(HttpStatus.OK);
     }
     
+    @GetMapping("/b/{id}")
+    public ResponseEntity<List<Appointments>> findBarbersByAppointments(@PathVariable("id") Long id){
+        List<Appointments> allRecors = service.findBarbersByAppointments(id);
+        return new ResponseEntity<>(allRecors, HttpStatus.OK);
+    }
+
 }

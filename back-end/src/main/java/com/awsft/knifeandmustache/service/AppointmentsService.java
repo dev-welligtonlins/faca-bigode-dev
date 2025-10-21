@@ -11,7 +11,7 @@ import com.awsft.knifeandmustache.repository.AppointmentsRepository;
 public class AppointmentsService implements ICrud<Appointments>{
 
     private final AppointmentsRepository repo;
-  
+    
     public AppointmentsService(AppointmentsRepository repo){
         this.repo = repo;
     }
@@ -35,5 +35,8 @@ public class AppointmentsService implements ICrud<Appointments>{
         repo.delete(obj);
     }
 
+    public List<Appointments> findBarbersByAppointments(Long id){
+        return repo.findBarbersAppointments(id);
+    }
 }
 

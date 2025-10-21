@@ -1,5 +1,7 @@
 
 
+
+
 -- Database: knifeandmustache
 
 -- DROP DATABASE IF EXISTS "knifeandmustache";
@@ -8,9 +10,25 @@
 CREATE TABLE IF NOT EXISTS barbershops (
 	id SERIAL PRIMARY KEY,
 	barbershops_name VARCHAR(80) NOT NULL,
-	opening_hours TIME NOT NULL,
-	closing_hours TIME NOT NULL
+	service_time INT NOT NULL
 );
+
+-- HORÁRIOS (ABERTURA INTERVALO E FECHAMENTO)
+CREATE TABLE IF NOT EXISTS barbershop_schedules (
+	id SERIAL PRIMARY KEY,
+	day_week VARCHAR(15) NOT NULL,
+	opening_time TIME NOT NULL,
+	lunch_start_time TIME,
+	lunch_end_time TIME,
+	closing_time TIME NOT NULL,
+	barbershop_id INT NOT NULL,
+
+	CONSTRAINT fk_barbershop
+		FOREIGN KEY (barbershop_id)
+		REFERENCES barbershops(id)
+		ON DELETE CASCADE
+);
+
 
 -- ENDEREÇOS 
 CREATE TABLE IF NOT EXISTS address (
@@ -24,7 +42,7 @@ CREATE TABLE IF NOT EXISTS address (
 	address_state VARCHAR(2),
 	barbershop_id INT NOT NULL,
 
-	CONSTRAINT fk_address
+	CONSTRAINT fk_barbershop
 		FOREIGN KEY (barbershop_id)
 		REFERENCES barbershops(id)
 		ON DELETE CASCADE

@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.awsft.knifeandmustache.model.Appointments;
 import com.awsft.knifeandmustache.model.ServiceAppointments;
-import com.awsft.knifeandmustache.service.AppointmentsService;
 import com.awsft.knifeandmustache.service.ServiceAppointmentsService;
 
 @RestController
@@ -59,4 +57,9 @@ public class ServiceAppointmentsController implements  ICrud<ServiceAppointments
         return new ResponseEntity<>(HttpStatus.OK);
     }
     
+    @GetMapping("/barber/{id}")
+    public ResponseEntity<List<ServiceAppointments>> findByBarbersId(@PathVariable("id") Long id){
+        List<ServiceAppointments> allRecors = service.findByBarbersId(id);
+        return new ResponseEntity<>(allRecors, HttpStatus.OK);
+    }
 }

@@ -13,40 +13,41 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.awsft.knifeandmustache.model.ServiceCategories;
-import com.awsft.knifeandmustache.service.ServiceCategoriesService;
+import com.awsft.knifeandmustache.model.BarbershopSchedules;
+import com.awsft.knifeandmustache.service.BarbershopSchedulesService;
+
 
 @RestController
-@RequestMapping("/service_categories")
-public class ServiceCategoriesController implements  ICrud<ServiceCategories>{
+@RequestMapping("/barbershop_schedules")
+public class BarbershopSchedulesController implements  ICrud<BarbershopSchedules>{
        
-    private final ServiceCategoriesService service;
+    private final BarbershopSchedulesService service;
 
-    public ServiceCategoriesController(ServiceCategoriesService service){
+    public BarbershopSchedulesController(BarbershopSchedulesService service){
         this.service = service;
     }
 
     @PostMapping("/")
-    public ResponseEntity<ServiceCategories> insert(@RequestBody ServiceCategories obj){
-        ServiceCategories record = service.save(obj);
+    public ResponseEntity<BarbershopSchedules> insert(@RequestBody BarbershopSchedules obj){
+        BarbershopSchedules record = service.save(obj);
         return new ResponseEntity<>(record, HttpStatus.CREATED);
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<ServiceCategories>> findAll(){
-        List<ServiceCategories> allRecors = service.findAll();
+    public ResponseEntity<List<BarbershopSchedules>> findAll(){
+        List<BarbershopSchedules> allRecors = service.findAll();
         return new ResponseEntity<>(allRecors, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ServiceCategories> getById(@PathVariable("id") Long id){
-        ServiceCategories record = service.getById(id);
+    public ResponseEntity<BarbershopSchedules> getById(@PathVariable("id") Long id){
+        BarbershopSchedules record = service.getById(id);
         return new ResponseEntity<>(record, HttpStatus.OK);
     }
 
     @PutMapping("/")
-    public ResponseEntity<ServiceCategories> update(@RequestBody ServiceCategories obj){
-        ServiceCategories record = service.save(obj);
+    public ResponseEntity<BarbershopSchedules> update(@RequestBody BarbershopSchedules obj){
+        BarbershopSchedules record = service.save(obj);
         return new ResponseEntity<>(record, HttpStatus.OK);
     }
 
@@ -56,4 +57,6 @@ public class ServiceCategoriesController implements  ICrud<ServiceCategories>{
         service.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    
 }

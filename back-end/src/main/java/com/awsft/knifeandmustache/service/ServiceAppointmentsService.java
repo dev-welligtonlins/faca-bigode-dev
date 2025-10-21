@@ -35,5 +35,9 @@ public class ServiceAppointmentsService implements ICrud<ServiceAppointments>{
         repo.delete(obj);
     }
 
+    public List<ServiceAppointments> findByBarbersId(Long id){
+        return repo.findByBarbersId(id);
+    }
+
 }
 

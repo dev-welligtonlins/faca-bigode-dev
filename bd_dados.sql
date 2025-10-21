@@ -2,10 +2,10 @@
 
 
 -- BARBEARIAS
-INSERT INTO barbershops (barbershops_name, opening_hours, closing_hours) 
-		VALUES ('Barbearia do Bigode', '08:00:00', '18:00:00');
-INSERT INTO barbershops (barbershops_name, opening_hours, closing_hours) 
-		VALUES ('Barbearia do Careca', '10:00:00', '20:00:00');
+INSERT INTO barbershops (barbershops_name, service_time) 
+		VALUES ('Barbearia do Bigode', 50);
+INSERT INTO barbershops (barbershops_name, service_time) 
+		VALUES ('Barbearia do Careca', 45);
 
 
 
@@ -105,6 +105,17 @@ INSERT INTO service_appointments (barber_id, service_id, appointment_id)
 INSERT INTO service_appointments (barber_id, service_id, appointment_id)
 		VALUES (3, 6, 2);
 
+INSERT INTO service_appointments (barber_id, service_id, appointment_id)
+		VALUES (2, 1, 3);
+
+INSERT INTO service_appointments (barber_id, service_id, appointment_id)
+		VALUES (2, 4, 3);
+
+INSERT INTO service_appointments (barber_id, service_id, appointment_id)
+		VALUES (3, 2, 4);
+
+
+
 -- ###################
 -- AGENDA DE BARBEIROS
 -- ###################
@@ -123,9 +134,6 @@ INSERT INTO agenda (service_appointments_id, barber_id)
 INSERT INTO agenda (service_appointments_id, barber_id)
 		VALUES (5, 3);
 
-
-
--- ##########
 
 
 -- ##########
