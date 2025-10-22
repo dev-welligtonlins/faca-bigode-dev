@@ -91,17 +91,12 @@ CREATE TABLE IF NOT EXISTS services (
 	service_description VARCHAR(45) NOT NULL,
 	duration INT NOT NULL,
 	service_value FLOAT NOT NULL,
-	service_categories_id INT NOT NULL,
+	category VARCHAR(45) NOT NULL,
 	barbershop_id INT NOT NULL,
 	
 	CONSTRAINT fk_barbershop
 		FOREIGN KEY (barbershop_id)
 		REFERENCES barbershops(id)
-		ON DELETE CASCADE,
-		
-	CONSTRAINT fk_categories
-		FOREIGN KEY (service_categories_id)
-		REFERENCES service_categories(id)
 		ON DELETE CASCADE
 );
 

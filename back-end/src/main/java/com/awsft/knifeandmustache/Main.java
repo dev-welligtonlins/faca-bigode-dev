@@ -1,7 +1,5 @@
 package com.awsft.knifeandmustache;
 
-import com.awsft.knifeandmustache.model.PaymentMethods;
-import com.awsft.knifeandmustache.model.Payments;
 
 public class Main {
     public static void main(String[] args) {

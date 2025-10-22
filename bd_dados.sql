@@ -35,38 +35,31 @@ INSERT INTO barbers (barber_name, url_social, is_hair, is_beard, barbershop_id) 
 
 
 
--- CATEGORIAS DE SERVICO
-INSERT INTO service_categories (service_categories_description) VALUES ('Barba');
-INSERT INTO service_categories (service_categories_description) VALUES ('Cabelo');
-INSERT INTO service_categories (service_categories_description) VALUES ('Combo');
-
-
-
 -- ########
 -- SERVICOS
 -- ########
-INSERT INTO services (service_description, duration, service_value, service_categories_id, barbershop_id) 
-		VALUES ('Barba Lenhador', 20, 30.00, 1, 1);
-INSERT INTO services (service_description, duration, service_value, service_categories_id, barbershop_id) 
-		VALUES ('Barba Cerrada', 25, 30.00, 1, 1);
-INSERT INTO services (service_description, duration, service_value, service_categories_id, barbershop_id) 
-		VALUES ('Barba Cheia', 20, 25.00, 1, 1);
+INSERT INTO services (service_description, duration, service_value, category, barbershop_id) 
+		VALUES ('Barba Lenhador', 20, 30.00, 'BARBA', 1);
+INSERT INTO services (service_description, duration, service_value, category, barbershop_id) 
+		VALUES ('Barba Cerrada', 25, 30.00, 'BARBA', 1);
+INSERT INTO services (service_description, duration, service_value, category, barbershop_id) 
+		VALUES ('Barba Cheia', 20, 25.00, 'BARBA', 1);
 
-INSERT INTO services (service_description, duration, service_value, service_categories_id, barbershop_id) 
-		VALUES ('Degradê', 50, 50.00, 2, 1);
-INSERT INTO services (service_description, duration, service_value, service_categories_id, barbershop_id) 
-		VALUES ('Corte Americano', 50, 45.00, 2, 1);
-INSERT INTO services (service_description, duration, service_value, service_categories_id, barbershop_id) 
-		VALUES ('Corte Militar', 30, 35.00, 2, 1);
-INSERT INTO services (service_description, duration, service_value, service_categories_id, barbershop_id) 
-		VALUES ('Corte Social', 40, 39.99, 2, 1);
-INSERT INTO services (service_description, duration, service_value, service_categories_id, barbershop_id) 
-		VALUES ('Moicano', 50, 33.00, 2, 1);
+INSERT INTO services (service_description, duration, service_value, category, barbershop_id) 
+		VALUES ('Degradê', 50, 50.00, 'CABELO', 1);
+INSERT INTO services (service_description, duration, service_value, category, barbershop_id) 
+		VALUES ('Corte Americano', 50, 45.00, 'CABELO', 1);
+INSERT INTO services (service_description, duration, service_value, category, barbershop_id) 
+		VALUES ('Corte Militar', 30, 35.00, 'CABELO', 1);
+INSERT INTO services (service_description, duration, service_value, category, barbershop_id) 
+		VALUES ('Corte Social', 40, 39.99, 'CABELO', 1);
+INSERT INTO services (service_description, duration, service_value, category, barbershop_id) 
+		VALUES ('Moicano', 50, 33.00, 'CABELO', 1);
 
-INSERT INTO services (service_description, duration, service_value, service_categories_id, barbershop_id) 
-		VALUES ('Corte Social + Barba Cerrada', 65, 60, 3, 2);
-INSERT INTO services (service_description, duration, service_value, service_categories_id, barbershop_id) 
-		VALUES ('Degradê + Barba Cheia', 60, 68.00, 3, 2);
+INSERT INTO services (service_description, duration, service_value, category, barbershop_id) 
+		VALUES ('Corte Social + Barba Cerrada', 65, 60, 'COMBO', 2);
+INSERT INTO services (service_description, duration, service_value, category, barbershop_id) 
+		VALUES ('Degradê + Barba Cheia', 60, 68.00, 'COMBO', 2);
 
 
 
