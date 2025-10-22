@@ -9,8 +9,7 @@
 -- BARBEARIAS
 CREATE TABLE IF NOT EXISTS barbershops (
 	id SERIAL PRIMARY KEY,
-	barbershops_name VARCHAR(80) NOT NULL,
-	service_time INT NOT NULL
+	barbershops_name VARCHAR(80) NOT NULL
 );
 
 -- HORÁRIOS (ABERTURA INTERVALO E FECHAMENTO)

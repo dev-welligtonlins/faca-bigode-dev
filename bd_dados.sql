@@ -2,10 +2,10 @@
 
 
 -- BARBEARIAS
-INSERT INTO barbershops (barbershops_name, service_time) 
-		VALUES ('Barbearia do Bigode', 50);
-INSERT INTO barbershops (barbershops_name, service_time) 
-		VALUES ('Barbearia do Careca', 45);
+INSERT INTO barbershops (barbershops_name) 
+		VALUES ('Barbearia do Bigode');
+INSERT INTO barbershops (barbershops_name) 
+		VALUES ('Barbearia do Careca');
 
 
 
