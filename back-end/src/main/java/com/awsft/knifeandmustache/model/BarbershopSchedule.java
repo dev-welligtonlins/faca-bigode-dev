@@ -2,6 +2,8 @@ package com.awsft.knifeandmustache.model;
 
 import java.time.LocalTime;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -9,6 +11,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -31,6 +35,14 @@ public class BarbershopSchedule {
     @Column(name = "closing_time")
     private LocalTime closingTime;
 
+    @ManyToOne
+    @JoinColumn(name = "barbershop_id")
+    @JsonBackReference
+    private Barbershop barbershop;
+
+
+
+    
     public BarbershopSchedule() {
 
     }
@@ -74,8 +86,12 @@ public class BarbershopSchedule {
     }
     public void setClosingTime(LocalTime closingTime) {
         this.closingTime = closingTime;
-    }   
-
-    
+    }
+    public Barbershop getBarbershop() {
+        return barbershop;
+    }
+    public void setBarbershop(Barbershop barbershop) {
+        this.barbershop = barbershop;
+    } 
 
 }

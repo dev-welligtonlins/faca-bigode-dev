@@ -1,9 +1,13 @@
 package com.awsft.knifeandmustache.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,6 +21,11 @@ public class Accommodation {
     private Boolean parking;
     private Boolean bath;
     private Boolean air_conditioner;
+
+    @OneToOne
+    @JoinColumn(name = "barbershop_id")
+    @JsonBackReference
+    private Barbershop barbershop;
     
     public Accommodation() {
         
@@ -63,5 +72,14 @@ public class Accommodation {
 
     public void setAir_conditioner(Boolean air_conditioner) {
         this.air_conditioner = air_conditioner;
-    }    
+    }
+
+    public Barbershop getBarbershop() {
+        return barbershop;
+    }
+
+    public void setBarbershop(Barbershop barbershop) {
+        this.barbershop = barbershop;
+    }
+    
 }

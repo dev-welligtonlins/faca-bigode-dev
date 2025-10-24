@@ -11,6 +11,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -35,6 +37,11 @@ public class Barber {
     @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonBackReference
     private List<ServiceAppointment> serviceAppointments = new ArrayList<ServiceAppointment>();
+
+    @ManyToOne
+    @JoinColumn(name = "barbershop_id")
+    @JsonBackReference
+    private Barbershop barbershop;
 
     public Barber() {
 
@@ -92,5 +99,12 @@ public class Barber {
         this.serviceAppointments = serviceAppointments;
     }
 
-    
+    public Barbershop getBarbershop() {
+        return barbershop;
+    }
+
+    public void setBarbershop(Barbershop barbershop) {
+        this.barbershop = barbershop;
+    }
+
 }
