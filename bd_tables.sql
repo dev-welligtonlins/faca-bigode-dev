@@ -1,7 +1,4 @@
 
-
-
-
 -- Database: knifeandmustache
 
 -- DROP DATABASE IF EXISTS "knifeandmustache";
@@ -78,11 +75,7 @@ CREATE TABLE IF NOT EXISTS barbers (
 		ON DELETE CASCADE
 );
 
--- CATEGORIAS DE SERVIÇOS
-CREATE TABLE IF NOT EXISTS service_categories (
-	id SERIAL PRIMARY KEY,
-	service_categories_description VARCHAR(45) NOT NULL
-);
+
 
 -- SERVIÇOS
 CREATE TABLE IF NOT EXISTS services (
@@ -116,24 +109,25 @@ CREATE TABLE IF NOT EXISTS appointments (
 CREATE TABLE IF NOT EXISTS service_appointments (
 	id SERIAL PRIMARY KEY,
 	service_time TIME NOT NULL,
-	barber_id INT NOT NULL,
-	service_id INT NOT NULL,
+	barber_id INT,
+	service_id INT,
 	appointment_id INT NOT NULL,
 	
 	CONSTRAINT fk_barber 
 		FOREIGN KEY (barber_id)
 		REFERENCES barbers(id)
-		ON DELETE CASCADE,
+		ON DELETE SET NULL,
 		
-	CONSTRAINT fk_appointment 
-		FOREIGN KEY (appointment_id)
-		REFERENCES appointments(id)
-		ON DELETE CASCADE,
-
 	CONSTRAINT fk_service 
 		FOREIGN KEY (service_id)
 		REFERENCES services(id)
+		ON DELETE SET NULL,
+
+	CONSTRAINT fk_appointment 
+		FOREIGN KEY (appointment_id)
+		REFERENCES appointments(id)
 		ON DELETE CASCADE
+
 );
 
 -- ##################
@@ -166,14 +160,5 @@ CREATE TABLE IF NOT EXISTS payments (
 	CONSTRAINT fk_appointment
 		FOREIGN KEY (appointment_id)
 		REFERENCES appointments(id)
+		ON DELETE CASCADE
 );
-
-
-
-
-
-
-
-
-
-

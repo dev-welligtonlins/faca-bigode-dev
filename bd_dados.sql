@@ -25,6 +25,33 @@ INSERT INTO accommodations (wifi, parking, bath, air_conditioner, barbershop_id)
 
 
 
+-- HORÁRIOS DE FUNCIONAMENTO DA BARBEARIA
+INSERT INTO barbershop_schedules (day_week, opening_time, lunch_start_time, lunch_end_time, closing_time, barbershop_id)
+		VALUES ('SEGUNDA', '08:00', '11:00', '13:00', '18:30', 1);
+INSERT INTO barbershop_schedules (day_week, opening_time, lunch_start_time, lunch_end_time, closing_time, barbershop_id)
+		VALUES ('TERÇA', '08:00', '11:00', '13:00', '18:30', 1);
+INSERT INTO barbershop_schedules (day_week, opening_time, lunch_start_time, lunch_end_time, closing_time, barbershop_id)
+		VALUES ('QUARTA', '08:00', '11:00', '13:00', '18:30', 1);
+INSERT INTO barbershop_schedules (day_week, opening_time, lunch_start_time, lunch_end_time, closing_time, barbershop_id)
+		VALUES ('QUINTA', '08:00', '11:00', '13:00', '18:30', 1);
+INSERT INTO barbershop_schedules (day_week, opening_time, lunch_start_time, lunch_end_time, closing_time, barbershop_id)
+		VALUES ('SEXTA', '08:00', '11:00', '13:00', '18:30', 1);
+INSERT INTO barbershop_schedules (day_week, opening_time, lunch_start_time, lunch_end_time, closing_time, barbershop_id)
+		VALUES ('SÁBADO', '08:00', '11:00', '13:00', '18:30', 1);
+
+INSERT INTO barbershop_schedules (day_week, opening_time, lunch_start_time, lunch_end_time, closing_time, barbershop_id)
+		VALUES ('SEGUNDA', '07:00', '11:00', '13:00', '18:30', 2);
+INSERT INTO barbershop_schedules (day_week, opening_time, lunch_start_time, lunch_end_time, closing_time, barbershop_id)
+		VALUES ('TERÇA', '07:00', '11:00', '13:00', '18:30', 2);
+INSERT INTO barbershop_schedules (day_week, opening_time, lunch_start_time, lunch_end_time, closing_time, barbershop_id)
+		VALUES ('QUARTA', '07:00', '11:00', '13:00', '18:30', 2);
+INSERT INTO barbershop_schedules (day_week, opening_time, lunch_start_time, lunch_end_time, closing_time, barbershop_id)
+		VALUES ('QUINTA', '07:00', '11:00', '13:00', '18:30', 2);
+INSERT INTO barbershop_schedules (day_week, opening_time, lunch_start_time, lunch_end_time, closing_time, barbershop_id)
+		VALUES ('SEXTA', '07:00', '11:00', '13:00', '21:30', 2);
+INSERT INTO barbershop_schedules (day_week, opening_time, lunch_start_time, lunch_end_time, closing_time, barbershop_id)
+		VALUES ('SÁBADO', '07:00', '11:00', '11:30', '2:30', 2);
+
 -- BARBEIROS
 INSERT INTO barbers (barber_name, url_social, is_hair, is_beard, barbershop_id) 
 		VALUES ('João Gomes', '@joaotesoura', TRUE, TRUE, 1);

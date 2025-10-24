@@ -31,7 +31,7 @@ public class Appointment {
     private LocalDateTime appointmentTime;
     
 
-    @OneToMany(mappedBy = "appointment", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "appointment", cascade = CascadeType.ALL, orphanRemoval = true) 
     @JsonManagedReference
     private List<Payment> payments = new ArrayList<Payment>();
 

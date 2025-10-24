@@ -27,19 +27,20 @@ public class ServiceAppointment {
     @JsonFormat(pattern = "HH:mm")
     private LocalTime time;
 
-    @ManyToOne
-    @JoinColumn(name = "barber_id")
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "barber_id", nullable = true)
     @JsonManagedReference
     private Barber barber;
 
-    @ManyToOne
-    @JoinColumn(name = "service_id")
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "service_id",  nullable = true)
     private Service service;
 
     @ManyToOne
     @JoinColumn(name = "appointment_id")
     @JsonBackReference
     private Appointment appointment;
+
 
     public ServiceAppointment(){
 

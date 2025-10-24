@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,12 +33,12 @@ public class Barber {
     private Boolean isBeard;
 
 
-    @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "barber")
     @JsonBackReference
     private List<ServiceAppointment> serviceAppointments = new ArrayList<ServiceAppointment>();
 
-    @ManyToOne
-    @JoinColumn(name = "barbershop_id")
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "barbershop_id", nullable = true)
     @JsonBackReference
     private Barbershop barbershop;
 
