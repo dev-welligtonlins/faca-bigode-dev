@@ -116,18 +116,17 @@ CREATE TABLE IF NOT EXISTS service_appointments (
 	CONSTRAINT fk_barber 
 		FOREIGN KEY (barber_id)
 		REFERENCES barbers(id)
-		ON DELETE SET NULL,
+		ON DELETE CASCADE,
 		
 	CONSTRAINT fk_service 
 		FOREIGN KEY (service_id)
 		REFERENCES services(id)
-		ON DELETE SET NULL,
+		ON DELETE CASCADE,
 
 	CONSTRAINT fk_appointment 
 		FOREIGN KEY (appointment_id)
 		REFERENCES appointments(id)
 		ON DELETE CASCADE
-
 );
 
 -- ##################

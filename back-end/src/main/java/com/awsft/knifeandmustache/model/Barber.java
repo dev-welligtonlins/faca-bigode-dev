@@ -37,8 +37,8 @@ public class Barber {
     @JsonBackReference
     private List<ServiceAppointment> serviceAppointments = new ArrayList<ServiceAppointment>();
 
-    @ManyToOne(optional = true)
-    @JoinColumn(name = "barbershop_id", nullable = true)
+    @ManyToOne
+    @JoinColumn(name = "barbershop_id")
     @JsonBackReference
     private Barbershop barbershop;
 

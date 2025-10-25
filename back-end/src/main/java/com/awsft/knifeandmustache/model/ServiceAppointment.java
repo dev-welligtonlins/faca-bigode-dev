@@ -27,13 +27,13 @@ public class ServiceAppointment {
     @JsonFormat(pattern = "HH:mm")
     private LocalTime time;
 
-    @ManyToOne(optional = true)
-    @JoinColumn(name = "barber_id", nullable = true)
+    @ManyToOne
+    @JoinColumn(name = "barber_id")
     @JsonManagedReference
     private Barber barber;
 
-    @ManyToOne(optional = true)
-    @JoinColumn(name = "service_id",  nullable = true)
+    @ManyToOne
+    @JoinColumn(name = "service_id")
     private Service service;
 
     @ManyToOne

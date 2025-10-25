@@ -53,8 +53,7 @@ INSERT INTO barbershop_schedules (day_week, opening_time, lunch_start_time, lunc
 		VALUES ('SÁBADO', '07:00', '11:00', '11:30', '2:30', 2);
 
 -- BARBEIROS
-INSERT INTO barbers (barber_name, url_social, is_hair, is_beard, barbershop_id) 
-		VALUES ('João Gomes', '@joaotesoura', TRUE, TRUE, 1);
+INSERT INTO barbers (barber_name, url_social, is_hair, is_beard, barbershop_id) VALUES ('João Gomes', '@joaotesoura', TRUE, TRUE, 1);
 INSERT INTO barbers (barber_name, url_social, is_hair, is_beard, barbershop_id) VALUES ('Mario BK', '@BK_Silva', TRUE, TRUE, 1);
 INSERT INTO barbers (barber_name, url_social, is_hair, is_beard, barbershop_id) VALUES ('Cleber', '@Clebertesoura', TRUE, FALSE, 1);
 INSERT INTO barbers (barber_name, url_social, is_hair, is_beard, barbershop_id) VALUES ('Brito', '@BritoCortes', TRUE, FALSE, 2);
