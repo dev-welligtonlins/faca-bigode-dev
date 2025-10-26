@@ -20,7 +20,7 @@ public class BarberService implements ICrud<Barber>{
         return repo.save(obj);
     }
  
-    @Override
+    @Override // ESSE MÉTODO DEVERÁ SER DELETADO NO FINAL
     public List<Barber> findAll(){
         return repo.findAll();
     }
@@ -32,7 +32,8 @@ public class BarberService implements ICrud<Barber>{
     @Override
     public void delete(Long id){
         Barber obj = repo.findById(id).orElse(null);
-        repo.delete(obj);
+        obj.setBarberActive(false);
+        repo.save(obj);
     }
 
     public List<Barber> findByIsHairTrue() {
@@ -41,6 +42,14 @@ public class BarberService implements ICrud<Barber>{
 
     public List<Barber> findByIsBeardTrue() {
         return repo.findByIsBeardTrue();
+    }
+
+    public List<Barber> findByBarberActiveTrue(){
+        return repo.findByBarberActiveTrue();
+    }
+
+    public List<Barber> findByBarbershopId(Long id) {
+        return repo.findByBarbershopId(id);
     }
 }
 

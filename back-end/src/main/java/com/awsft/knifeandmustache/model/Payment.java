@@ -23,7 +23,7 @@ public class Payment {
     @Column(name = "payment_value")
     private Double value;
     @Column(name = "payment_status")
-    private Boolean statusPayment;
+    private Boolean paymentStatus;
     @Column(name = "payment_method")
     @Enumerated(EnumType.STRING)
     private EPaymentMethod paymentMethod;
@@ -36,9 +36,9 @@ public class Payment {
     public Payment() {        
     }
 
-    public Payment(Double value, Boolean statusPayment, EPaymentMethod paymentMethod, Appointment appointment) {
+    public Payment(Double value, Boolean paymentStatus, EPaymentMethod paymentMethod, Appointment appointment) {
         this.value = value;
-        this.statusPayment = statusPayment;
+        this.paymentStatus = paymentStatus;
         this.paymentMethod = paymentMethod;
         this.appointment = appointment;
     }
@@ -52,11 +52,11 @@ public class Payment {
     public void setValue(Double value) {
         this.value = value;
     }
-    public Boolean getStatusPayment() {
-        return statusPayment;
+    public Boolean getPaymentStatus() {
+        return paymentStatus;
     }
-    public void setStatusPayment(Boolean statusPayment) {
-        this.statusPayment = statusPayment;
+    public void setPaymentStatus(Boolean paymentStatus) {
+        this.paymentStatus = paymentStatus;
     }
     public Appointment getAppointment() {
         return appointment;

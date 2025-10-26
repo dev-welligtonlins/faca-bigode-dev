@@ -32,6 +32,8 @@ public class Barber {
     @Column(name = "is_beard")
     private Boolean isBeard;
 
+    @Column(name = "barber_active")
+    private Boolean barberActive;
 
     @OneToMany(mappedBy = "barber")
     @JsonBackReference
@@ -104,6 +106,14 @@ public class Barber {
 
     public void setBarbershop(Barbershop barbershop) {
         this.barbershop = barbershop;
+    }
+
+    public Boolean getBarberActive() {
+        return barberActive;
+    }
+
+    public void setBarberActive(Boolean barberActive) {
+        this.barberActive = barberActive;
     }
 
 }

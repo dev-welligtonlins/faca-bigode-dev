@@ -28,6 +28,8 @@ public class Service {
     private Integer duration;    
     @Column(name = "service_value")
     private Double value;
+    @Column(name = "service_active")
+    private Boolean serviceActive;
 
     @Column(name = "category")
     @Enumerated(EnumType.STRING)
@@ -93,4 +95,13 @@ public class Service {
         this.barbershop = barbershop;
     }
 
+    public Boolean getServiceActive() {
+        return serviceActive;
+    }
+
+    public void setServiceActive(Boolean serviceActive) {
+        this.serviceActive = serviceActive;
+    }
+
+    
 }

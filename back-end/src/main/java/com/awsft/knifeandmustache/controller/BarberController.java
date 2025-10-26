@@ -17,6 +17,7 @@ import com.awsft.knifeandmustache.model.Barber;
 import com.awsft.knifeandmustache.service.BarberService;
 
 
+
 @RestController
 @RequestMapping("/barbers")
 public class BarberController implements  ICrud<Barber>{
@@ -69,5 +70,18 @@ public class BarberController implements  ICrud<Barber>{
         List<Barber> allRecors = service.findByIsBeardTrue();
         return new ResponseEntity<>(allRecors, HttpStatus.OK);
     }
+
+    @GetMapping("/actives")
+    public ResponseEntity<List<Barber>> findByBarberActiveTrue(){
+        List<Barber> allRecors = service.findByBarberActiveTrue();
+        return new ResponseEntity<>(allRecors, HttpStatus.OK);
+    }
+
+    @GetMapping("/barbershop/{id}")
+    public ResponseEntity<List<Barber>> findByBarbershopId(@PathVariable("id") Long id) {
+        List<Barber> allRecors = service.findByBarbershopId(id);
+        return new ResponseEntity<>(allRecors, HttpStatus.OK);
+    }
+    
     
 }

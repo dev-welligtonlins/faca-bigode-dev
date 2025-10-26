@@ -12,5 +12,9 @@ public interface BarberRepository extends JpaRepository<Barber, Long>{
     List<Barber> findByIsHairTrue();
 
     List<Barber> findByIsBeardTrue();
+
+    List<Barber> findByBarberActiveTrue();
+
+    List<Barber> findByBarbershopId(Long id);
 } 
 
