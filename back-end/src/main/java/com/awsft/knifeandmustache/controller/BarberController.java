@@ -71,15 +71,9 @@ public class BarberController implements  ICrud<Barber>{
         return new ResponseEntity<>(allRecors, HttpStatus.OK);
     }
 
-    @GetMapping("/actives")
-    public ResponseEntity<List<Barber>> findByBarberActiveTrue(){
-        List<Barber> allRecors = service.findByBarberActiveTrue();
-        return new ResponseEntity<>(allRecors, HttpStatus.OK);
-    }
-
     @GetMapping("/barbershop/{id}")
-    public ResponseEntity<List<Barber>> findByBarbershopId(@PathVariable("id") Long id) {
-        List<Barber> allRecors = service.findByBarbershopId(id);
+    public ResponseEntity<List<Barber>> findByBarbershopIdAndBarberActiveTrue(@PathVariable("id") Long id) {
+        List<Barber> allRecors = service.findByBarbershopIdAndBarberActiveTrue(id);
         return new ResponseEntity<>(allRecors, HttpStatus.OK);
     }
     

@@ -32,5 +32,9 @@ public class ServiceService implements ICrud<Service>{
         Service obj = repo.findById(id).orElse(null);
         repo.delete(obj);
     }
+
+    public List<Service> findByBarbershopIdAndServiceActiveTrue(Long id) {
+        return repo.findByBarbershopIdAndServiceActiveTrue(id);
+    }
 }
 

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.awsft.knifeandmustache.model.Barber;
 import com.awsft.knifeandmustache.model.Service;
 import com.awsft.knifeandmustache.service.ServiceService;
 
@@ -58,4 +59,10 @@ public class ServiceController implements  ICrud<Service>{
         return new ResponseEntity<>(HttpStatus.OK);
     }
     
+
+    @GetMapping("/barbershop/{id}")
+    public ResponseEntity<List<Service>> findByBarbershopIdAndServiceActiveTrue(@PathVariable("id") Long id) {
+        List<Service> allRecors = service.findByBarbershopIdAndServiceActiveTrue(id);
+        return new ResponseEntity<>(allRecors, HttpStatus.OK);
+    }
 }

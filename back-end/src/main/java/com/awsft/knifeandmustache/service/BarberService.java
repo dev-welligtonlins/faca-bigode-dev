@@ -44,12 +44,8 @@ public class BarberService implements ICrud<Barber>{
         return repo.findByIsBeardTrue();
     }
 
-    public List<Barber> findByBarberActiveTrue(){
-        return repo.findByBarberActiveTrue();
-    }
-
-    public List<Barber> findByBarbershopId(Long id) {
-        return repo.findByBarbershopId(id);
+    public List<Barber> findByBarbershopIdAndBarberActiveTrue(Long id) {
+        return repo.findByBarbershopIdAndBarberActiveTrue(id);
     }
 }
 
