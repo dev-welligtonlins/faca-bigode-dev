@@ -39,5 +39,10 @@ public class AppointmentService implements ICrud<Appointment>{
     public List<ServiceAppointment> findBarbersByAppointments(Long id){
         return repo.findBarbersAppointments(id);
     }
+
+    public List<Appointment> findByDayOfWeek(Long dayOfWeek) {
+        return repo.findByDayOfWeek(dayOfWeek);
+    }
+    
 }
 

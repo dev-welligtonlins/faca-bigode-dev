@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.awsft.knifeandmustache.model.Appointment;
 import com.awsft.knifeandmustache.model.ServiceAppointment;
@@ -17,5 +18,9 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long>{
         " JOIN barbers b ON sa.barber_id = b.id" + 
         " WHERE sa.barber_id = :i", nativeQuery = true)
     List<ServiceAppointment> findBarbersAppointments(Long i);
+
+    @Query(value = "SELECT * FROM appointments WHERE EXTRACT(DOW FROM appointment_time) = :dayOfWeek", nativeQuery = true)
+    List<Appointment> findByDayOfWeek(@Param("dayOfWeek") Long dayOfWeek);
+    
 } 
 

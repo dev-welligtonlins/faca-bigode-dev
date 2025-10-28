@@ -67,6 +67,7 @@ CREATE TABLE IF NOT EXISTS barbers (
 	url_social VARCHAR(120),
 	is_hair BOOLEAN NOT NULL,
 	is_beard BOOLEAN NOT NULL,
+	barber_active BOOLEAN NOT NULL,
 	barbershop_id INT NOT NULL,
 	
 	CONSTRAINT fk_barbershop
@@ -84,6 +85,7 @@ CREATE TABLE IF NOT EXISTS services (
 	duration INT NOT NULL,
 	service_value FLOAT NOT NULL,
 	category VARCHAR(45) NOT NULL,
+	service_active BOOLEAN NOT NULL,
 	barbershop_id INT NOT NULL,
 	
 	CONSTRAINT fk_barbershop
@@ -97,6 +99,7 @@ CREATE TABLE IF NOT EXISTS appointments (
 	id SERIAL PRIMARY KEY,
 	client_name VARCHAR(100) NOT NULL,
 	appointment_time TIMESTAMP NOT NULL,
+	appointment_status VARCHAR(25) NOT NULL,
 	barbershop_id INT NOT NULL,
 
 	CONSTRAINT fk_barbershop

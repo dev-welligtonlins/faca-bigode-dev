@@ -30,7 +30,8 @@ public class ServiceService implements ICrud<Service>{
     @Override
     public void delete(Long id){
         Service obj = repo.findById(id).orElse(null);
-        repo.delete(obj);
+        obj.setServiceActive(false);
+        repo.save(obj);
     }
 
     public List<Service> findByBarbershopIdAndServiceActiveTrue(Long id) {
