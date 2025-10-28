@@ -1,0 +1,22 @@
+<h2>Verificação de Código</h2>
+<div>
+    <form (ngSubmit)="onSubmit()">
+        <fieldset>
+            <legend for="code">Digite o Código</legend>
+            <div class="input-group">
+                <span class="input-group-text icons-background">
+                    <i class="bi bi-envelope-check-fill"></i>
+                </span>
+                <input type="text" id="code" [(ngModel)]="code" name="code" class="form-control" placeholder="####"
+                    required>
+            </div>
+        </fieldset>
+        <button type="submit" class="btn btn-success w-100">Confirma código</button>
+    </form>
+    <div>
+        <button class="btn btn-link" [disabled]="countdown > 0" (click)="onResendClick()">
+            <span *ngIf="countdown > 0">Reenviar código em {{countdown}}s</span>
+            <span *ngIf="countdown === 0">Solicitar novo código</span>
+        </button>
+    </div>
+</div>

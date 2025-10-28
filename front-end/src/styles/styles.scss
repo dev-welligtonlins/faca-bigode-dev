@@ -185,13 +185,66 @@ body {
         h2 {
             margin-top: 4%;
             display: flex;
-            justify-content: start;
+            justify-content: center;
             align-items: center;
+            font-size: 30px;
             font-family: fonts.$font-primary;
             font-weight: fonts.$font-weight-bold;
             color: white;
             margin-left: 2rem;
         }
+
+        img {
+            display: flex;
+            flex-direction: center;
+            justify-content: center;
+            align-items: center;
+            right: 50px;
+            left: 50px;
+            width: 110px;
+            height: 110px;
+            margin-bottom: -2%;
+        }
+
+        button {
+            font-family: fonts.$font-primary;
+            font-weight: fonts.$font-weight-semibold;
+            padding: 10px;
+            background-color: #7F62F5;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 3%;
+            color: white;
+
+            &:hover {
+                background-color: #5f49b7;
+            }
+        }
+
+        input {
+            width: 90%;
+            background-color: transparent;
+            font-size: 12px;
+            border: none;
+            border-color: #7F62F5;
+            outline: none;
+            padding-left: 15px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        label {
+            font-family: fonts.$font-primary;
+            font-weight: fonts.$font-weight-light;
+            font-size: 13px;
+            color: #c0c0c0;
+            margin-bottom: 5px;
+            margin-left: 5px;
+        }
+
+
 
         // Botão do google
         .google-login {

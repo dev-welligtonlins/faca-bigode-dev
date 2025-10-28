@@ -9,6 +9,10 @@ export const routes: Routes = [
   {
     path: 'perfil-barbershop',
     loadComponent: () => import('./pages/perfil-barbershop-page/perfil-barbershop-page').then(m => m.PerfilBarbershopPage)
+  },
+  {
+    path: 'fogot-password',
+    loadComponent: () => import('./pages/forgot-password-page/forgot-password-page').then(m => m.ForgotPasswordPage) 
   }
-
+  
 ];
