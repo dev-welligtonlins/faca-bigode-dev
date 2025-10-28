@@ -70,4 +70,9 @@ public class AppointmentController implements  ICrud<Appointment>{
         return new ResponseEntity<>(allRecors, HttpStatus.OK);
     }    
 
+    @GetMapping("/{id}/{dayOfWeek}")
+    public ResponseEntity<List<ServiceAppointment>> findServiceAppointmentsByBarberIdAndDayOfWeek(@PathVariable("id") Long id, @PathVariable("dayOfWeek") Long dayOfWeek){
+        List<ServiceAppointment> allRecors = service.findServiceAppointmentsByBarberIdAndDayOfWeek(id, dayOfWeek);
+        return new ResponseEntity<>(allRecors, HttpStatus.OK);
+    }
 }
