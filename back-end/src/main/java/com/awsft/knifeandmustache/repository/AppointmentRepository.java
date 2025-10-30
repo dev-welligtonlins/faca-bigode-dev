@@ -11,27 +11,29 @@ import com.awsft.knifeandmustache.model.Appointment;
 import com.awsft.knifeandmustache.model.ServiceAppointment;
 
 
-public interface AppointmentRepository extends JpaRepository<Appointment, Long>{
-     // retorna todos service_appointments do barber.id= i
+public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
+    // TODO: findBarbersAppointments [retorna todos service_appointments do barber.id= i]
+    // TODO: findByDayOfWeek [retorna todos appointments de um dia appointments.appointment_time= dayOfWeek]
+    // TODO: findServiceAppointmentsByBarberIdAndDayOfWeek [retorna todos service_appointments de um dia do barber.id = id e barber.barber_active = true
+    //                                - dayOfWeek é o dia(id) dom=0 sab=6 ]
+    
     @Query(value = 
         "SELECT sa.* FROM appointments a " + 
         " JOIN service_appointments sa ON sa.appointment_id = a.id" + 
         " JOIN barbers b ON sa.barber_id = b.id" + 
         " WHERE sa.barber_id = :id", nativeQuery = true)
-    List<ServiceAppointment> findBarbersAppointments(Long id);
+    List<ServiceAppointment> findBarbersAppointments(@Param("id") Long id);
 
-     // retorna todos appointments de um dia appointments.appointment_time= dayOfWeek
-    //  0 DIMINGO, 1 SEGUNDA, 2 TERÇA, ... 6 SÁBADO
     @Query(value = "SELECT * FROM appointments WHERE EXTRACT(DOW FROM appointment_time) = :dayOfWeek", nativeQuery = true)
     List<Appointment> findByDayOfWeek(@Param("dayOfWeek") Long dayOfWeek);
     
-    // retorna todos service_appointments do barber.id = id e barber.barber_active = true
-    // o segundo parametro é o dia
     @Query(value = 
         "SELECT sa.* FROM appointments a " + 
         " JOIN service_appointments sa ON sa.appointment_id = a.id" + 
         " JOIN barbers b ON sa.barber_id = b.id" + 
         " WHERE EXTRACT(DOW FROM appointment_time) = :dayOfWeek AND sa.barber_id = :id AND b.barber_active = TRUE", nativeQuery = true)
     List<ServiceAppointment> findServiceAppointmentsByBarberIdAndDayOfWeek(Long id, @Param("dayOfWeek") Long dayOfWeek);
+
+    
 } 
 

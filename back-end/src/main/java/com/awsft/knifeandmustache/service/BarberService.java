@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.awsft.knifeandmustache.dto.BarberDTO;
 import com.awsft.knifeandmustache.model.Barber;
 import com.awsft.knifeandmustache.repository.BarberRepository;
 
@@ -36,16 +37,20 @@ public class BarberService implements ICrud<Barber>{
         repo.save(obj);
     }
 
-    public List<Barber> findByIsHairTrue() {
-        return repo.findByIsHairTrue();
+    public List<Barber> findByBarbershopIdAndBarberActiveTrueAndIsHairTrue(Long id) {
+        return repo.findByBarbershopIdAndBarberActiveTrueAndIsHairTrue(id);
     }
 
-    public List<Barber> findByIsBeardTrue() {
-        return repo.findByIsBeardTrue();
+    public List<Barber> findByBarbershopIdAndBarberActiveTrueAndIsBeardTrue(Long id) {
+        return repo.findByBarbershopIdAndBarberActiveTrueAndIsBeardTrue(id);
     }
 
     public List<Barber> findByBarbershopIdAndBarberActiveTrue(Long id) {
         return repo.findByBarbershopIdAndBarberActiveTrue(id);
+    }
+
+    public List<BarberDTO> findBarbersByBarbershopId(Long id) {
+        return repo.findBarbersByBarbershopId(id);
     }
 }
 

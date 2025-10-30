@@ -27,30 +27,32 @@ INSERT INTO accommodations (wifi, parking, bath, air_conditioner, barbershop_id)
 
 -- HORÁRIOS DE FUNCIONAMENTO DA BARBEARIA
 INSERT INTO barbershop_schedules (day_week, opening_time, lunch_start_time, lunch_end_time, closing_time, barbershop_id)
-		VALUES ('SEGUNDA', '08:00', '11:00', '13:00', '18:30', 1);
+		VALUES ('MONDAY', '08:00', '11:00', '13:00', '18:30', 1);
 INSERT INTO barbershop_schedules (day_week, opening_time, lunch_start_time, lunch_end_time, closing_time, barbershop_id)
-		VALUES ('TERÇA', '08:00', '11:00', '13:00', '18:30', 1);
+		VALUES ('TUESDAY', '08:00', '11:00', '13:00', '18:30', 1);
 INSERT INTO barbershop_schedules (day_week, opening_time, lunch_start_time, lunch_end_time, closing_time, barbershop_id)
-		VALUES ('QUARTA', '08:00', '11:00', '13:00', '18:30', 1);
+		VALUES ('WEDNESDAY', '08:00', '11:00', '13:00', '18:30', 1);
 INSERT INTO barbershop_schedules (day_week, opening_time, lunch_start_time, lunch_end_time, closing_time, barbershop_id)
-		VALUES ('QUINTA', '08:00', '11:00', '13:00', '18:30', 1);
+		VALUES ('THURSDAY', '08:00', '11:00', '13:00', '18:30', 1);
 INSERT INTO barbershop_schedules (day_week, opening_time, lunch_start_time, lunch_end_time, closing_time, barbershop_id)
-		VALUES ('SEXTA', '08:00', '11:00', '13:00', '18:30', 1);
+		VALUES ('FRIDAY', '08:00', '11:00', '13:00', '18:30', 1);
 INSERT INTO barbershop_schedules (day_week, opening_time, lunch_start_time, lunch_end_time, closing_time, barbershop_id)
-		VALUES ('SÁBADO', '08:00', '11:00', '13:00', '18:30', 1);
+		VALUES ('SUNDAY', '08:00', '11:00', '13:00', '18:30', 1);
+
+    
 
 INSERT INTO barbershop_schedules (day_week, opening_time, lunch_start_time, lunch_end_time, closing_time, barbershop_id)
-		VALUES ('SEGUNDA', '07:00', '11:00', '13:00', '18:30', 2);
+		VALUES ('MONDAY', '07:00', '11:00', '13:00', '18:30', 2);
 INSERT INTO barbershop_schedules (day_week, opening_time, lunch_start_time, lunch_end_time, closing_time, barbershop_id)
-		VALUES ('TERÇA', '07:00', '11:00', '13:00', '18:30', 2);
+		VALUES ('TUESDAY', '07:00', '11:00', '13:00', '18:30', 2);
 INSERT INTO barbershop_schedules (day_week, opening_time, lunch_start_time, lunch_end_time, closing_time, barbershop_id)
-		VALUES ('QUARTA', '07:00', '11:00', '13:00', '18:30', 2);
+		VALUES ('WEDNESDAY', '07:00', '11:00', '13:00', '18:30', 2);
 INSERT INTO barbershop_schedules (day_week, opening_time, lunch_start_time, lunch_end_time, closing_time, barbershop_id)
-		VALUES ('QUINTA', '07:00', '11:00', '13:00', '18:30', 2);
+		VALUES ('THURSDAY', '07:00', '11:00', '13:00', '18:30', 2);
 INSERT INTO barbershop_schedules (day_week, opening_time, lunch_start_time, lunch_end_time, closing_time, barbershop_id)
-		VALUES ('SEXTA', '07:00', '11:00', '13:00', '21:30', 2);
+		VALUES ('FRIDAY', '07:00', '11:00', '13:00', '21:30', 2);
 INSERT INTO barbershop_schedules (day_week, opening_time, lunch_start_time, lunch_end_time, closing_time, barbershop_id)
-		VALUES ('SÁBADO', '07:00', '11:00', '11:30', '2:30', 2);
+		VALUES ('SUNDAY', '07:00', '11:00', '11:30', '2:30', 2);
 
 -- BARBEIROS
 INSERT INTO barbers (barber_name, url_social, is_hair, is_beard, barber_active, barbershop_id) VALUES ('João Gomes', '@joaotesoura', TRUE, TRUE, TRUE, 1);
@@ -93,13 +95,20 @@ INSERT INTO services (service_description, duration, service_value, category, se
 -- AGENDAMENTO
 -- ###########
 INSERT INTO appointments (client_name, appointment_time, appointment_status, barbershop_id)
-		VALUES ('Yuri Vinicius', '2025-09-17 14:00:00', 'AGENDADO', 1);
+		VALUES ('Yuri Vinicius', '2025-10-25 14:00:00', 'FINALIZADO', 1);
 
 INSERT INTO appointments (client_name, appointment_time, appointment_status, barbershop_id)
-		VALUES ('Welligton Bob', '2025-09-17 15:00:00', 'AGENDADO', 1);
+		VALUES ('Welligton Bob', '2025-10-25 15:00:00', 'CANCELADO', 1);
 
 INSERT INTO appointments (client_name, appointment_time, appointment_status, barbershop_id)
-		VALUES ('Aleson Aberto', '2025-09-17 16:00:00', 'AGENDADO', 2);
+		VALUES ('Welligton Bob', '2025-10-26 09:00:00', 'FINALIZADO', 1);
+
+INSERT INTO appointments (client_name, appointment_time, appointment_status, barbershop_id)
+		VALUES ('Welligton Bob', '2025-10-26 13:00:00', 'AGENDADO', 1);
+
+
+INSERT INTO appointments (client_name, appointment_time, appointment_status, barbershop_id)
+		VALUES ('Aleson Aberto', '2025-10-26 16:00:00', 'AGENDADO', 2);
 
 INSERT INTO appointments (client_name, appointment_time, appointment_status, barbershop_id)
 		VALUES ('Gideão', '2025-09-18 14:00:00', 'AGENDADO', 2);
@@ -109,29 +118,29 @@ INSERT INTO appointments (client_name, appointment_time, appointment_status, bar
 -- ##########################
 -- SERVICOS DE UM AGENDAMENTO
 -- ##########################
-INSERT INTO service_appointments (barber_id, service_id, appointment_id, service_time)
-		VALUES (1, 1, 1, '14:30');
 
 INSERT INTO service_appointments (barber_id, service_id, appointment_id, service_time)
-		VALUES (1, 2, 1, '15:00');
+		VALUES (1, 1, 1, '14:00');
+INSERT INTO service_appointments (barber_id, service_id, appointment_id, service_time)
+		VALUES (1, 4, 1, '14:30');
+INSERT INTO service_appointments (barber_id, service_id, appointment_id, service_time)
+		VALUES (2, 2, 2, '15:00');
+INSERT INTO service_appointments (barber_id, service_id, appointment_id, service_time)
+		VALUES (2, 6, 2, '15:30');
+INSERT INTO service_appointments (barber_id, service_id, appointment_id, service_time)
+		VALUES (2, 4, 3, '09:00');
+INSERT INTO service_appointments (barber_id, service_id, appointment_id, service_time)
+		VALUES (2, 7, 3, '09:30');
+INSERT INTO service_appointments (barber_id, service_id, appointment_id, service_time)
+		VALUES (1, 5, 4, '13:00');
+
+
 
 INSERT INTO service_appointments (barber_id, service_id, appointment_id, service_time)
-		VALUES (2, 5, 3, '15:30');
+		VALUES (4, 4, 5, '16:00');
 
 INSERT INTO service_appointments (barber_id, service_id, appointment_id, service_time)
-		VALUES (1, 4, 4, '16:00');
-
-INSERT INTO service_appointments (barber_id, service_id, appointment_id, service_time)
-		VALUES (3, 6, 2, '16:30');
-
-INSERT INTO service_appointments (barber_id, service_id, appointment_id, service_time)
-		VALUES (2, 1, 3, '17:00');
-
-INSERT INTO service_appointments (barber_id, service_id, appointment_id, service_time)
-		VALUES (2, 4, 3, '17:30');
-
-INSERT INTO service_appointments (barber_id, service_id, appointment_id, service_time)
-		VALUES (3, 2, 4, '18:00');
+		VALUES (5, 2, 6, '14:00');
 
 
 

@@ -7,7 +7,7 @@
 -- 		sb.service_barbershop_client_name AS cliente,
 -- 		bs.barbershop_services_value AS valor,		
 -- 		p.payments_status AS status_pagamento
--- 	FROM agenda a
+-- 	FROM agenda a   
 -- 	JOIN barbers b ON a.agenda_barber_id = b.id
 -- 	JOIN barbershop_services bs ON a.agenda_barbershop_services_id = bs.id
 -- 	JOIN service_barbershop sb ON bs.barbershop_services_service_barbershop_id = sb.id

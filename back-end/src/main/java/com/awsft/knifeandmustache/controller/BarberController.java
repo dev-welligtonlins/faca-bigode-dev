@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.awsft.knifeandmustache.dto.BarberDTO;
 import com.awsft.knifeandmustache.model.Barber;
 import com.awsft.knifeandmustache.service.BarberService;
 
@@ -59,15 +60,15 @@ public class BarberController implements  ICrud<Barber>{
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/hair")
-    public ResponseEntity<List<Barber>> findByIsHairTrue(){
-        List<Barber> allRecors = service.findByIsHairTrue();
+    @GetMapping("/{id}/hair")
+    public ResponseEntity<List<Barber>> findByBarbershopIdAndBarberActiveTrueAndIsHairTrue(@PathVariable("id") Long id){
+        List<Barber> allRecors = service.findByBarbershopIdAndBarberActiveTrueAndIsHairTrue(id);
         return new ResponseEntity<>(allRecors, HttpStatus.OK);
     }
 
-    @GetMapping("/beard")
-    public ResponseEntity<List<Barber>> findByIsBeardTrue(){
-        List<Barber> allRecors = service.findByIsBeardTrue();
+    @GetMapping("/{id}/beard")
+    public ResponseEntity<List<Barber>> findByBarbershopIdAndBarberActiveTrueAndIsBeardTrue(@PathVariable("id") Long id){
+        List<Barber> allRecors = service.findByBarbershopIdAndBarberActiveTrueAndIsBeardTrue(id);
         return new ResponseEntity<>(allRecors, HttpStatus.OK);
     }
 
@@ -77,5 +78,10 @@ public class BarberController implements  ICrud<Barber>{
         return new ResponseEntity<>(allRecors, HttpStatus.OK);
     }
     
-    
+    @GetMapping("/dto/{id}")
+    public ResponseEntity<List<BarberDTO>> findBarbersByBarbershopId(@PathVariable("id") Long id) {
+        List<BarberDTO> allRecors = service.findBarbersByBarbershopId(id);
+        return new ResponseEntity<>(allRecors, HttpStatus.OK);
+    }
+
 }

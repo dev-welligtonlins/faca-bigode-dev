@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.awsft.knifeandmustache.dto.ServiceAppointmentDTO;
 import com.awsft.knifeandmustache.model.ServiceAppointment;
 import com.awsft.knifeandmustache.repository.ServiceAppointmentRepository;
 
@@ -39,5 +40,8 @@ public class ServiceAppointmentService implements ICrud<ServiceAppointment>{
         return repo.findByBarberId(id);
     }
 
+    public List<ServiceAppointmentDTO> findServiceAppointmentByBarbershopId(Long id) {
+        return repo.findServiceAppointmentByBarbershopId(id);
+    }
 }
 
