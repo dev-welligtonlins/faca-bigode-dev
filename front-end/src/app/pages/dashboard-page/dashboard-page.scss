@@ -1,0 +1,73 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh; /* ocupa toda a altura da viewport */
+  width: 260px; /* ajuste a largura conforme desejar */
+  padding: 1rem;
+  background: #141519 !important;
+  border-right: 1px solid rgba(0,0,0,.05);
+  z-index: 1020;
+  overflow-y: auto;
+
+  .nav-link {
+    color: #fff;
+    margin-bottom: 0.5rem;
+    &:hover {
+      color: #fff;
+      background: #7F62F5;
+      border-radius: 25rem;
+    }
+    &.active {
+      font-weight: bold;
+      color: #fff;
+      background: #7F62F5;
+      border-radius: 25rem;
+    }
+  }
+  
+}
+
+/* ...existing code... */
+
+.profile-area {
+  .profile-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border: 2px solid rgba(255,255,255,0.06);
+  }
+  .profile-name {
+    color: #fff;
+    font-size: 1rem;
+  }
+  .profile-role {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.85rem;
+  }
+  /* ajustar espaçamento interno do offcanvas (quando o fundo for claro/ou escuro) */
+  &.border-bottom {
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+}
+
+/* garantir contraste se sidebar tiver fundo escuro */
+.sidebar .profile-area .profile-name,
+.sidebar .profile-area .profile-role {
+  color: #fff;
+}
+
+/* ...existing code... */
+
+/* desloca o conteúdo principal quando o sidebar está visível (lg+) */
+@media (min-width: 992px) {
+  main {
+    margin-left: 260px; /* deve corresponder à width do .sidebar */
+  }
+}
+
+/* mantém o comportamento offcanvas em telas pequenas */
+@media (max-width: 991.98px) {
+  .sidebar { display: none; position: static; width: auto; }
+  main { margin-left: 0; }
+}

@@ -12,7 +12,11 @@ export const routes: Routes = [
   },
   {
     path: 'fogot-password',
-    loadComponent: () => import('./pages/forgot-password-page/forgot-password-page').then(m => m.ForgotPasswordPage) 
+    loadComponent: () => import('./pages/forgot-password-page/forgot-password-page').then(m => m.ForgotPasswordPage)
+  },
+
+  {
+    path: 'dashboard-page',
+    loadComponent: () => import('./pages/dashboard-page/dashboard-page').then(m => m.DashboardPage)
   }
-  
 ];
