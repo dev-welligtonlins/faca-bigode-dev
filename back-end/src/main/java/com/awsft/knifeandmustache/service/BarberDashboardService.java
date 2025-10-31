@@ -28,7 +28,7 @@ public class BarberDashboardService {
         
         Long sizeBarbers = (long) barbers.size();
         Long sizeServiceAppointments = (long) serviceAppointments.size();
-
+        
         return new BarberDashboardDTO(barbers, sizeBarbers, serviceAppointments, sizeServiceAppointments);
     }
 
