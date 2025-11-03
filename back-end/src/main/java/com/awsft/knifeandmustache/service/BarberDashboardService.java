@@ -24,12 +24,13 @@ public class BarberDashboardService {
     public BarberDashboardDTO getBarberDash(Long id) {
         List<BarberDTO> barbers = barberRepository.findBarbersByBarbershopId(id);
         List<ServiceAppointmentDTO> serviceAppointments = serviceAppointmentRepository.findServiceAppointmentByBarbershopId(id);
-        
-        
+         
         Long sizeBarbers = (long) barbers.size();
         Long sizeServiceAppointments = (long) serviceAppointments.size();
         
-        return new BarberDashboardDTO(barbers, sizeBarbers, serviceAppointments, sizeServiceAppointments);
+        Double total = serviceAppointments.stream().mapToDouble(obj -> obj.getValue()).sum();
+
+        return new BarberDashboardDTO(barbers, sizeBarbers, serviceAppointments, sizeServiceAppointments, total);
     }
 
 }
