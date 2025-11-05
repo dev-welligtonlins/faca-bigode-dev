@@ -1,20 +1,21 @@
 package com.awsft.knifeandmustache.dto;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class ServiceDashboardDTO {
     
     private List<ServiceDTO> servicesDTO;
     private Long total;
     
-    @JsonFormat(shape = JsonFormat.Shape.NUMBER_FLOAT, pattern = "0.00")
-    private Double averageValueServices;
-    private Double averageTimeServices;
+    // @JsonFormat(shape = JsonFormat.Shape.NUMBER_FLOAT, pattern = "0.00")
+    private BigDecimal averageValueServices;
+    private int averageTimeServices;
     
-    public ServiceDashboardDTO(List<ServiceDTO> servicesDTO, Long total, Double averageValueServices,
-            Double averageTimeServices) {
+    public ServiceDashboardDTO(List<ServiceDTO> servicesDTO, Long total, BigDecimal averageValueServices,
+            int averageTimeServices) {
         this.servicesDTO = servicesDTO;
         this.total = total;
         this.averageValueServices = averageValueServices;
@@ -37,19 +38,19 @@ public class ServiceDashboardDTO {
         this.total = total;
     }
 
-    public Double getAverageValueServices() {
-        return averageValueServices;
+    public BigDecimal getAverageValueServices() {
+        return averageValueServices.setScale(2, RoundingMode.HALF_UP);
     }
 
-    public void setAverageValueServices(Double averageValueServices) {
+    public void setAverageValueServices(BigDecimal averageValueServices) {
         this.averageValueServices = averageValueServices;
     }
 
-    public Double getAverageTimeServices() {
+    public Integer getAverageTimeServices() {
         return averageTimeServices;
     }
 
-    public void setAverageTimeServices(Double averageTimeServices) {
+    public void setAverageTimeServices(Integer averageTimeServices) {
         this.averageTimeServices = averageTimeServices;
     }
 

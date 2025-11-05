@@ -1,5 +1,6 @@
 package com.awsft.knifeandmustache.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -22,8 +23,8 @@ public class ServiceDashboardService {
           
         Long sizeServices = (long) services.size();
         
-        Double averageValue = services.stream().mapToDouble(obj -> obj.getValue()).average().orElse(0.0);
-        Double averageTime = services.stream().mapToDouble(obj -> obj.getDuration()).average().orElse(0.0);
+        BigDecimal averageValue = BigDecimal.valueOf(services.stream().mapToDouble(obj -> obj.getValue()).average().orElse(0.0));
+        int averageTime = (int) services.stream().mapToDouble(obj -> obj.getDuration()).average().orElse(0.0);
 
         return new ServiceDashboardDTO(services, sizeServices, averageValue, averageTime);
     }
