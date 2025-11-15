@@ -21,8 +21,8 @@ public interface BarberRepository extends JpaRepository<Barber, Long>{
 
     List<Barber> findByBarbershopIdAndBarberActiveTrue(Long id);
 
-    @Query("SELECT new com.awsft.knifeandmustache.dto.BarberDTO(b.name, b.urlSocial) " +  
-            "FROM Barber b JOIN b.barbershop bs" + " WHERE bs.id = :id GROUP BY b.urlSocial, b.name")
+    @Query("SELECT new com.awsft.knifeandmustache.dto.BarberDTO(b.id, b.name, b.urlSocial, b.isHair, b.isBeard) " +  
+            "FROM Barber b JOIN b.barbershop bs" + " WHERE bs.id = :id GROUP BY b.id, b.name, b.urlSocial, b.isHair, b.isBeard")
     List<BarberDTO> findBarbersByBarbershopId(Long id);
     
     // @Query("SELECT new com.awsft.knifeandmustache.dto.BarberServiceAppointmentDTO(b.name, COUNT(b)) " +  

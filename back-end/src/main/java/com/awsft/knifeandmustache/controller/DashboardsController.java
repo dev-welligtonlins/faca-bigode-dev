@@ -24,13 +24,13 @@ public class DashboardsController {
         this.serviceDashService = serviceDashService;
     }
 
-    @GetMapping("/dto/{id}")
+    @GetMapping("/dto/barber/{id}")
     public ResponseEntity<BarberDashboardDTO> findServiceAppointmentByBarbershop(@PathVariable("id") Long id) {
         BarberDashboardDTO record = barberDashService.getBarberDash(id);
         return new ResponseEntity<>(record, HttpStatus.OK);
     }
 
-    @GetMapping("/dto/s/{id}")
+    @GetMapping("/dto/service/{id}")
     public ResponseEntity<ServiceDashboardDTO> findServiceByBarbershop(@PathVariable("id") Long id) {
         ServiceDashboardDTO record = serviceDashService.getServiceDash(id);
         return new ResponseEntity<>(record, HttpStatus.OK);
