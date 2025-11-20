@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.awsft.knifeandmustache.dto.BarberDTO;
 import com.awsft.knifeandmustache.model.Barber;
+import com.awsft.knifeandmustache.new_dto.NewBarberDTO;
 import com.awsft.knifeandmustache.service.BarberService;
 
 
@@ -35,7 +36,7 @@ public class BarberController implements  ICrud<Barber>{
         return new ResponseEntity<>(record, HttpStatus.CREATED);
     }
 
-    @GetMapping("/")
+    @GetMapping("/findall")
     public ResponseEntity<List<Barber>> findAll(){
         List<Barber> allRecors = service.findAll();
         return new ResponseEntity<>(allRecors, HttpStatus.OK);
@@ -51,13 +52,6 @@ public class BarberController implements  ICrud<Barber>{
     public ResponseEntity<Barber> update(@RequestBody Barber obj){
         Barber record = service.save(obj);
         return new ResponseEntity<>(record, HttpStatus.OK);
-    }
-
-    @Override
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") Long id){
-        service.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/{id}/hair")
@@ -78,10 +72,29 @@ public class BarberController implements  ICrud<Barber>{
         return new ResponseEntity<>(allRecors, HttpStatus.OK);
     }
     
-    @GetMapping("/dto/{id}")
+    @GetMapping("/dto/barbers/{id}")
     public ResponseEntity<List<BarberDTO>> findBarbersByBarbershopId(@PathVariable("id") Long id) {
         List<BarberDTO> allRecors = service.findBarbersByBarbershopId(id);
         return new ResponseEntity<>(allRecors, HttpStatus.OK);
+    }
+
+    @PostMapping("/dto/new-barber")
+    public ResponseEntity<List<NewBarberDTO>> newDto(@RequestBody List<NewBarberDTO> listDto){
+        List<NewBarberDTO> allRecord = service.newDto(listDto);
+        return new ResponseEntity<>(allRecord, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/dto/update-barber/{id}")
+    public ResponseEntity<BarberDTO> updateDto(@PathVariable("id") Long id, @RequestBody BarberDTO obj){
+        BarberDTO record = service.updateDto(id, obj);
+        return new ResponseEntity<>(record, HttpStatus.OK);
+    }
+
+    @Override
+    @DeleteMapping("/dto/delete-barber/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") Long id){
+        service.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

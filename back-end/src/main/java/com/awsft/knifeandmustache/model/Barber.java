@@ -48,14 +48,15 @@ public class Barber {
 
     }
 
-    public Barber(String name, String urlSocial, Boolean isHair, Boolean isBeard) {
+    public Barber(String name, String urlSocial, Boolean isHair, Boolean isBeard, Boolean barberActive, Barbershop barbershop) {
         this.name = name;
         this.urlSocial = urlSocial;
         this.isHair = isHair;
         this.isBeard = isBeard;
+        this.barberActive = barberActive;
+        this.barbershop = barbershop;
     }
 
-    
     public Long getId() {
         return id;
     }
@@ -92,6 +93,14 @@ public class Barber {
         this.isBeard = isBeard;
     }
 
+    public Boolean getBarberActive() {
+        return barberActive;
+    }
+
+    public void setBarberActive(Boolean barberActive) {
+        this.barberActive = barberActive;
+    }
+
     public List<ServiceAppointment> getServiceAppointments() {
         return serviceAppointments;
     }
@@ -108,12 +117,5 @@ public class Barber {
         this.barbershop = barbershop;
     }
 
-    public Boolean getBarberActive() {
-        return barberActive;
-    }
-
-    public void setBarberActive(Boolean barberActive) {
-        this.barberActive = barberActive;
-    }
-
+    
 }
