@@ -1,1 +1,89 @@
-<p>agendamentos-component works!</p>
+<div class="title-dasboard">
+    <div>
+        <h1>Agendamentos</h1>
+        <p>Gerencie os agendamentos da barbearia</p>
+    </div>
+    <button class="btn-primary">
+        <i class="bi bi-plus-lg"></i> Adicionar Serviço
+    </button>
+</div>
+
+<div class="filter-agenda">
+    <div class="row">
+        <div class="col-12 col-md-4">
+            <label for="filtroData"></label>
+            <input type="date" class="form-control" id="filtroData" [(ngModel)]="filtro.data"
+                (change)="aplicarFiltros()">
+        </div>
+
+        <div class="col-12 col-md-4">
+            <label for="filtroBusca"></label>
+            <input type="text" class="form-control" id="filtroBusca" placeholder="Buscar por Cliente..."
+                [(ngModel)]="filtro.busca" (input)="aplicarFiltros()">
+        </div>
+
+        <div class="col-12 col-md-4">
+            <label for="filtroBarbeiro"></label>
+            <select class="form-control" id="filtroBarbeiro" [(ngModel)]="filtro.barbeiroId"
+                (change)="aplicarFiltros()">
+                <option [ngValue]="null">Todos Barbeiros</option>
+                <option *ngFor="let b of barbeiros" [ngValue]="b.id">
+                    {{ b.nome }}
+                </option>
+            </select>
+        </div>
+    </div>
+</div>
+
+
+<div class="fundo">
+
+    <div class="secao-agendamentos">
+        <i class="bi-clock-history fs-5" style="font-size: 1.5rem;"></i>
+        <h2>Agendamentos do Dia</h2>
+    </div>
+
+
+    <div *ngFor="let agendamento of agendamentosFiltrados" class="card card-agendamento mb-3">
+        <div class="card-body">
+
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <span class="cliente-nome">{{ agendamento.nomeCliente }}</span>
+                    <span
+                        [class]="'status-badge badge me-1 ' + (agendamento.status === 'confirmado' ? 'bg-success-subtle text-success' : 'bg-secondary')">
+                        {{ agendamento.status }}
+                    </span>
+
+                    <div class="d-flex align-items-center mt-1 mb-2">
+                        <i class="bi bi-telephone-fill me-2" style="font-size: 0.9rem;"></i>
+                        <span>{{ agendamento.telefone }}</span>
+                    </div>
+
+                    <div class="detalhes">
+                        {{ agendamento.nomeServico }} &bull; {{ getBarbeiroNome(agendamento.barbeiroId) }}
+                    </div>
+                </div>
+                <div class="text-end">
+                    <span class="hora">{{ agendamento.hora }}</span>
+                    <div class="duracao-valor">
+                        <small class="d-block">{{ agendamento.duracao }}min</small>
+                        <span class="valor">{{ agendamento.valor | currency: 'BRL':'symbol':'1.2-2' }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-start pt-2">
+                <button class="btn custom-confirmed me-2">confirmado</button>
+                <button class="btn custom-edit me-2" (click)="editarAgendamento(agendamento.id)">Editar</button>
+                <button class="btn custom-cancel" (click)="cancelarAgendamento(agendamento.id)">cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <button class="btn-ver-todos">
+            Ver todos os agendamentos
+        </button>
+    </div>
+</div>
