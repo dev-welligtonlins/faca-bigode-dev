@@ -1,70 +1,102 @@
-<nav class="navbar navbar-light bg-light d-lg-none">
-  <div class="container-fluid">
-    <button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas"
-      aria-controls="sidebarOffcanvas">
-      <i class="bi bi-list"></i> Menu
-    </button>
-    <span class="navbar-brand mb-0 h1">Dashboard</span>
-  </div>
-</nav>
+<div>
+  <div class="search-bar">
+    <form (submit)="$event.preventDefault()">
+      <div class="input-icon w-10">
+        <i class="bi bi-search"></i>
+        <input class="form-control" type="search" placeholder="Pesquisar serviços, clientes..."
+          [(ngModel)]="searchQuery" aria-label="Pesquisar" name="search" />
+      </div>
+    </form>
 
-<div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarOffcanvas" aria-labelledby="sidebarOffcanvasLabel">
-  <div class="offcanvas-header">
-    <div class="profile-area text-center p-3 border-bottom">
-      <img src="assets/img/profile.jpg" alt="Perfil" class="rounded-circle profile-img">
-      <div class="mt-2 fw-bold profile-name">Seu Nome</div>
-      <div class="text-muted small profile-role">Barbearia</div>
+    <div class="profile-foto">
+      <img [src]="perfil.fotoUrl" class="profile-img me-3">
+      <span class="profile-nome">
+        {{ perfil.user }}
+      </span>
+
+      <div class="btn-profile">
+        <button type="button" class="btn" (click)="logout()">
+          <i class="bi bi-box-arrow-right"></i>
+        </button>
+      </div>
     </div>
-
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
-  <div class="offcanvas-body p-0">
-    <nav class="nav flex-column p-3">
-      <a class="nav-link" routerLink="/dashboard"><i class="bi bi-house-door"></i> Dashboard</a>
-      <a class="nav-link" routerLink="/Agendamentos"><i class="bi bi-journal"></i> Agendamentos</a>
-      <a class="nav-link" routerLink="/Clientes"><i class="bi bi-people"></i> Clientes</a>
-      <a class="nav-link" routerLink="/Barbeiros"><i class="bi bi-person"></i> Barbeiros</a>
-      <a class="nav-link" routerLink="/Serviços"><i class="bi bi-rulers"></i> Serviços</a>
-      <a class="nav-link" routerLink="/Financeiro"><i class="bi bi-currency-dollar"></i> Financeiro</a>
-      <a class="nav-link" routerLink="/Relatórios"><i class="bi bi-bar-chart"></i> Relatórios</a>
-      <a class="nav-link" routerLink="/Configurações"><i class="bi bi-gear"></i> Configurações</a>
-      <a class="nav-link text-danger" routerLink="/logout">Sair</a>
-    </nav>
-  </div>
-</div>
 
-<div class="container-fluid">
-  <div class="row">
-    <!-- Sidebar para telas grandes -->
-    <aside class="col-lg-3 d-none d-lg-block bg-light sidebar p-3">
-      <div class="sidebar-sticky">
-        <div class="profile-area text-center p-3 border-bottom">
-          <img src="assets/img/profile.jpg" alt="Perfil" class="rounded-circle profile-img">
-          <div class="mt-2 fw-bold profile-name">Seu Nome</div>
-          <div class="text-muted small profile-role">Barbearia</div>
+
+  <nav class="navbar navbar-light bg-light d-lg-none">
+    <div class="container-fluid">
+      <button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">
+        <i class="bi bi-list"></i> Menu
+      </button>
+      <span class="navbar-brand mb-0 h1">Dashboard</span>
+    </div>
+  </nav>
+
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarOffcanvas" aria-labelledby="sidebarOffcanvasLabel">
+    <div class="offcanvas-header">
+
+      <!-- <div class="profile-area text-center p-3 border-bottom"> -->
+      <!-- <img src="assets/img/profile.jpg" alt="Perfil" class="rounded-circle profile-img"> -->
+      <!-- <div class="mt-2 fw-bold profile-name">Seu Nome</div> -->
+      <!-- <div class="text-muted small profile-role">Barbearia</div> -->
+      <!--</div> -->
+
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-0">
+      <nav class="nav flex-column p-3">
+        <a class="nav-link" routerLink="/dashboard"><i class="bi bi-house-door"></i> Dashboard</a>
+        <a class="nav-link" routerLink="/Agendamentos"><i class="bi bi-journal"></i> Agendamentos</a>
+        <a class="nav-link" routerLink="/Clientes"><i class="bi bi-people"></i> Clientes</a>
+        <a class="nav-link" routerLink="/Barbeiros"><i class="bi bi-person"></i> Barbeiros</a>
+        <a class="nav-link" routerLink="/Serviços"><i class="bi bi-rulers"></i> Serviços</a>
+        <a class="nav-link" routerLink="/Financeiro"><i class="bi bi-coin"></i> Financeiro</a>
+        <a class="nav-link" routerLink="/Relatórios"><i class="bi bi-bar-chart"></i> Relatórios</a>
+        <a class="nav-link" routerLink="/Configurações"><i class="bi bi-gear"></i> Configurações</a>
+        <a class="nav-link text-danger" routerLink="/logout">Sair</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar para telas grandes -->
+      <aside class="col-lg-3 d-none d-lg-block bg-light sidebar p-3">
+        <div class="sidebar-sticky">
+
+          <div class="profile-area p-3">
+            <img [src]="perfil.fotoUrl" alt="" class="profile-img me-3">
+            <span class="profile-faca">
+              {{ perfil.nome }}
+            </span>
+
+            <span class="profile-user">
+              {{ perfil.user }}
+            </span>
+          </div>
+
+
+          <nav class="nav flex-column">
+            <a class="nav-link" routerLink="/dashboard/dashboard"><i class="bi bi-house-door"></i> Dashboard</a>
+            <a class="nav-link" routerLink="/dashboard/Agendamentos"><i class="bi bi-journal"></i> Agendamentos</a>
+            <a class="nav-link" routerLink="/dashboard/Clientes"><i class="bi bi-people"></i> Clientes</a>
+            <a class="nav-link" routerLink="/dashboard/Barbeiros"><i class="bi bi-person"></i> Barbeiros</a>
+            <a class="nav-link" routerLink="/dashboard/servicos"><i class="bi bi-rulers"></i> Serviços</a>
+            <a class="nav-link" routerLink="/dashboard/Financeiro"><i class="bi bi-coin"></i> Financeiro</a>
+            <a class="nav-link" routerLink="/dashboard/Relatórios"><i class="bi bi-bar-chart"></i> Relatórios</a>
+            <a class="nav-link" routerLink="/dashboard/Configurações"><i class="bi bi-gear"></i> Configurações</a>
+            <hr>
+            <a class="nav-link text-danger" routerLink="/logout">Sair</a>
+          </nav>
         </div>
-        <nav class="nav flex-column">
-          <a class="nav-link" routerLink="/dashboard"><i class="bi bi-house-door"></i> Dashboard</a>
-          <a class="nav-link" routerLink="/Agendamentos"><i class="bi bi-journal"></i> Agendamentos</a>
-          <a class="nav-link" routerLink="/Clientes"><i class="bi bi-people"></i> Clientes</a>
-          <a class="nav-link" routerLink="/Barbeiros"><i class="bi bi-person"></i> Barbeiros</a>
-          <a class="nav-link" routerLink="/Serviços"><i class="bi bi-rulers"></i> Serviços</a>
-          <a class="nav-link" routerLink="/Financeiro"><i class="bi bi-currency-dollar"></i> Financeiro</a>
-          <a class="nav-link" routerLink="/Relatórios"><i class="bi bi-bar-chart"></i> Relatórios</a>
-          <a class="nav-link" routerLink="/Configurações"><i class="bi bi-gear"></i> Configurações</a>
-          <hr>
-          <a class="nav-link text-danger" routerLink="/logout">Sair</a>
-        </nav>
-      </div>
-    </aside>
+      </aside>
 
-    <!-- Conteúdo principal -->
-    <main class="col-12 col-lg-9 ms-auto px-4 py-4">
-      <div class="d-flex align-items-center justify-content-between mb-4">
+      <!-- Conteúdo principal -->
+      <main class="col-12 col-lg-9">
 
-      </div>
-
-      <!-- Aqui vai o conteúdo do dashboard -->
-    </main>
+        <!-- area onde as "sub-páginas" do dashboard serão renderizadas -->
+        <router-outlet></router-outlet>
+      </main>
+    </div>
   </div>
-</div>
