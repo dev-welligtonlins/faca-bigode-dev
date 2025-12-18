@@ -1,0 +1,133 @@
+.filter-agenda {
+    background-color: #141519;
+    padding: 1rem !important;
+    margin-bottom: 2rem !important;
+    border-radius: 8px;
+
+    .row {
+        align-items: center;
+    }
+
+    .form-control {
+        font-size: 13px;
+        background-color: #f1f1f100;
+        color: #D9D9D9;
+        border-color: #D9D9D9;
+        border-radius: 5px;
+
+        &::placeholder {
+            color: #D9D9D9;
+        }
+    }
+}
+
+.secao-agendamentos {
+    display: flex;
+    align-items: center;
+    margin-bottom: 7px;
+
+    h2 {
+        font-size: 17px;
+        color: #ffffff;
+        margin: 0;
+    }
+
+    .bi-clock-history {
+        margin-right: 10px;
+        color: #7F62F5;
+    }
+}
+
+
+.fundo {
+    background-color: #141519; // Cor de fundo escura
+    padding: 20px;
+    padding-bottom: -50px;
+    border-radius: 12px;
+}
+
+.card-agendamento {
+    display: flex;
+    background-color: #222326; // Fundo escuro do Card
+    color: #ffffff;
+    border-radius: 12px;
+
+
+    .card-body {
+        padding: 0.76rem;
+    }
+}
+
+.cliente-nome {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+.hora {
+    font-size: 16px;
+    font-weight: bold;
+    display: block; // Garante que a hora fique em uma linha própria
+    margin-bottom: 2px;
+}
+
+.duracao-valor {
+    span.valor {
+        font-weight: bold;
+        color: #00dd00;
+    }
+}
+
+// ------------------------------------
+// Estilos de BADGES e BOTÕES CUSTOMIZADOS
+// ------------------------------------
+
+// Ajuste a cor do status 'confirmado'
+.status-badge {
+    padding: 3px 6px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    font-weight: 600;
+
+    &.bg-success-subtle {
+        background-color: #c8e6c9 !important;
+        color: #1b5e20 !important;
+    }
+}
+
+// Botão 'confirmado' (cor de badge)
+.custom-confirmed {
+    @extend .status-badge; // Reutiliza o estilo do badge
+    background-color: #c8e6c9;
+    color: #1b5e20;
+}
+
+// Botão 'Editar' (roxo/azul marinho)
+.custom-edit {
+    background-color: #5d4037; // Exemplo de cor roxa escura
+    color: #ffffff;
+    border: none;
+    font-weight: 500;
+}
+
+// Botão 'cancelar' (rosa/vermelho claro)
+.custom-cancel {
+    background-color: #ffcdd2; // Exemplo de cor rosa claro
+    color: #c62828; // Texto vermelho escuro
+    border: none;
+    font-weight: 500;
+}
+
+.btn-ver-todos {
+    display: flex;
+    align-items: center;
+    background-color: #7F62F5; // Cor de fundo roxa/azul marinho
+    color: #ffffff; // Cor do texto branca
+    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 8px;
+
+    &:hover {
+        background-color: #5b47aa; // Cor ao passar o mouse
+    }
+}
