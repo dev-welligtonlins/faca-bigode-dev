@@ -1,1 +1,156 @@
-<p>services-component works!</p>
+<div class="title-dasboard">
+    <div>
+        <h1>Serviços</h1>
+        <p>Gerencie o catálogo de serviços da sua barbearia</p>
+    </div>
+    <button class="btn-primary" (click)="toggleNew()">
+        <i class="bi bi-plus-lg"></i> Adicionar Serviço
+    </button>
+</div>
+
+
+<div class="row">
+    <div class="col-12 col-md-6 col-lg-3 mb-4">
+        <div class="card-body">
+            <div class="header-group">
+                <h1>Total serviços</h1>
+                <div class="icon-wrapper bg-primary-light"><i class="bi bi-rulers"></i></div>
+            </div>
+            <h2>15</h2>
+            <p class="card-text small">Serviços cadastrados na barbearia.</p>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3 mb-4">
+        <div class="card-body">
+            <div class="header-group">
+                <h1>Preço Médio</h1>
+                <div class="icon-wrapper bg-primary-light"><i class="bi bi-coin"></i></div>
+            </div>
+            <h2>R$ 25,00</h2>
+            <p class="card-text small">Preço médio dos serviços cadastrados.</p>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3 mb-4">
+        <div class="card-body">
+            <div class="header-group">
+                <h1>Duração Média</h1>
+                <div class="icon-wrapper bg-primary-light"><i class="bi bi-clock"></i></div>
+            </div>
+            <h2>45 min</h2>
+            <p class="card-text small">Duração média dos serviços cadastrados.</p>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3 mb-4">
+        <div class="card-body">
+            <div class="header-group">
+                <h1>Mais popular</h1>
+                <div class="icon-wrapper bg-primary-light"><i class="bi bi-star"></i></div>
+            </div>
+            <h2>Moica trem</h2>
+            <p class="card-text small">Serviço mais solicitado pelos clientes.</p>
+        </div>
+    </div>
+
+    <div class="filtro justify-content-between align-items-center">
+        <div class="filter-bar mb-3">
+            <div class="filters">
+                <span class="filter-text">Filtrar por categoria:</span>
+                <button *ngFor="let c of categories" type="button" class="btn filter-btn"
+                    [class.active]="activeCategory === c" (click)="selectCategory(c)">
+                    {{ c | titlecase }}
+                </button>
+            </div>
+        </div>
+
+        <div>
+            <form>
+                <div *ngIf="newServiceVisible" class="p-3 new-service-card">
+                    <h1>Novo Serviço</h1>
+                    <div class="col-lg-12 mb-4">
+                        <fieldset>
+                            <legend>Nome do Serviço</legend>
+                            <input [(ngModel)]="formModel.title" name="title" />
+                        </fieldset>
+                    </div>
+
+                    <div class="col-lg-12 mb-4">
+                        <fieldset class="description">
+                            <legend>Descriação</legend>
+                            <textarea class="form-control" id="descricaoServico"
+                                [(ngModel)]="formModel.title"></textarea>
+                        </fieldset>
+                    </div>
+
+                    <div class="category col-lg-12 mb-4">
+                        <h1 class="category">Selecionar uma categoria</h1>
+                        <select class="form-select" [(ngModel)]="formModel.category" name="category">
+                            <option *ngFor="let c of categories" [value]="c.toLowerCase()">{{ c | titlecase }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="d-flex justify-content-betwee gap-3">
+                        <div class="col-lg-5 mb-4">
+                            <fieldset>
+                                <legend>R$</legend>
+                                <input type="number" [(ngModel)]="formModel.price" name="price" placeholder="0,00" />
+                            </fieldset>
+                        </div>
+
+                        <div class="col-lg-5 mb-4">
+                            <fieldset>
+                                <legend>Duração</legend>
+                                <input type="number" [(ngModel)]="formModel.duration" name="duration"
+                                    placeholder="Duração (min)" />
+                            </fieldset>
+                        </div>
+                    </div>
+
+                    <div class="save">
+                        <button type="button" class="btn btn-secondary">
+                            Cancelar
+                        </button>
+                        <button class="btn btn-save" (click)="addService()">Cadastrar</button>
+                    </div>
+                </div>
+
+                <!-- lista de serviços -->
+                <div class="row-services row">
+                    <div class="col-12 col-md-6 col-lg-4 mb-3" *ngFor="let s of filteredServices; trackBy: trackById">
+                        <div class="card-service">
+                            <div>
+                                <h6 class="mb-0">{{ s.title }}</h6>
+                            </div>
+                            <p class="small">Categoria: {{ s.category }}</p>
+
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: 26%;" aria-valuenow="25"
+                                    aria-valuemin="0" aria-valuemax="100">25%</div>
+                            </div>
+
+                            <div class="d-flex justify-content-between mb-1">
+                                <div class="fw-semibold">R$ {{ s.price }}</div>
+                                <div class="small"><i class="bi bi-clock-history"></i>{{
+                                    s.duration
+                                    }}
+                                    min
+                                </div>
+                            </div>
+                            <div class="btn">
+                                <button class="btn-editar" type="button" (click)="editService(s)">Editar
+                                </button>
+                                <button class="btn-delet">Excluir </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="filteredServices.length === 0" class="col-12">
+                        <div class="alert alert">Nenhum serviço cadastrado.</div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
