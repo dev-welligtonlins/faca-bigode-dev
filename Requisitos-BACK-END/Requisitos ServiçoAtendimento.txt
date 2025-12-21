@@ -1,0 +1,45 @@
+
+# SERVICE-APPOINTMENT
+
+    (1) - adicionar (serviceAppointment) serviços para atendimentos de uma barbearia. Para cada serviço de um atendimento
+          precisa ser informado o barbeiro e hórario a ser realizado. 
+          Importante o serviceAppointment vai ser ligado ao Appointment e não a Barbearia
+
+          
+          service_appointment/dto/new-service_appointment
+          newDto()  
+          usuário: barbearia e cliente
+
+    (2) - adicionar lista de novos serviços para uma barbearia. 
+          
+          service/dto/new-service
+          newDto()  
+          usuário: barbearia
+
+    (3) - remover serviços de atendimentos. 
+          o serviço não vai ser deletado do banco de dados, os serviços passam de 'ativos' para 'inativos' 
+          
+          services/dto/delete-service/{id}
+          delete()
+          usuário: barbearia
+
+    (4) - atualizar informações do serviço. 
+          atributos: serviceDescription, duration, value, serviceCategory 
+          precisa preservar o historico de alterações do value e serviceDescription
+          para integridade com os pagamentos 
+          services/dto/update-service/{id}
+          updateDto()
+          usuário: barbearia                    
+
+    (5) - listar todos barbeiros de uma barbearia específica. 
+          ObjetoDTO: ServiceDTO
+
+          services/dto/service/{id}  
+          findServicesByBarbershopId()
+          usuário: barbearia
+
+    (6) - retornar dashboard da página de services para usuário barbearia. 
+          
+          dashboard/dto/service/{id}
+          findServiceByBarbershop()
+          usuário: barbearia

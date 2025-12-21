@@ -65,3 +65,13 @@ export const routes: Routes = [
   // loadComponent: () => import('./pages/login-page/login-page').then(m => m.LoginPage) // Caminho presumido corrigido
   // },
 ]; 
+  // {
+  //   path: 'dashboard-page',
+  //   loadComponent: () => import('./pages/dashboard-page/dashboard-page').then(m => m.DashboardPage)
+  // },
+
+  // {
+  //   path: 'test-api/:id',
+  //   loadComponent: () => import('./pages/test-api-page/test-api-page').then(m => m.TestApiPage)
+  // }
+

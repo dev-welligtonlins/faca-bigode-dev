@@ -1,12 +1,14 @@
 import { BehaviorSubject } from "rxjs";
 import { BarberModel } from "../models/barber-model";
 import { Injectable } from "@angular/core";
-import { HttpResponse } from "@angular/common/http";
+import { HttpClient, HttpResponse } from "@angular/common/http";
+import { environment } from "../../environments/environment.dev";
 
 @Injectable({
     providedIn: 'root'
 })
 export class sBarber {
+
     private barbersSubject = new BehaviorSubject<BarberModel[]>([]);
     barbers$ = this.barbersSubject.asObservable();
 

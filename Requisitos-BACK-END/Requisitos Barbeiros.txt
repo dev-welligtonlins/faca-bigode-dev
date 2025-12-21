@@ -1,0 +1,54 @@
+
+# BARBEIROS
+
+    (1) - adicionar um novo barbeiro para uma barbearia. Por padrão ele fica ativo
+          obrigatorio: nome, isCorte, isBarba  
+          opcional: foto de perfil, url do instagram, whatsapp
+          service: public NewBarberDTO newDto(NewBarberDTO obj)
+          
+          barbers/dto/new-barber
+          newDto()  
+          usuário: barbearia
+
+    (2) - adicionar lista de novos barbeiros para uma barbearia. 
+          Exemple: saveAll() - com isso usaremos apenas um 'POST' 
+          obrigatorio: passar pelo menos um barbeiro na lista
+          
+          barbers/dto/new-barber
+          newDto()  
+          usuário: barbearia
+
+    (3) - remover barbeiros da barbearia. 
+          o barbeiro não vai ser deletado do banco de dados, os barbeiros passam de 'ativo' para 'inativo' 
+          
+          barbers/dto/delete-barber/{id}
+          delete()
+          usuário: barbearia
+
+    (4) - atualizar informações do barbeiro. 
+          atributos: nome, foto de perfil, url do instagram, whatsapp, isCorte, isBarba  
+          
+          barbers/dto/update-barber/{id}
+          updateDto()
+          usuário: barbearia                    
+
+    (5) - listar todos barbeiros de uma barbearia específica. 
+          ObjetoDTO: BarberDTO
+
+          barbers/dto/barbers/{id}  
+          findBarbersByBarbershopId()
+          usuário: barbearia
+
+    (6) - retorno um barbeiro específica. 
+          ObjetoDTO: BarberDTO
+
+          barbers/dto/{id}  
+          findIdDTO()
+          usuário: barbearia
+
+    (7) - retornar dashboard da página de barbeiros para usuário barbearia. 
+          ObjetoDTO: total de barbeiros, lista de barbeiros, total de serviços do dia atual, avaliação média 
+          
+          dashboard/dto/service/{id}
+          findServiceAppointmentByBarbershop()
+          usuário: barbearia

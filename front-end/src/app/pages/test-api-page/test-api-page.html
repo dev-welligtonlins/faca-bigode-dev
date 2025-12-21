@@ -1,0 +1,30 @@
+<div class="container mt-4">
+  <h3>Lista de Barbeiros</h3>
+
+  <div >Carregando...</div>
+
+  <table  class="table table-bordered mt-3">
+    <thead>
+      <tr>
+        <th>DASHBOARD</th>
+      </tr>
+    </thead>
+    <tbody>
+      <div *ngIf="dashboard">
+        <td>Total de serviços: {{ dashboard.total }}</td>
+        <td>Preço médio: {{ dashboard.averageValueServices }}</td>
+        <td>Tempo médio: {{ dashboard.averageTimeServices }}</td>
+        
+        <li *ngFor="let service of dashboard.servicesDTO">
+        {{ service.serviceDescription }} - Categoria: {{ service.serviceCategory }} - Duração(min): {{ service.duration }} -  Valor(R$): {{ service.value }}
+        </li>
+        <!-- <td>{{ services.valor }}</td> -->
+        <!-- <td>
+          <span [ngClass]="barber.active ? 'text-success' : 'text-danger'">
+            {{ barber.active ? 'Ativo' : 'Inativo' }}
+          </span>
+        </td> -->
+      </div>
+    </tbody>
+  </table>
+</div>
