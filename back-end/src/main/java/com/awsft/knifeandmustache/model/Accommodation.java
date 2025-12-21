@@ -20,7 +20,7 @@ public class Accommodation {
     private Boolean wifi;
     private Boolean parking;
     private Boolean bath;
-    private Boolean air_conditioner;
+    private Boolean airConditioner;
 
     @OneToOne
     @JoinColumn(name = "barbershop_id")
@@ -31,15 +31,19 @@ public class Accommodation {
         
     }
 
-    public Accommodation(Boolean wifi, Boolean parking, Boolean bath, Boolean air_conditioner) {
+    public Accommodation(Boolean wifi, Boolean parking, Boolean bath, Boolean airConditioner) {
         this.wifi = wifi;
         this.parking = parking;
         this.bath = bath;
-        this.air_conditioner = air_conditioner;
+        this.airConditioner = airConditioner;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id){
+        this.id = id;
     }
 
     public Boolean getWifi() {
@@ -66,12 +70,12 @@ public class Accommodation {
         this.bath = bath;
     }
 
-    public Boolean getAir_conditioner() {
-        return air_conditioner;
+    public Boolean getAirConditioner() {
+        return airConditioner;
     }
 
-    public void setAir_conditioner(Boolean air_conditioner) {
-        this.air_conditioner = air_conditioner;
+    public void setAirConditioner(Boolean airConditioner) {
+        this.airConditioner = airConditioner;
     }
 
     public Barbershop getBarbershop() {

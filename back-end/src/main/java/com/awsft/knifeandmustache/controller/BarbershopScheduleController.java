@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.awsft.knifeandmustache.dto.BarbershopScheduleDTO;
 import com.awsft.knifeandmustache.model.BarbershopSchedule;
+import com.awsft.knifeandmustache.new_dto.NewBarbershopScheduleDTO;
 import com.awsft.knifeandmustache.service.BarbershopScheduleService;
+import com.awsft.knifeandmustache.update_dto.UpdateBarbershopScheduleDTO;
 
 
 @RestController
@@ -51,12 +54,34 @@ public class BarbershopScheduleController implements  ICrud<BarbershopSchedule>{
         return new ResponseEntity<>(record, HttpStatus.OK);
     }
 
+    @GetMapping("/dto/{id}")
+    public ResponseEntity<BarbershopScheduleDTO> findIdDTO(@PathVariable("id") Long id) {
+        BarbershopScheduleDTO record = service.findIdDTO(id);
+        return new ResponseEntity<>(record, HttpStatus.OK);
+    }
+
+    @GetMapping("/dto/barbershop/{id}")
+    public ResponseEntity<List<BarbershopScheduleDTO>> findByBarbershopId(@PathVariable("id") Long id){
+        List<BarbershopScheduleDTO> allRecors = service.findByBarbershopId(id);
+        return new ResponseEntity<>(allRecors, HttpStatus.OK);
+    }
+
+    @PostMapping("/dto/new-barbershop_schedule/")
+    public ResponseEntity<BarbershopScheduleDTO> newDto(@RequestBody NewBarbershopScheduleDTO dto){
+        BarbershopScheduleDTO record = service.newDto(dto);
+        return new ResponseEntity<>(record, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/dto/update-barbershop_schedule/{id}")
+    public ResponseEntity<BarbershopScheduleDTO> updateDto(@PathVariable("id") Long id, @RequestBody UpdateBarbershopScheduleDTO dto){
+        BarbershopScheduleDTO record = service.updateDto(id, dto);
+        return new ResponseEntity<>(record, HttpStatus.OK);
+    }
+    
     @Override
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Long id){
         service.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-    
 }

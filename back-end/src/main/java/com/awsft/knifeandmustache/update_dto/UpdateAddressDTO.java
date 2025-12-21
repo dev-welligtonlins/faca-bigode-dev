@@ -1,50 +1,31 @@
-package com.awsft.knifeandmustache.model;
+package com.awsft.knifeandmustache.update_dto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "address")
-public class Address {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UpdateAddressDTO {
     private Long id;
     private String cep;
     private String road;
+    private Long number;
     private String neighborhood;
     private String complement;
     private String city;
-    @Column(name = "address_number")
-    private Long number;
-    @Column(name = "address_state")
     private String state;
-    @OneToOne
-    @JoinColumn(name = "barbershop_id")
-    @JsonBackReference
-    private Barbershop barbershop;
-
-    public Address() {
-    }
-    public Address(String cep, String road, String neighborhood, String complement, String city, Long number, String state) {
+    
+    public UpdateAddressDTO(Long id, String cep, String road, Long number, String neighborhood, String complement,
+            String city, String state) {
+        this.id = id;
         this.cep = cep;
         this.road = road;
+        this.number = number;
         this.neighborhood = neighborhood;
         this.complement = complement;
         this.city = city;
-        this.number = number;
         this.state = state;
     }
     public Long getId() {
         return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
     }
     public String getCep() {
         return cep;
@@ -57,6 +38,12 @@ public class Address {
     }
     public void setRoad(String road) {
         this.road = road;
+    }
+    public Long getNumber() {
+        return number;
+    }
+    public void setNumber(Long number) {
+        this.number = number;
     }
     public String getNeighborhood() {
         return neighborhood;
@@ -76,22 +63,10 @@ public class Address {
     public void setCity(String city) {
         this.city = city;
     }
-    public Long getNumber() {
-        return number;
-    }
-    public void setNumber(Long number) {
-        this.number = number;
-    }
     public String getState() {
         return state;
     }
     public void setState(String state) {
         this.state = state;
-    }
-    public Barbershop getBarbershop() {
-        return barbershop;
-    }
-    public void setBarbershop(Barbershop barbershop) {
-        this.barbershop = barbershop;
-    } 
+    }    
 }

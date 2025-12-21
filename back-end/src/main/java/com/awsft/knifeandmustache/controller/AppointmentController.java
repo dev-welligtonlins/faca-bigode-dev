@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.awsft.knifeandmustache.dto.AppointmentDTO;
-import com.awsft.knifeandmustache.dto.BarberDTO;
 import com.awsft.knifeandmustache.model.Appointment;
 import com.awsft.knifeandmustache.model.ServiceAppointment;
 import com.awsft.knifeandmustache.new_dto.NewAppointmentDTO;
@@ -54,13 +53,6 @@ public class AppointmentController implements  ICrud<Appointment>{
         Appointment record = service.save(obj);
         return new ResponseEntity<>(record, HttpStatus.OK);
     }
-
-    @Override
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") Long id){
-        service.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
     
     @GetMapping("/b/{id}")
     public ResponseEntity<List<ServiceAppointment>> findBarbersByAppointments(@PathVariable("id") Long id){
@@ -80,16 +72,16 @@ public class AppointmentController implements  ICrud<Appointment>{
         return new ResponseEntity<>(allRecors, HttpStatus.OK);
     }
 
-    @GetMapping("/dto/barbershop/{id}")
-    public ResponseEntity<List<AppointmentDTO>> findByBarbershopId(@PathVariable("id") Long id){
-        List<AppointmentDTO> allRecors = service.findByBarbershopId(id);
-        return new ResponseEntity<>(allRecors, HttpStatus.OK);
-    }
- 
     @GetMapping("/dto/{id}")
     public ResponseEntity<AppointmentDTO> findIdDTO(@PathVariable("id") Long id) {
         AppointmentDTO record = service.findIdDTO(id);
         return new ResponseEntity<>(record, HttpStatus.OK);
+    }
+
+    @GetMapping("/dto/barbershop/{id}")
+    public ResponseEntity<List<AppointmentDTO>> findByBarbershopId(@PathVariable("id") Long id){
+        List<AppointmentDTO> allRecors = service.findByBarbershopId(id);
+        return new ResponseEntity<>(allRecors, HttpStatus.OK);
     }
 
     @PostMapping("/dto/new-appointment/")
@@ -102,5 +94,12 @@ public class AppointmentController implements  ICrud<Appointment>{
     public ResponseEntity<AppointmentDTO> updateDto(@PathVariable("id") Long id, @RequestBody UpdateAppointmentDTO dto){
         AppointmentDTO record = service.updateDto(id, dto);
         return new ResponseEntity<>(record, HttpStatus.OK);
+    }
+
+    @Override
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") Long id){
+        service.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
