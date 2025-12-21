@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.awsft.knifeandmustache.dto.ServiceAppointmentDTO;
 import com.awsft.knifeandmustache.model.ServiceAppointment;
+import com.awsft.knifeandmustache.new_dto.NewServiceAppointmentDTO;
 import com.awsft.knifeandmustache.service.ServiceAppointmentService;
 
 @RestController
@@ -50,13 +51,6 @@ public class ServiceAppointmentController implements  ICrud<ServiceAppointment>{
         ServiceAppointment record = service.save(obj);
         return new ResponseEntity<>(record, HttpStatus.OK);
     }
-
-    @Override
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") Long id){
-        service.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
     
     @GetMapping("/barber/{id}")
     public ResponseEntity<List<ServiceAppointment>> findByBarberId(@PathVariable("id") Long id){
@@ -64,4 +58,34 @@ public class ServiceAppointmentController implements  ICrud<ServiceAppointment>{
         return new ResponseEntity<>(allRecors, HttpStatus.OK);
     }
 
+    @GetMapping("/dto/barbershop/{id}")
+    public ResponseEntity<List<ServiceAppointmentDTO>> findByBarbershopId(@PathVariable("id") Long id){
+        List<ServiceAppointmentDTO> allRecors = service.findByBarbershopId(id);
+        return new ResponseEntity<>(allRecors, HttpStatus.OK);
+    }
+
+    @GetMapping("/dto/{id}")
+    public ResponseEntity<ServiceAppointmentDTO> findIdDTO(@PathVariable("id") Long id) {
+        ServiceAppointmentDTO record = service.findIdDTO(id);
+        return new ResponseEntity<>(record, HttpStatus.OK);
+    }
+
+    @PostMapping("/dto/new-service_appointment/")
+    public ResponseEntity<List<ServiceAppointmentDTO>> newDto(@RequestBody List<NewServiceAppointmentDTO> listDto){
+        List<ServiceAppointmentDTO> allRecord = service.newDto(listDto);
+        return new ResponseEntity<>(allRecord, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/dto/update-service_appointment/{id}")
+    public ResponseEntity<ServiceAppointmentDTO> updateDto(@PathVariable("id") Long id, @RequestBody NewServiceAppointmentDTO obj){
+        ServiceAppointmentDTO record = service.updateDto(id, obj);
+        return new ResponseEntity<>(record, HttpStatus.OK);
+    }
+
+    @Override
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") Long id){
+        service.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

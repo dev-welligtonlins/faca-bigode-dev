@@ -17,6 +17,7 @@ import com.awsft.knifeandmustache.dto.ServiceDTO;
 import com.awsft.knifeandmustache.model.Service;
 import com.awsft.knifeandmustache.new_dto.NewServiceDTO;
 import com.awsft.knifeandmustache.service.ServiceService;
+import com.awsft.knifeandmustache.update_dto.UpdateServiceDTO;
 
 
 @RestController
@@ -62,25 +63,31 @@ public class ServiceController implements  ICrud<Service>{
     
 
     @GetMapping("/barbershop/{id}")
-    public ResponseEntity<List<Service>> findByBarbershopIdAndServiceActiveTrue(@PathVariable("id") Long id) {
-        List<Service> allRecors = service.findByBarbershopIdAndServiceActiveTrue(id);
+    public ResponseEntity<List<ServiceDTO>> findByBarbershopIdAndServiceActiveTrue(@PathVariable("id") Long id) {
+        List<ServiceDTO> allRecors = service.findByBarbershopIdAndServiceActiveTrue(id);
         return new ResponseEntity<>(allRecors, HttpStatus.OK);
     }
 
-    @GetMapping("/dto/services/{id}")
-    public ResponseEntity<List<ServiceDTO>> findServicesByBarbershopId(@PathVariable("id") Long id) {
-        List<ServiceDTO> allRecors = service.findServicesByBarbershopId(id);
+    @GetMapping("/dto/{id}")
+    public ResponseEntity<ServiceDTO> findIdDTO(@PathVariable("id") Long id) {
+        ServiceDTO record = service.findIdDTO(id);
+        return new ResponseEntity<>(record, HttpStatus.OK);
+    }
+
+    @GetMapping("/dto/barbershop/{id}")
+    public ResponseEntity<List<ServiceDTO>> findServicesByBarbershopIdAndServiceActiveTrue(@PathVariable("id") Long id) {
+        List<ServiceDTO> allRecors = service.findServicesByBarbershopIdAndServiceActiveTrue(id);
         return new ResponseEntity<>(allRecors, HttpStatus.OK);
     }
 
     @PostMapping("/dto/new-service")
-    public ResponseEntity<List<NewServiceDTO>> newDto(@RequestBody List<NewServiceDTO> listDto){
-        List<NewServiceDTO> allRecord = service.newDto(listDto);
+    public ResponseEntity<List<ServiceDTO>> newDto(@RequestBody List<NewServiceDTO> listDto){
+        List<ServiceDTO> allRecord = service.newDto(listDto);
         return new ResponseEntity<>(allRecord, HttpStatus.CREATED);
     }
 
     @PutMapping("/dto/update-service/{id}")
-    public ResponseEntity<ServiceDTO> updateDto(@PathVariable("id") Long id, @RequestBody ServiceDTO obj){
+    public ResponseEntity<ServiceDTO> updateDto(@PathVariable("id") Long id, @RequestBody UpdateServiceDTO obj){
         ServiceDTO record = service.updateDto(id, obj);
         return new ResponseEntity<>(record, HttpStatus.OK);
     }

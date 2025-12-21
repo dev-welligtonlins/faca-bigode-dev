@@ -9,6 +9,7 @@ import com.awsft.knifeandmustache.model.Barber;
 import com.awsft.knifeandmustache.model.Barbershop;
 import com.awsft.knifeandmustache.new_dto.NewBarberDTO;
 import com.awsft.knifeandmustache.repository.BarberRepository;
+import com.awsft.knifeandmustache.update_dto.UpdateBarberDTO;
 
 @Service
 public class BarberService implements ICrud<Barber>{
@@ -40,15 +41,24 @@ public class BarberService implements ICrud<Barber>{
         return repo.findByBarbershopIdAndBarberActiveTrueAndIsBeardTrue(id);
     }
 
-    public List<Barber> findByBarbershopIdAndBarberActiveTrue(Long id) {
-        return repo.findByBarbershopIdAndBarberActiveTrue(id);
+    // retorna todos barbeiros ativos da barbearia.id
+    public List<BarberDTO> findByBarbershopIdAndBarberActiveTrue(Long id) {
+        List<Barber> barbers = repo.findByBarbershopIdAndBarberActiveTrue(id);
+        return barbers.stream().map(BarberDTO::fromEntity).toList();
+    }
+    // retorna um unico barbeiro pelo seu id
+    public BarberDTO findIdDTO(Long id) {
+        Barber barber = repo.findById(id).orElseThrow(() -> new RuntimeException("Barbeiro não encontrado"));
+        return BarberDTO.fromEntity(barber);
     }
 
     public List<BarberDTO> findBarbersByBarbershopId(Long id) {
-        return repo.findBarbersByBarbershopId(id);
+        List<Barber> barbers = repo.findBarbersByBarbershopId(id);
+        return barbers.stream().map(BarberDTO::fromEntity).toList();
     }
 
-    public List<NewBarberDTO> newDto(List<NewBarberDTO> listDto){
+    // adiciona novos barbeiros
+    public List<BarberDTO> newDto(List<NewBarberDTO> listDto){
         List<Barber> list = listDto.stream().map(obj -> {
             Barber newObj = new Barber();
             newObj.setName(obj.getBarberName());
@@ -65,19 +75,17 @@ public class BarberService implements ICrud<Barber>{
         }).toList();
 
         repo.saveAll(list);
-        return listDto;
+        return list.stream().map(BarberDTO::fromEntity).toList();
     }
 
-    public BarberDTO updateDto(Long id, BarberDTO obj) {
+    public BarberDTO updateDto(Long id, UpdateBarberDTO obj) {
         Barber updateObj = getById(id);
-
         updateObj.setName(obj.getBarberName());
         updateObj.setUrlSocial(obj.getBarberUrlSocial());
         updateObj.setIsHair(obj.getIsHair());
         updateObj.setIsBeard(obj.getIsBeard());
-
         repo.save(updateObj);
-        return obj;
+        return BarberDTO.fromEntity(updateObj);
     }
 
     @Override

@@ -1,8 +1,8 @@
 package com.awsft.knifeandmustache.model;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -38,11 +38,11 @@ public class Appointment {
 
     @OneToMany(mappedBy = "appointment", cascade = CascadeType.ALL, orphanRemoval = true) 
     @JsonManagedReference
-    private List<Payment> payments = new ArrayList<Payment>();
+    private Set<Payment> payments = new HashSet<>();
 
     @OneToMany(mappedBy = "appointment", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    private List<ServiceAppointment> serviceAppointments = new ArrayList<ServiceAppointment>();
+    private Set<ServiceAppointment> serviceAppointments = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "barbershop_id")
@@ -50,49 +50,59 @@ public class Appointment {
     private Barbershop barbershop;
 
     public Appointment() {
-
+        
     }
 
-    public Appointment(String clienteName, LocalDateTime appointmentTime) {
+    public Appointment(String clienteName, LocalDateTime appointmentTime, EAppointmentStatus appointmentStatus,
+            Set<Payment> payments, Set<ServiceAppointment> serviceAppointments, Barbershop barbershop) {
         this.clienteName = clienteName;
         this.appointmentTime = appointmentTime;
+        this.appointmentStatus = appointmentStatus;
+        this.payments = payments;
+        this.serviceAppointments = serviceAppointments;
+        this.barbershop = barbershop;
     }
 
     public Long getId() {
         return id;
     }
-
+    public void setId(Long id) {
+        this.id = id;
+    }
     public String getClienteName() {
         return clienteName;
     }
-
     public void setClienteName(String clienteName) {
         this.clienteName = clienteName;
     }
-
     public LocalDateTime getAppointmentTime() {
         return appointmentTime;
     }
-
     public void setAppointmentTime(LocalDateTime appointmentTime) {
         this.appointmentTime = appointmentTime;
     }
-
-    public List<Payment> getPayments() {
+    public EAppointmentStatus getAppointmentStatus() {
+        return appointmentStatus;
+    }
+    public void setAppointmentStatus(EAppointmentStatus appointmentStatus) {
+        this.appointmentStatus = appointmentStatus;
+    }
+    public Set<Payment> getPayments() {
         return payments;
     }
-
-    public void setPayments(List<Payment> payments) {
+    public void setPayments(Set<Payment> payments) {
         this.payments = payments;
     }
-
-    public List<ServiceAppointment> getServiceAppointments() {
+    public Set<ServiceAppointment> getServiceAppointments() {
         return serviceAppointments;
     }
-
-    public void setServiceAppointments(List<ServiceAppointment> serviceAppointment) {
-        this.serviceAppointments = serviceAppointment;
+    public void setServiceAppointments(Set<ServiceAppointment> serviceAppointments) {
+        this.serviceAppointments = serviceAppointments;
     }
-    
-    
+    public Barbershop getBarbershop() {
+        return barbershop;
+    }
+    public void setBarbershop(Barbershop barbershop) {
+        this.barbershop = barbershop;
+    }   
 }

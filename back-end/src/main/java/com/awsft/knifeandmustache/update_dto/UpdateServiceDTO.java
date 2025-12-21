@@ -1,28 +1,27 @@
-package com.awsft.knifeandmustache.dto;
+package com.awsft.knifeandmustache.update_dto;
 
 import com.awsft.knifeandmustache.model.ECategoryService;
-import com.awsft.knifeandmustache.model.Service;
 
-public class ServiceDTO {
+public class UpdateServiceDTO {
     private Long id;
     private String serviceDescription;
     private Integer duration;
     private Double value;
     private ECategoryService serviceCategory;
-    
-    public static ServiceDTO fromEntity(Service service) {
-        ServiceDTO dto = new ServiceDTO();
-        dto.id = service.getId();
-        dto.serviceDescription = service.getServiceDescription();
-        dto.duration = service.getDuration();
-        dto.value = service.getValue();
-        dto.serviceCategory = service.getServiceCategory();
 
-        return dto;
+    public UpdateServiceDTO(Long id, String serviceDescription, Integer duration, Double value, ECategoryService serviceCategory) {
+        this.id = id;
+        this.serviceDescription = serviceDescription;
+        this.duration = duration;
+        this.value = value;
+        this.serviceCategory = serviceCategory;
     }
 
     public Long getId() {
         return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
     }
     public String getServiceDescription() {
         return serviceDescription;
@@ -47,5 +46,5 @@ public class ServiceDTO {
     }
     public void setServiceCategory(ECategoryService serviceCategory) {
         this.serviceCategory = serviceCategory;
-    }
+    } 
 }

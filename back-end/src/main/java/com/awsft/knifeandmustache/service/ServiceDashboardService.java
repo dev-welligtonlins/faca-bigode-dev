@@ -13,13 +13,15 @@ import com.awsft.knifeandmustache.repository.ServiceRepository;
 public class ServiceDashboardService {
 
     private final ServiceRepository serviceRepository;
+    private final ServiceService serviceService;
 
-    public ServiceDashboardService(ServiceRepository serviceRepository) {
+    public ServiceDashboardService(ServiceRepository serviceRepository, ServiceService serviceService) {
         this.serviceRepository = serviceRepository;
+        this.serviceService = serviceService;
     }
 
     public ServiceDashboardDTO getServiceDash(Long id) {
-        List<ServiceDTO> services = serviceRepository.findServicesByBarbershopId(id);
+        List<ServiceDTO> services = serviceService.findServicesByBarbershopIdAndServiceActiveTrue(id);
           
         Long sizeServices = (long) services.size();
         

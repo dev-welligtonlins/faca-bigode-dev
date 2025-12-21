@@ -34,6 +34,25 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
         " WHERE EXTRACT(DOW FROM appointment_time) = :dayOfWeek AND sa.barber_id = :id AND b.barber_active = TRUE", nativeQuery = true)
     List<ServiceAppointment> findServiceAppointmentsByBarberIdAndDayOfWeek(Long id, @Param("dayOfWeek") Long dayOfWeek);
 
-    
+    // @Query("""
+    //     SELECT DISTINCT a FROM Appointment a
+    //     JOIN a.barbershop bs
+    //     LEFT JOIN FETCH a.payments
+    //     LEFT JOIN FETCH a.serviceAppointments
+    //     WHERE bs.id = :id
+    // """)
+    List<Appointment> findByBarbershopId(Long id);
+
+    // @Query("""
+    //     SELECT DISTINCT a FROM Appointment a
+    //     LEFT JOIN FETCH a.payments p
+    //     LEFT JOIN FETCH a.serviceAppointments sa
+    //     LEFT JOIN FETCH sa.barber b
+    //     LEFT JOIN FETCH sa.service s
+    //     WHERE a.id = :id
+    // """)
+    // Appointment findIdDTO(Long id);
 } 
+
+        
 

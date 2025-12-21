@@ -1,27 +1,24 @@
-package com.awsft.knifeandmustache.dto;
+package com.awsft.knifeandmustache.update_dto;
 
-import com.awsft.knifeandmustache.model.Barber;
-
-public class BarberDTO {
+public class UpdateBarberDTO {
     private Long id;
     private String barberName;
     private String barberUrlSocial;
     private Boolean isHair;
     private Boolean isBeard;
-    
-    public static BarberDTO fromEntity(Barber barber) {
-        BarberDTO dto = new BarberDTO();
-        dto.id = barber.getId();
-        dto.barberName = barber.getName();
-        dto.barberUrlSocial = barber.getUrlSocial();
-        dto.isHair = barber.getIsHair();
-        dto.isBeard = barber.getIsBeard();
 
-        return dto;
+    public UpdateBarberDTO(Long id, String barberName, String barberUrlSocial, Boolean isHair, Boolean isBeard) {
+        this.barberName = barberName;
+        this.barberUrlSocial = barberUrlSocial;
+        this.isHair = isHair;
+        this.isBeard = isBeard;
     }
-
+    
     public Long getId() {
         return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
     }
     public String getBarberName() {
         return barberName;
@@ -30,7 +27,7 @@ public class BarberDTO {
         this.barberName = barberName;
     }
     public String getBarberUrlSocial() {
-        return barberUrlSocial;
+       return barberUrlSocial;
     }
     public void setBarberUrlSocial(String barberUrlSocial) {
         this.barberUrlSocial = barberUrlSocial;
@@ -47,5 +44,4 @@ public class BarberDTO {
     public void setIsBeard(Boolean isBeard) {
         this.isBeard = isBeard;
     }
-    
 }

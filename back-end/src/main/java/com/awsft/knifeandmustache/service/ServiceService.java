@@ -7,6 +7,7 @@ import com.awsft.knifeandmustache.model.Barbershop;
 import com.awsft.knifeandmustache.model.Service;
 import com.awsft.knifeandmustache.new_dto.NewServiceDTO;
 import com.awsft.knifeandmustache.repository.ServiceRepository;
+import com.awsft.knifeandmustache.update_dto.UpdateServiceDTO;
 
 @org.springframework.stereotype.Service
 public class ServiceService implements ICrud<Service>{
@@ -29,16 +30,24 @@ public class ServiceService implements ICrud<Service>{
     public Service getById(Long id){
         return repo.findById(id).orElse(null);
     }
-
-    public List<Service> findByBarbershopIdAndServiceActiveTrue(Long id) {
-        return repo.findByBarbershopIdAndServiceActiveTrue(id);
+    // retorna todos barbeiros ativos da barbearia.id
+    public List<ServiceDTO> findByBarbershopIdAndServiceActiveTrue(Long id) {
+        List<Service> services = repo.findServicesByBarbershopIdAndServiceActiveTrue(id);
+        return services.stream().map(ServiceDTO::fromEntity).toList();
     }
 
-    public List<ServiceDTO> findServicesByBarbershopId(Long id) {
-        return repo.findServicesByBarbershopId(id);
+    // retorna um unico servico
+    public ServiceDTO findIdDTO(Long id) {
+        Service service = repo.findById(id).orElseThrow(() -> new RuntimeException("Serviço não encontrado"));
+        return ServiceDTO.fromEntity(service);
     }
 
-    public List<NewServiceDTO> newDto(List<NewServiceDTO> listDto){
+    public List<ServiceDTO> findServicesByBarbershopIdAndServiceActiveTrue(Long id) {
+        List<Service> services = repo.findServicesByBarbershopIdAndServiceActiveTrue(id);
+        return services.stream().map(ServiceDTO::fromEntity).toList();
+    }
+
+    public List<ServiceDTO> newDto(List<NewServiceDTO> listDto){
         List<Service> list = listDto.stream().map(obj -> {
             Service newObj = new Service();
             newObj.setServiceDescription(obj.getServiceDescription());
@@ -55,19 +64,17 @@ public class ServiceService implements ICrud<Service>{
         }).toList();
 
         repo.saveAll(list);
-        return listDto;
+        return list.stream().map(ServiceDTO::fromEntity).toList();
     }
 
-    public ServiceDTO updateDto(Long id, ServiceDTO obj) {
+    public ServiceDTO updateDto(Long id, UpdateServiceDTO obj) {
         Service updateObj = getById(id);
-
         updateObj.setServiceDescription(obj.getServiceDescription());
         updateObj.setDuration(obj.getDuration());
         updateObj.setValue(obj.getValue());
         updateObj.setServiceCategory(obj.getServiceCategory());
-
         repo.save(updateObj);
-        return obj;
+        return ServiceDTO.fromEntity(updateObj);
     }
 
     @Override

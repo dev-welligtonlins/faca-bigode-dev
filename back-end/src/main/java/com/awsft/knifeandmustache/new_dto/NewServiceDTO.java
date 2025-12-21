@@ -56,9 +56,5 @@ public class NewServiceDTO {
 
     public void setBarbershopId(Long barbershopId) {
         this.barbershopId = barbershopId;
-    }
-
-    
-    
-       
+    }    
 }

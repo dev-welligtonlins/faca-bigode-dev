@@ -1,7 +1,7 @@
 package com.awsft.knifeandmustache.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -36,86 +36,82 @@ public class Barbershop {
 
     @OneToMany(mappedBy = "barbershop", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    private List<BarbershopSchedule> barbershopSchedules = new ArrayList<BarbershopSchedule>();
+    private Set<BarbershopSchedule> barbershopSchedules = new HashSet<>();
 
     @OneToMany(mappedBy = "barbershop", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    private List<Barber> barbers = new ArrayList<Barber>();
+    private Set<Barber> barbers = new HashSet<>();
 
     @OneToMany(mappedBy = "barbershop", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    private List<Service> services = new ArrayList<Service>(); 
+    private Set<Service> services = new HashSet<>(); 
     
     @OneToMany(mappedBy = "barbershop", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    private List<Appointment> appointments = new ArrayList<Appointment>();
+    private Set<Appointment> appointments = new HashSet<>();
 
     public Barbershop() {
 
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Barbershop(String name, Address address, Accommodation accommodation,
+            Set<BarbershopSchedule> barbershopSchedules, Set<Barber> barbers, Set<Service> services,
+            Set<Appointment> appointments) {
+        this.name = name;
+        this.address = address;
+        this.accommodation = accommodation;
+        this.barbershopSchedules = barbershopSchedules;
+        this.barbers = barbers;
+        this.services = services;
+        this.appointments = appointments;
     }
 
     public Long getId() {
         return id;
     }
-
+    public void setId(Long id) {
+        this.id = id;
+    }
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
     public Address getAddress() {
         return address;
     }
-
     public void setAddress(Address address) {
         this.address = address;
     }
-
     public Accommodation getAccommodation() {
         return accommodation;
     }
-
     public void setAccommodation(Accommodation accommodation) {
         this.accommodation = accommodation;
     }
-
-    public List<BarbershopSchedule> getBarbershopSchedules() {
+    public Set<BarbershopSchedule> getBarbershopSchedules() {
         return barbershopSchedules;
     }
-
-    public void setBarbershopSchedules(List<BarbershopSchedule> barbershopSchedules) {
+    public void setBarbershopSchedules(Set<BarbershopSchedule> barbershopSchedules) {
         this.barbershopSchedules = barbershopSchedules;
     }
-
-    public List<Barber> getBarbers() {
+    public Set<Barber> getBarbers() {
         return barbers;
     }
-
-    public void setBarbers(List<Barber> barbers) {
+    public void setBarbers(Set<Barber> barbers) {
         this.barbers = barbers;
     }
-
-    public List<Service> getServices() {
+    public Set<Service> getServices() {
         return services;
     }
-
-    public void setServices(List<Service> services) {
+    public void setServices(Set<Service> services) {
         this.services = services;
     }
-
-    public List<Appointment> getAppointments() {
+    public Set<Appointment> getAppointments() {
         return appointments;
     }
-
-    public void setAppointments(List<Appointment> appointments) {
+    public void setAppointments(Set<Appointment> appointments) {
         this.appointments = appointments;
-    }
- 
+    }    
 }

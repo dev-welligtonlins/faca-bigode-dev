@@ -1,7 +1,7 @@
 package com.awsft.knifeandmustache.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -38,7 +38,7 @@ public class Service {
     @OneToMany
     @JoinColumn(name = "service_appointments")
     @JsonBackReference
-    private List<ServiceAppointment> serviceAppointments = new ArrayList<ServiceAppointment>();
+    private Set<ServiceAppointment> serviceAppointments = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "barbershop_id")
@@ -49,13 +49,23 @@ public class Service {
         
     }
 
-    public Service(String serviceDescription, Integer duration, Double value, ECategoryService serviceCategory) {
+    public Service(String serviceDescription, Integer duration, Double value, Boolean serviceActive,
+            ECategoryService serviceCategory, Set<ServiceAppointment> serviceAppointments, Barbershop barbershop) {
         this.serviceDescription = serviceDescription;
         this.duration = duration;
         this.value = value;
+        this.serviceActive = serviceActive;
         this.serviceCategory = serviceCategory;
+        this.serviceAppointments = serviceAppointments;
+        this.barbershop = barbershop;
     }
 
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
     public String getServiceDescription() {
         return serviceDescription;
     }
@@ -74,34 +84,28 @@ public class Service {
     public void setValue(Double value) {
         this.value = value;
     }
+    public Boolean getServiceActive() {
+        return serviceActive;
+    }
+    public void setServiceActive(Boolean serviceActive) {
+        this.serviceActive = serviceActive;
+    }
     public ECategoryService getServiceCategory() {
         return serviceCategory;
     }
     public void setServiceCategory(ECategoryService serviceCategory) {
         this.serviceCategory = serviceCategory;
     }
-    public List<ServiceAppointment> getServiceAppointments() {
+    public Set<ServiceAppointment> getServiceAppointments() {
         return serviceAppointments;
     }
-    public void setServiceAppointments(List<ServiceAppointment> serviceAppointments) {
+    public void setServiceAppointments(Set<ServiceAppointment> serviceAppointments) {
         this.serviceAppointments = serviceAppointments;
     }
-
     public Barbershop getBarbershop() {
         return barbershop;
     }
-
     public void setBarbershop(Barbershop barbershop) {
         this.barbershop = barbershop;
     }
-
-    public Boolean getServiceActive() {
-        return serviceActive;
-    }
-
-    public void setServiceActive(Boolean serviceActive) {
-        this.serviceActive = serviceActive;
-    }
-
-    
 }

@@ -1,7 +1,7 @@
 package com.awsft.knifeandmustache.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -37,85 +37,73 @@ public class Barber {
 
     @OneToMany(mappedBy = "barber")
     @JsonBackReference
-    private List<ServiceAppointment> serviceAppointments = new ArrayList<ServiceAppointment>();
-
+    private Set<ServiceAppointment> serviceAppointments = new HashSet<>();
     @ManyToOne
     @JoinColumn(name = "barbershop_id")
     @JsonBackReference
     private Barbershop barbershop;
 
     public Barber() {
-
+        
     }
-
-    public Barber(String name, String urlSocial, Boolean isHair, Boolean isBeard, Boolean barberActive, Barbershop barbershop) {
+    
+    public Barber(String name, String urlSocial, Boolean isHair, Boolean isBeard, Boolean barberActive,
+            Set<ServiceAppointment> serviceAppointments, Barbershop barbershop) {
         this.name = name;
         this.urlSocial = urlSocial;
         this.isHair = isHair;
         this.isBeard = isBeard;
         this.barberActive = barberActive;
+        this.serviceAppointments = serviceAppointments;
         this.barbershop = barbershop;
     }
 
     public Long getId() {
         return id;
     }
-
+    public void setId(Long id) {
+        this.id = id;
+    }
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
     public String getUrlSocial() {
         return urlSocial;
     }
-
     public void setUrlSocial(String urlSocial) {
         this.urlSocial = urlSocial;
     }
-
     public Boolean getIsHair() {
         return isHair;
     }
-
     public void setIsHair(Boolean isHair) {
         this.isHair = isHair;
     }
-
     public Boolean getIsBeard() {
         return isBeard;
     }
-
     public void setIsBeard(Boolean isBeard) {
         this.isBeard = isBeard;
     }
-
     public Boolean getBarberActive() {
         return barberActive;
     }
-
     public void setBarberActive(Boolean barberActive) {
         this.barberActive = barberActive;
     }
-
-    public List<ServiceAppointment> getServiceAppointments() {
+    public Set<ServiceAppointment> getServiceAppointments() {
         return serviceAppointments;
     }
-
-    public void setServiceAppointments(List<ServiceAppointment> serviceAppointments) {
+    public void setServiceAppointments(Set<ServiceAppointment> serviceAppointments) {
         this.serviceAppointments = serviceAppointments;
     }
-
     public Barbershop getBarbershop() {
         return barbershop;
     }
-
     public void setBarbershop(Barbershop barbershop) {
         this.barbershop = barbershop;
     }
-
-    
 }

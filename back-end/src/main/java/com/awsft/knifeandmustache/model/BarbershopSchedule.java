@@ -40,9 +40,6 @@ public class BarbershopSchedule {
     @JsonBackReference
     private Barbershop barbershop;
 
-
-
-    
     public BarbershopSchedule() {
 
     }

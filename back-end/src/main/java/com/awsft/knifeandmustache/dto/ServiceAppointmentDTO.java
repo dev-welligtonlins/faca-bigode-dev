@@ -2,27 +2,34 @@ package com.awsft.knifeandmustache.dto;
 
 import java.time.LocalTime;
 
-import com.awsft.knifeandmustache.model.EAppointmentStatus;
-import com.awsft.knifeandmustache.model.ECategoryService;
+import com.awsft.knifeandmustache.model.ServiceAppointment;
 
 
 public class ServiceAppointmentDTO {
-    private EAppointmentStatus appointmentStatus;
+    private Long id;
+    private String name;
     private LocalTime time;
     private String serviceDescription;
-    private ECategoryService serviceCategory;
     private Integer duration;
     private Double value;
 
-    public ServiceAppointmentDTO(EAppointmentStatus appointmentStatus, LocalTime time, String serviceDescription, ECategoryService serviceCategory, Integer duration, Double value) {
-        this.appointmentStatus = appointmentStatus;
-        this.time = time;
-        this.serviceDescription = serviceDescription;
-        this.serviceCategory = serviceCategory;
-        this.duration = duration;
-        this.value = value;
-    }        
+    public static ServiceAppointmentDTO fromEntity(ServiceAppointment serviceAppointment) {
+        ServiceAppointmentDTO dto = new ServiceAppointmentDTO();
+        dto.id = serviceAppointment.getId();
+        dto.name = serviceAppointment.getBarber().getName();
+        dto.time = serviceAppointment.getTime();
+        dto.serviceDescription = serviceAppointment.getService().getServiceDescription();
+        dto.duration = serviceAppointment.getService().getDuration();
+        dto.value = serviceAppointment.getService().getValue();
+        return dto;
+    }
 
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
     public LocalTime getTime() {
         return time;
     }
@@ -34,12 +41,6 @@ public class ServiceAppointmentDTO {
     }
     public void setServiceDescription(String serviceDescription) {
         this.serviceDescription = serviceDescription;
-    }
-    public ECategoryService getServiceCategory() {
-        return serviceCategory;
-    }
-    public void setServiceCategory(ECategoryService serviceCategory) {
-        this.serviceCategory = serviceCategory;
     }
     public Integer getDuration() {
         return duration;
@@ -53,11 +54,12 @@ public class ServiceAppointmentDTO {
     public void setValue(Double value) {
         this.value = value;
     }
-    public EAppointmentStatus getAppointmentStatus() {
-        return appointmentStatus;
+    public Long getId() {
+        return id;
     }
-    public void setAppointmentStatus(EAppointmentStatus appointmentStatus) {
-        this.appointmentStatus = appointmentStatus;
-    }
-
+    public void setId(Long id) {
+        this.id = id;
+    }   
+    
+    
 }
