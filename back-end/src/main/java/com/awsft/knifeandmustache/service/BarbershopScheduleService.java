@@ -1,6 +1,8 @@
 package com.awsft.knifeandmustache.service;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -46,21 +48,24 @@ public class BarbershopScheduleService implements ICrud<BarbershopSchedule>{
     }
 
     // adiciona horário para barbearia
-    public BarbershopScheduleDTO newDto(NewBarbershopScheduleDTO dto){
-        BarbershopSchedule newObj = new BarbershopSchedule();
-        newObj.setDayWeek(dto.getDayWeek());
-        newObj.setOpeningTime(dto.getOpeningTime());
-        newObj.setLunchStartTime(dto.getLunchStartTime());
-        newObj.setLunchEndTime(dto.getLunchEndTime());
-        newObj.setClosingTime(dto.getClosingTime());
+    public List<BarbershopScheduleDTO> newDto(List<NewBarbershopScheduleDTO> dto){
+        Set<BarbershopSchedule> schedules = dto.stream().map(sc -> {
+            BarbershopSchedule schedule = new BarbershopSchedule();
+            schedule.setDayWeek(sc.getDayWeek());
+            schedule.setOpeningTime(sc.getOpeningTime());
+            schedule.setLunchStartTime(sc.getLunchStartTime());
+            schedule.setLunchEndTime(sc.getLunchEndTime());
+            schedule.setClosingTime(sc.getClosingTime());
 
-        Barbershop barbershop = new Barbershop();
-        barbershop.setId(dto.getBarbershopId());
-        newObj.setBarbershop(barbershop);
+            Barbershop barbershop = new Barbershop();
+            barbershop.setId(sc.getBarbershopId());
+            schedule.setBarbershop(barbershop);
 
-        repo.save(newObj);
-        BarbershopSchedule barbershopSchedule = repo.findById(newObj.getId()).orElseThrow(() -> new RuntimeException("Horário not register"));
-        return BarbershopScheduleDTO.fromEntity(barbershopSchedule);
+            return schedule;
+        }).collect(Collectors.toSet());
+
+        repo.saveAll(schedules);
+        return schedules.stream().map(BarbershopScheduleDTO::fromEntity).toList();
     }
 
     // atualiza endereço

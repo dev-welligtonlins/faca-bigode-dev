@@ -15,6 +15,7 @@ public class BarbershopScheduleDTO {
 
     public static BarbershopScheduleDTO fromEntity(BarbershopSchedule schedule){
         BarbershopScheduleDTO dto = new BarbershopScheduleDTO();
+        dto.setId(schedule.getId());
         dto.setDayWeek(schedule.getDayWeek());
         dto.setOpeningTime(schedule.getOpeningTime());
         dto.setLunchStartTime(schedule.getLunchStartTime());

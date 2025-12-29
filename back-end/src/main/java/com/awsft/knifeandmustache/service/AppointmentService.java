@@ -28,6 +28,7 @@ public class AppointmentService implements ICrud<Appointment>{
     private final AppointmentRepository repo;
     private final BarberRepository repoBarber;
     private final ServiceRepository repoService;
+    private Double valueTotal = 0.0;
     
     public AppointmentService(AppointmentRepository repo, BarberRepository repoBarber, ServiceRepository repoService){
         this.repo = repo;
@@ -86,15 +87,6 @@ public class AppointmentService implements ICrud<Appointment>{
         newObj.setAppointmentTime(dto.getAppointmentTime());
         newObj.setAppointmentStatus(EAppointmentStatus.AGENDADO);
 
-        Set<Payment> payments = dto.getPayments().stream().map(p -> {
-            Payment pay = new Payment();
-            pay.setAppointment(newObj);
-            pay.setPaymentMethod(p.getPaymentMethod());
-            pay.setPaymentStatus(p.getPaymentStatus());
-            pay.setValue(0.0);
-            return pay;
-        }).collect(Collectors.toSet());
-
         Set<ServiceAppointment> serviceAppointments = dto.getServiceAppointments().stream().map(sa -> {
             ServiceAppointment serviceAppointment = new ServiceAppointment();
             serviceAppointment.setAppointment(newObj);
@@ -104,9 +96,19 @@ public class AppointmentService implements ICrud<Appointment>{
             serviceAppointment.setBarber(barber);
 
             Service service = repoService.getReferenceById(sa.getServiceId());
+            this.valueTotal += service.getValue();
             serviceAppointment.setService(service);
 
             return serviceAppointment;
+        }).collect(Collectors.toSet());
+
+        Set<Payment> payments = dto.getPayments().stream().map(p -> {
+            Payment pay = new Payment();
+            pay.setAppointment(newObj);
+            pay.setPaymentMethod(p.getPaymentMethod());
+            pay.setPaymentStatus(p.getPaymentStatus());
+            pay.setValue(this.valueTotal);
+            return pay;
         }).collect(Collectors.toSet());
 
         newObj.setServiceAppointments(serviceAppointments);

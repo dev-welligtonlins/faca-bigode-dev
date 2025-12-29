@@ -67,9 +67,9 @@ public class BarbershopScheduleController implements  ICrud<BarbershopSchedule>{
     }
 
     @PostMapping("/dto/new-barbershop_schedule/")
-    public ResponseEntity<BarbershopScheduleDTO> newDto(@RequestBody NewBarbershopScheduleDTO dto){
-        BarbershopScheduleDTO record = service.newDto(dto);
-        return new ResponseEntity<>(record, HttpStatus.CREATED);
+    public ResponseEntity<List<BarbershopScheduleDTO>> newDto(@RequestBody List<NewBarbershopScheduleDTO> dto){
+        List<BarbershopScheduleDTO> allRecors = service.newDto(dto);
+        return new ResponseEntity<>(allRecors, HttpStatus.CREATED);
     }
 
     @PutMapping("/dto/update-barbershop_schedule/{id}")
