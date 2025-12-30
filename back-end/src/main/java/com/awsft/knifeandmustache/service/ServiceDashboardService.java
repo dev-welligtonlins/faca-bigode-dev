@@ -24,8 +24,8 @@ public class ServiceDashboardService {
         List<ServiceDTO> services = serviceService.findServicesByBarbershopIdAndServiceActiveTrue(id);
           
         Long sizeServices = (long) services.size();
-        
-        BigDecimal averageValue = BigDecimal.valueOf(services.stream().mapToDouble(obj -> obj.getValue()).average().orElse(0.0));
+        BigDecimal averageValue = BigDecimal.ZERO;
+        // BigDecimal averageValue = BigDecimal.valueOf(services.stream().mapToDouble(obj -> obj.getValue()).average().orElse(0.0));
         int averageTime = (int) services.stream().mapToDouble(obj -> obj.getDuration()).average().orElse(0.0);
 
         return new ServiceDashboardDTO(services, sizeServices, averageValue, averageTime);

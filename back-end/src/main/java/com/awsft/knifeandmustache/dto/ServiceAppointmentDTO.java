@@ -1,5 +1,6 @@
 package com.awsft.knifeandmustache.dto;
 
+import java.math.BigDecimal;
 import java.time.LocalTime;
 
 import com.awsft.knifeandmustache.model.ServiceAppointment;
@@ -11,7 +12,7 @@ public class ServiceAppointmentDTO {
     private LocalTime time;
     private String serviceDescription;
     private Integer duration;
-    private Double value;
+    private BigDecimal value;
 
     public static ServiceAppointmentDTO fromEntity(ServiceAppointment serviceAppointment) {
         ServiceAppointmentDTO dto = new ServiceAppointmentDTO();
@@ -48,10 +49,10 @@ public class ServiceAppointmentDTO {
     public void setDuration(Integer duration) {
         this.duration = duration;
     }
-    public Double getValue() {
+    public BigDecimal getValue() {
         return value;
     }
-    public void setValue(Double value) {
+    public void setValue(BigDecimal value) {
         this.value = value;
     }
     public Long getId() {

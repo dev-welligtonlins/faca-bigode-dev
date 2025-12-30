@@ -94,24 +94,24 @@ INSERT INTO services (service_description, duration, service_value, category, se
 -- ###########
 -- AGENDAMENTO
 -- ###########
-INSERT INTO appointments (client_name, appointment_time, appointment_status, barbershop_id)
-		VALUES ('Yuri Vinicius', '2025-10-25 14:00:00', 'FINALIZADO', 1);
+INSERT INTO appointments (client_name, appointment_time, appointment_status, value_total, barbershop_id)
+		VALUES ('Yuri Vinicius', '2025-10-25 14:00:00', 'FINALIZADO', 0.1, 1);
 
-INSERT INTO appointments (client_name, appointment_time, appointment_status, barbershop_id)
-		VALUES ('Welligton Bob', '2025-10-25 15:00:00', 'CANCELADO', 1);
+INSERT INTO appointments (client_name, appointment_time, appointment_status, value_total, barbershop_id)
+		VALUES ('Welligton Bob', '2025-10-25 15:00:00', 'CANCELADO', 0.1, 1);
 
-INSERT INTO appointments (client_name, appointment_time, appointment_status, barbershop_id)
-		VALUES ('Welligton Bob', '2025-10-26 09:00:00', 'FINALIZADO', 1);
+INSERT INTO appointments (client_name, appointment_time, appointment_status, value_total, barbershop_id)
+		VALUES ('Welligton Bob', '2025-10-26 09:00:00', 'FINALIZADO', 0.1, 1);
 
-INSERT INTO appointments (client_name, appointment_time, appointment_status, barbershop_id)
-		VALUES ('Welligton Bob', '2025-10-26 13:00:00', 'AGENDADO', 1);
+INSERT INTO appointments (client_name, appointment_time, appointment_status, value_total, barbershop_id)
+		VALUES ('Welligton Bob', '2025-10-26 13:00:00', 'AGENDADO', 0.1, 1);
 
 
-INSERT INTO appointments (client_name, appointment_time, appointment_status, barbershop_id)
-		VALUES ('Aleson Aberto', '2025-10-26 16:00:00', 'AGENDADO', 2);
+INSERT INTO appointments (client_name, appointment_time, appointment_status, value_total, barbershop_id)
+		VALUES ('Aleson Aberto', '2025-10-26 16:00:00', 'AGENDADO', 0.1, 2);
 
-INSERT INTO appointments (client_name, appointment_time, appointment_status, barbershop_id)
-		VALUES ('Gideão', '2025-09-18 14:00:00', 'AGENDADO', 2);
+INSERT INTO appointments (client_name, appointment_time, appointment_status, value_total, barbershop_id)
+		VALUES ('Gideão', '2025-09-18 14:00:00', 'AGENDADO', 0.1, 2);
 
 
 

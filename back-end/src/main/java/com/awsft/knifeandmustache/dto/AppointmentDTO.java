@@ -1,5 +1,6 @@
 package com.awsft.knifeandmustache.dto;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -10,6 +11,7 @@ public class AppointmentDTO {
     private Long id;
     private String clientName; 
     private LocalDateTime appointmentTime;
+    private BigDecimal value;
     private List<PaymentDTO> payments;
     private List<ServiceAppointmentDTO> serviceAppointments;
     private EAppointmentStatus appointmentStatus;
@@ -20,6 +22,7 @@ public class AppointmentDTO {
         dto.id = a.getId();
         dto.clientName = a.getClienteName();
         dto.appointmentTime = a.getAppointmentTime();
+        dto.value = a.getValue();
         dto.appointmentStatus = a.getAppointmentStatus();
 
         dto.payments = a.getPayments()
@@ -53,6 +56,7 @@ public class AppointmentDTO {
     public void setAppointmentTime(LocalDateTime appointmentTime) {
         this.appointmentTime = appointmentTime;
     }
+    
     public List<PaymentDTO> getPayments() {
         return payments;
     }
@@ -70,5 +74,11 @@ public class AppointmentDTO {
     }
     public void setAppointmentStatus(EAppointmentStatus appointmentStatus) {
         this.appointmentStatus = appointmentStatus;
+    }
+    public BigDecimal getValue() {
+        return value;
+    }
+    public void setValue(BigDecimal value) {
+        this.value = value;
     }            
 }

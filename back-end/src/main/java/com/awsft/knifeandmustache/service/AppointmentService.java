@@ -1,5 +1,6 @@
 package com.awsft.knifeandmustache.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -28,7 +29,6 @@ public class AppointmentService implements ICrud<Appointment>{
     private final AppointmentRepository repo;
     private final BarberRepository repoBarber;
     private final ServiceRepository repoService;
-    private Double valueTotal = 0.0;
     
     public AppointmentService(AppointmentRepository repo, BarberRepository repoBarber, ServiceRepository repoService){
         this.repo = repo;
@@ -96,7 +96,6 @@ public class AppointmentService implements ICrud<Appointment>{
             serviceAppointment.setBarber(barber);
 
             Service service = repoService.getReferenceById(sa.getServiceId());
-            this.valueTotal += service.getValue();
             serviceAppointment.setService(service);
 
             return serviceAppointment;
@@ -107,10 +106,14 @@ public class AppointmentService implements ICrud<Appointment>{
             pay.setAppointment(newObj);
             pay.setPaymentMethod(p.getPaymentMethod());
             pay.setPaymentStatus(p.getPaymentStatus());
-            pay.setValue(this.valueTotal);
+            pay.setValue(0.0);
             return pay;
         }).collect(Collectors.toSet());
 
+        BigDecimal valueTotal = serviceAppointments.stream().map(sa -> sa.getService().getValue())
+            .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        newObj.setValue(valueTotal);
         newObj.setServiceAppointments(serviceAppointments);
         newObj.setPayments(payments);
 
@@ -119,7 +122,6 @@ public class AppointmentService implements ICrud<Appointment>{
         newObj.setBarbershop(barbershop);
 
         repo.save(newObj);
-
         Appointment appointment = repo.findById(newObj.getId()).orElseThrow(() -> new RuntimeException("Appointment not found"));
         return AppointmentDTO.fromEntity(appointment);
     }
@@ -158,15 +160,6 @@ public class AppointmentService implements ICrud<Appointment>{
         
         updateObj.getPayments().clear();
         payments.forEach(updateObj.getPayments()::add);
-        
-        // Set<Payment> payments = dto.getPayments().stream().map(p -> {
-        //     Payment pay = new Payment();
-        //     pay.setAppointment(updateObj);
-        //     pay.setPaymentMethod(p.getPaymentMethod());
-        //     pay.setPaymentStatus(p.getPaymentStatus());
-        //     pay.setValue(0.0);
-        //     return pay;
-        // }).collect(Collectors.toSet());
 
         Map<Long, ServiceAppointment> existingServiceAppointments =
             updateObj.getServiceAppointments().stream()
@@ -196,7 +189,10 @@ public class AppointmentService implements ICrud<Appointment>{
 
         updateObj.getServiceAppointments().clear();
         serviceAppointments.forEach(updateObj.getServiceAppointments()::add);
-        
+        // Percorre os serviços do atendimento e soma os valores
+        BigDecimal valueTotal = updateObj.getServiceAppointments().stream().map(sa -> sa.getService().getValue()).reduce(BigDecimal.ZERO, BigDecimal::add);
+        updateObj.setValue(valueTotal);
+
         repo.save(updateObj);
         Appointment appointment = repo.findById(updateObj.getId()).orElseThrow(() -> new RuntimeException("Appointment not found"));
         return AppointmentDTO.fromEntity(appointment);

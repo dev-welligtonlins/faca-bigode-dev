@@ -1,5 +1,6 @@
 package com.awsft.knifeandmustache.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -31,7 +32,8 @@ public class Appointment {
     private String clienteName;
     @Column(name = "appointment_time")
     private LocalDateTime appointmentTime;
-    
+    @Column(name = "value_total", precision = 10, scale = 2)
+    private BigDecimal value;
     @Column(name = "appointment_status")
     @Enumerated(EnumType.STRING)
     private EAppointmentStatus appointmentStatus;
@@ -53,10 +55,11 @@ public class Appointment {
         
     }
 
-    public Appointment(String clienteName, LocalDateTime appointmentTime, EAppointmentStatus appointmentStatus,
+    public Appointment(String clienteName, LocalDateTime appointmentTime, BigDecimal value, EAppointmentStatus appointmentStatus,
             Set<Payment> payments, Set<ServiceAppointment> serviceAppointments, Barbershop barbershop) {
         this.clienteName = clienteName;
         this.appointmentTime = appointmentTime;
+        this.value = value;
         this.appointmentStatus = appointmentStatus;
         this.payments = payments;
         this.serviceAppointments = serviceAppointments;
@@ -80,7 +83,7 @@ public class Appointment {
     }
     public void setAppointmentTime(LocalDateTime appointmentTime) {
         this.appointmentTime = appointmentTime;
-    }
+    }    
     public EAppointmentStatus getAppointmentStatus() {
         return appointmentStatus;
     }
@@ -104,5 +107,13 @@ public class Appointment {
     }
     public void setBarbershop(Barbershop barbershop) {
         this.barbershop = barbershop;
+    }
+
+    public BigDecimal getValue() {
+        return value;
+    }
+
+    public void setValue(BigDecimal value) {
+        this.value = value;
     }   
 }

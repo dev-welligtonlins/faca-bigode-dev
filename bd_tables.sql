@@ -100,6 +100,7 @@ CREATE TABLE IF NOT EXISTS appointments (
 	client_name VARCHAR(100) NOT NULL,
 	appointment_time TIMESTAMP NOT NULL,
 	appointment_status VARCHAR(25) NOT NULL,
+	value_total FLOAT NOT NULL,
 	barbershop_id INT NOT NULL,
 
 	CONSTRAINT fk_barbershop

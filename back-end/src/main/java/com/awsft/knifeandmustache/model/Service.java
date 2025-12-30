@@ -1,5 +1,6 @@
 package com.awsft.knifeandmustache.model;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,8 +27,8 @@ public class Service {
     private Long id;
     private String serviceDescription;
     private Integer duration;    
-    @Column(name = "service_value")
-    private Double value;
+    @Column(name = "service_value", precision = 10, scale = 2)
+    private BigDecimal value;
     @Column(name = "service_active")
     private Boolean serviceActive;
 
@@ -49,7 +50,7 @@ public class Service {
         
     }
 
-    public Service(String serviceDescription, Integer duration, Double value, Boolean serviceActive,
+    public Service(String serviceDescription, Integer duration, BigDecimal value, Boolean serviceActive,
             ECategoryService serviceCategory, Set<ServiceAppointment> serviceAppointments, Barbershop barbershop) {
         this.serviceDescription = serviceDescription;
         this.duration = duration;
@@ -78,10 +79,10 @@ public class Service {
     public void setDuration(Integer duration) {
         this.duration = duration;
     }
-    public Double getValue() {
+    public BigDecimal getValue() {
         return value;
     }
-    public void setValue(Double value) {
+    public void setValue(BigDecimal value) {
         this.value = value;
     }
     public Boolean getServiceActive() {

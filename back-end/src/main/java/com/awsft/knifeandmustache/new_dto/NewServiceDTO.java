@@ -1,15 +1,17 @@
 package com.awsft.knifeandmustache.new_dto;
 
+import java.math.BigDecimal;
+
 import com.awsft.knifeandmustache.model.ECategoryService;
 
 public class NewServiceDTO {
     private String serviceDescription;
     private Integer duration;
-    private Double value;
+    private BigDecimal value;
     private ECategoryService serviceCategory;
     private Long barbershopId;
 
-    public NewServiceDTO(String serviceDescription, Integer duration, Double value, ECategoryService serviceCategory,
+    public NewServiceDTO(String serviceDescription, Integer duration, BigDecimal value, ECategoryService serviceCategory,
             Long barbershopId) {
         this.serviceDescription = serviceDescription;
         this.duration = duration;
@@ -34,11 +36,11 @@ public class NewServiceDTO {
         this.duration = duration;
     }
 
-    public Double getValue() {
+    public BigDecimal getValue() {
         return value;
     }
 
-    public void setValue(Double value) {
+    public void setValue(BigDecimal value) {
         this.value = value;
     }
 

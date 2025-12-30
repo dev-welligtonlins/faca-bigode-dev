@@ -1,5 +1,7 @@
 package com.awsft.knifeandmustache.dto;
 
+import java.math.BigDecimal;
+
 import com.awsft.knifeandmustache.model.ECategoryService;
 import com.awsft.knifeandmustache.model.Service;
 
@@ -7,7 +9,7 @@ public class ServiceDTO {
     private Long id;
     private String serviceDescription;
     private Integer duration;
-    private Double value;
+    private BigDecimal value;
     private ECategoryService serviceCategory;
     
     public static ServiceDTO fromEntity(Service service) {
@@ -36,10 +38,10 @@ public class ServiceDTO {
     public void setDuration(Integer duration) {
         this.duration = duration;
     }
-    public Double getValue() {
+    public BigDecimal getValue() {
         return value;
     }
-    public void setValue(Double value) {
+    public void setValue(BigDecimal value) {
         this.value = value;
     }
     public ECategoryService getServiceCategory() {
