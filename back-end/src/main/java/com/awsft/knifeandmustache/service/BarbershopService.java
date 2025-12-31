@@ -110,7 +110,7 @@ public class BarbershopService implements ICrud<Barbershop>{
         schedules.forEach(updateObj.getBarbershopSchedules()::add);
 
         repo.save(updateObj);
-        Barbershop barbershop = repo.findById(updateObj.getId()).orElseThrow(() -> new RuntimeException("Appointment not found"));
+        Barbershop barbershop = repo.findById(updateObj.getId()).orElseThrow(() -> new RuntimeException("Barbershop not found"));
         return BarbershopDTO.fromEntity(barbershop);
     }
 
