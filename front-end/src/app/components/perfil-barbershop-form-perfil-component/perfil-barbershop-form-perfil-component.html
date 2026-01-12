@@ -1,10 +1,10 @@
 <h2>Perfil</h2>
-<form>
+<form (ngSubmit)="postBarbershop()">
     <div class="perfil-container">
-        <div class="photo-upload">
+        <!-- <div class="photo-upload">
             <label class="photo-circle">
                 <ng-container>
-                    <!-- <ng-container *ngIf="previewUrl; *ngIfNgIfElse defaultIcon"> -->
+                     <ng-container *ngIf="previewUrl; *ngIfNgIfElse defaultIcon"> 
                     <img [src]="previewUrl" alt="Foto de perfil" />
                 </ng-container>
                 <ng-template #defaultIcon>
@@ -12,16 +12,21 @@
                 </ng-template>
                 <input type="file" accept="image/*" (change)="onFileSelected($event)" />
             </label>
-        </div>
+        </div> -->
         <fieldset>
             <legend>Nome da Barbearia</legend>
             <div class="input-group">
-                <input type="text" formControlName="descricao" id="descricao" class="form-control" placeholder=""
+                <input     type="text"
+                    name="name"
+                    [(ngModel)]="newBarbershop.name"
+                    placeholder="Nome da barbearia"
                     required>
             </div>
         </fieldset>
     </div>
-    <button type="submit" data-bs-toggle="modal" data-bs-target="#modal-time"> <i
+
+   <button type="submit">Salvar</button>
+    <!-- <button type="submit" data-bs-toggle="modal" data-bs-target="#modal-time"> <i
             class="bi bi-calendar-range"></i>Adicionar horário</button>
     <app-perfil-barbershop-form-perfil-component *ngIf="!isLogin" (submitForm)="openModal()">
     </app-perfil-barbershop-form-perfil-component>
@@ -45,5 +50,5 @@
                 <i class="bi {{payment.icon}}"></i> {{payment.name}}
             </button>
         </div>
-    </div>
+    </div> -->
 </form>

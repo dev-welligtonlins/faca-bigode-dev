@@ -1,17 +1,17 @@
 <h2>Endereço</h2>
 
-<form [formGroup]="form">
+<form (ngSubmit)="postAddress()">
     <div class="cep-and-number">
         <fieldset class="cep">
             <legend>Cep</legend>
             <div class="input-group">
-                <input formControlName="cep" type="text" id="cep" class="form-control" placeholder="" required>
+                <input name="cep" [(ngModel)]="newAddress.cep" type="text" id="cep" class="form-control" placeholder="" required>
             </div>
         </fieldset>
         <fieldset class="number">
             <legend>Número</legend>
             <div class="input-group">
-                <input type="text" formControlName="number" id="number" class="form-control" placeholder="" required>
+                <input name="number" [(ngModel)]="newAddress.number" type="number" id="number" class="form-control" placeholder="" required>
             </div>
         </fieldset>
     </div>
@@ -19,14 +19,13 @@
         <fieldset class="rua">
             <legend>Rua</legend>
             <div class="input-group">
-                <input formControlName="logradouro" type="text" id="logradouro" class="form-control" placeholder=""
-                    required>
+                <input name="road" [(ngModel)]="newAddress.road" type="text" id="road" class="form-control" placeholder="" required>
             </div>
         </fieldset>
         <fieldset class="bairro">
             <legend>Bairro</legend>
             <div class="input-group">
-                <input formControlName="bairro" type="text" id="bairro" class="form-control" placeholder="" required>
+                <input name="neighborhood" [(ngModel)]="newAddress.neighborhood" type="text" id="neighborhood" class="form-control" placeholder="" required>
             </div>
         </fieldset>
     </div>
@@ -36,7 +35,7 @@
             <!-- <span class="input-group-text icons-background">
                 <i class="bi bi-telephone-inbound-fill"></i>
             </span> -->
-            <input type="text" id="complemento" class="form-control" placeholder="    Ex: sala ou ap" required>
+            <input name="complement" [(ngModel)]="newAddress.complement" type="text" id="complement" class="form-control" placeholder="" required>
         </div>
     </fieldset>
     <div class="uf-and-city">
@@ -46,7 +45,7 @@
                 <!-- <span class="input-group-text icons-background">
                     <i class="bi bi-telephone-inbound-fill"></i>
                 </span> -->
-                <input formControlName="localidade" type="text" id="localidade" class="form-control" placeholder="" required>
+                <input name="city" [(ngModel)]="newAddress.city" type="text" id="city" class="form-control" placeholder="" required>
             </div>
         </fieldset>
         <fieldset class="uf">
@@ -55,8 +54,16 @@
                 <!-- <span class="input-group-text icons-background">
                     <i class="bi bi-telephone-inbound-fill"></i>
                 </span> -->
-                <input formControlName="uf" type="text" id="uf" class="form-control" placeholder="" required>
+                <input name="state" [(ngModel)]="newAddress.state" type="text" id="state" class="form-control" placeholder="" required>
             </div>
         </fieldset>
     </div>
+    <fieldset class="number">
+        <legend>Id Barbershop</legend>
+        <div class="input-group">
+            <input name="barbershopId" [(ngModel)]="newAddress.barbershopId" type="number" id="barbershopId" class="form-control" placeholder="" required>
+        </div>
+    </fieldset>
+
+   <button type="submit">Salvar</button>
 </form>
