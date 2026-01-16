@@ -1,0 +1,54 @@
+<form [formGroup]="scheduleForm" (ngSubmit)="postSchedules()">
+
+  <!-- SEGUNDA A SEXTA -->
+  <fieldset formGroupName="week">
+    <legend>Segunda a Sexta</legend>
+
+    <input type="time" formControlName="openingTime">
+    <input type="time" formControlName="lunchStartTime">
+    <input type="time" formControlName="lunchEndTime">
+    <input type="time" formControlName="closingTime">
+  </fieldset>
+
+  <!-- EDIÇÃO DE DIA ESPECÍFICO -->
+  <fieldset formGroupName="weekOverrides">
+    <legend>Editar dia específico (Seg–Sex)</legend>
+
+    <select formControlName="day">
+      <option value="">Selecione o dia</option>
+      <option value="MONDAY">Segunda</option>
+      <option value="TUESDAY">Terça</option>
+      <option value="WEDNESDAY">Quarta</option>
+      <option value="THURSDAY">Quinta</option>
+      <option value="FRIDAY">Sexta</option>
+    </select>
+
+    <input type="time" formControlName="openingTime">
+    <input type="time" formControlName="lunchStartTime">
+    <input type="time" formControlName="lunchEndTime">
+    <input type="time" formControlName="closingTime">
+  </fieldset>
+
+  <!-- SÁBADO -->
+  <fieldset formGroupName="saturday">
+    <legend>Sábado</legend>
+
+    <input type="time" formControlName="openingTime">
+    <input type="time" formControlName="lunchStartTime">
+    <input type="time" formControlName="lunchEndTime">
+    <input type="time" formControlName="closingTime">
+  </fieldset>
+
+  <!-- DOMINGO -->
+  <fieldset formGroupName="sunday">
+    <legend>Domingo</legend>
+
+    <input type="time" formControlName="openingTime">
+    <input type="time" formControlName="lunchStartTime">
+    <input type="time" formControlName="lunchEndTime">
+    <input type="time" formControlName="closingTime">
+  </fieldset>
+
+  <button type="submit">Salvar horários</button>
+
+</form>

@@ -1,0 +1,12 @@
+<form [formGroup]="accommodationForm" (ngSubmit)="postAccommodation()">
+
+  <input type="checkbox" formControlName="wifi" placeholder="Wifi">
+
+  <input type="checkbox" formControlName="parking" placeholder="Estacionamento">
+
+  <input type="checkbox" formControlName="bath" placeholder="Banheiro">
+  <input type="checkbox" formControlName="airConditioner" placeholder="Ar-condicionado">
+  <input type="number" formControlName="barbershopId" placeholder="">
+
+  <button type="submit">Salvar</button>
+</form>

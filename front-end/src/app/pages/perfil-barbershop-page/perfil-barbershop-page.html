@@ -18,12 +18,11 @@
     </div>
     <div class="section-right">
         <app-perfil-barbershop-form-perfil-component *ngSwitchCase="1"></app-perfil-barbershop-form-perfil-component>
-        <app-perfil-barbeshop-form-address-component *ngSwitchCase="2"
-            ></app-perfil-barbeshop-form-address-component>
-        <app-perfil-barbershop-form-barber-component *ngSwitchCase="3"
-            ></app-perfil-barbershop-form-barber-component>
-        <app-perfil-barbershop-form-services-component *ngSwitchCase="4"
-            ></app-perfil-barbershop-form-services-component>
+        <app-perfil-barbeshop-form-address-component *ngSwitchCase="2"></app-perfil-barbeshop-form-address-component>
+        <app-perfil-barbershop-form-schedule-component *ngSwitchCase="3"></app-perfil-barbershop-form-schedule-component>
+        <app-perfil-barbershop-form-accommodation-component *ngSwitchCase="4"></app-perfil-barbershop-form-accommodation-component>
+        <app-perfil-barbershop-form-barber-component *ngSwitchCase="5"></app-perfil-barbershop-form-barber-component>
+        <app-perfil-barbershop-form-services-component *ngSwitchCase="6"></app-perfil-barbershop-form-services-component>
 
 
 
@@ -33,7 +32,7 @@
             <div class="buttons-step">
                 <button (click)="prevStep()" *ngIf="start > 1">Voltar</button>
                 <button (click)="nextStep()">
-                    {{ start === 4 ? 'Finalizar' : 'Próximo' }}
+                    {{ start === 6 ? 'Finalizar' : 'Próximo' }}
                 </button>
             </div>
             <div class="signup-link">Se preferir,

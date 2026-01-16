@@ -8,10 +8,12 @@ import { PerfilBarbershopFormPerfilComponent } from '../../components/perfil-bar
 import { ModalTimeComponent } from '../../components/modal-time-component/modal-time-component';
 import { ServiceListComponent } from '../../components/service-list-component/service-list-component';
 import { BarberListComponent } from '../../components/barber-list-component/barber-list-component';
+import { PerfilBarbershopFormAccommodationComponent } from '../../components/perfil-barbershop-form-accommodation-component/perfil-barbershop-form-accommodation-component';
+import { PerfilBarbershopFormScheduleComponent } from '../../components/perfil-barbershop-form-schedule-component/perfil-barbershop-form-schedule-component';
 @Component({
   selector: 'app-perfil-barbershop-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, PerfilBarbeshopFormAddressComponent, PerfilBarbershopFormServicesComponent, PerfilBarbershopFormBarberComponent, PerfilBarbershopFormPerfilComponent, ModalTimeComponent, ServiceListComponent, BarberListComponent],
+  imports: [CommonModule, ReactiveFormsModule, PerfilBarbeshopFormAddressComponent, PerfilBarbershopFormAccommodationComponent, PerfilBarbershopFormScheduleComponent, PerfilBarbershopFormServicesComponent, PerfilBarbershopFormBarberComponent, PerfilBarbershopFormPerfilComponent, ModalTimeComponent, ServiceListComponent, BarberListComponent],
   templateUrl: './perfil-barbershop-page.html',
   styleUrl: './perfil-barbershop-page.scss'
 })
@@ -38,7 +40,7 @@ export class PerfilBarbershopPage {
   }
 
   nextStep() {
-    if (this.start < 4) {
+    if (this.start < 6) {
       this.start++;
     } else {
       this.finish();
