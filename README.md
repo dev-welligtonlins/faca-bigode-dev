@@ -60,8 +60,20 @@
             Java version: 21.0.8, vendor: Oracle Corporation, runtime: C:\Program Files\Java\jdk-21
             Default locale: pt_BR, platform encoding: UTF-8
             OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"
-            
-            
+
+
+## POSTGRESQL
+
+    Acesse: https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
+
+    Versão estável 18.1
+        Instalador: https://sbp.enterprisedb.com/getfile.jsp?fileid=1259914 
+
+    Tutorial
+        [https://mkyong.com/maven/how-to-install-maven-in-windows/](https://www.w3schools.com/postgresql/postgresql_install.php)
+
+    Teste 
+        postgres --version
             
             
             
