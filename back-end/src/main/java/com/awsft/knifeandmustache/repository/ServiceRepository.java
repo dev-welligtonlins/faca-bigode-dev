@@ -10,5 +10,6 @@ public interface ServiceRepository extends JpaRepository<Service, Long>{
     List<Service> findByBarbershopIdAndServiceActiveTrue(Long id);
 
     List<Service> findServicesByBarbershopIdAndServiceActiveTrue(Long id);
+
 } 
 
