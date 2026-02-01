@@ -15,7 +15,7 @@
     <legend>Editar dia específico (Seg–Sex)</legend>
 
     <select formControlName="day">
-      <option value="">Selecione o dia</option>
+      <option value="">Folga</option>
       <option value="MONDAY">Segunda</option>
       <option value="TUESDAY">Terça</option>
       <option value="WEDNESDAY">Quarta</option>
@@ -27,6 +27,10 @@
     <input type="time" formControlName="lunchStartTime">
     <input type="time" formControlName="lunchEndTime">
     <input type="time" formControlName="closingTime">
+    <p class="error"
+       *ngIf="overrideGroup.errors?.['overrideInvalid']">
+      Se escolher um dia, informe abertura e fechamento
+    </p>
   </fieldset>
 
   <!-- SÁBADO -->
@@ -48,7 +52,7 @@
     <input type="time" formControlName="lunchEndTime">
     <input type="time" formControlName="closingTime">
   </fieldset>
-
+  <input type="number" formControlName="barbershopId" placeholder="">
   <button type="submit">Salvar horários</button>
 
 </form>

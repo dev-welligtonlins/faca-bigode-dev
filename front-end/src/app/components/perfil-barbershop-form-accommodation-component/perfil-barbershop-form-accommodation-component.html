@@ -9,4 +9,17 @@
   <input type="number" formControlName="barbershopId" placeholder="">
 
   <button type="submit">Salvar</button>
+
+  <div class="amenities-section">
+    <h5>Acomodações da Barbearia</h5>
+    <div class="d-flex flex-wrap gap-2 mt-2">
+        <button type="button" *ngFor="let amenity of amenities" class="btn"
+            [ngClass]="amenity.selected ? 'btn-primary' : 'btn-outline-primary'" (click)="toggleAmenity(amenity)"
+            [title]="amenity.name" aria-pressed="{{ amenity.selected }}">
+            <i class="bi {{ amenity.icon }} me-1"></i>
+            {{ amenity.name }}
+        </button>
+    </div>
+</div>
 </form>
+

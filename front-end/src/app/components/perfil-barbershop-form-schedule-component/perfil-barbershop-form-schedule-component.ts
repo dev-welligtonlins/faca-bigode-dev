@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ServiceSchedule } from '../../services/ServiceSchedule';
 import { CommonModule, WeekDay } from '@angular/common';
 import { NewScheduleModel } from '../../models/new-schedule-model';
+import { weekOverrideValidator } from '../../validators/week-override-validator';
 
 @Component({
   selector: 'app-perfil-barbershop-form-schedule-component',
@@ -29,34 +30,34 @@ export class PerfilBarbershopFormScheduleComponent {
       // Quando um dia da semana tem horário diferente
       weekOverrides: this.fb.group({
         day: [null],
-        openingTime: ['', Validators.required],
+        openingTime: [''],
         lunchStartTime: [''],
         lunchEndTime: [''],
-        closingTime: ['', Validators.required],        
-      }),
-
+        closingTime: [''],        
+      }, {validators: weekOverrideValidator()}
+      ),
+      // Sabado
       saturday: this.fb.group({
         openingTime: ['', Validators.required],
         lunchStartTime: [''],
         lunchEndTime: [''],
         closingTime: ['', Validators.required],
       }),
-
+      // Domingo
       sunday: this.fb.group({
         openingTime: ['', Validators.required],
         lunchStartTime: [''],
         lunchEndTime: [''],
         closingTime: ['', Validators.required],
-      })
+      }),
+
+      barbershopId: [0, Validators.required]
 
     });
 
   }
 
-  get schedules(): FormArray {
-   return this.scheduleForm.get('schedules') as FormArray;
-  }
-
+  // salva os dados - 'POST'
   postSchedules() : void {
     if (this.scheduleForm.invalid) {
       this.scheduleForm.markAllAsTouched();
@@ -64,18 +65,20 @@ export class PerfilBarbershopFormScheduleComponent {
     }
 
     const schedulesArray = this.getScheduleForm();
-
+    console.log(schedulesArray)
     this.service.postSchedules(schedulesArray).subscribe({
       next: () => console.log('Salvo com sucesso!'),
       error: err => console.error(err)
     })
   }
 
+  // Acessa os dados do formulario e distribui para os dias da semana
   getScheduleForm() : NewScheduleModel[] {
     const week = this.scheduleForm.value.week;
     const override = this.scheduleForm.value.weekOverrides;
     const saturday = this.scheduleForm.value.saturday;
     const sunday = this.scheduleForm.value.sunday;
+    const barbershop= this.scheduleForm.value.barbershopId;
 
     const weekdays: NewScheduleModel['dayWeek'][] = [
       'MONDAY',' TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY'
@@ -91,7 +94,7 @@ export class PerfilBarbershopFormScheduleComponent {
           lunchStartTime: this.normalizeTime(data.lunchStartTime),
           lunchEndTime: this.normalizeTime(data.lunchEndTime),
           closingTime: this.normalizeTime(data.closingTime),
-          barbershopId: 4
+          barbershopId: barbershop
         };
       }),
       {
@@ -100,7 +103,7 @@ export class PerfilBarbershopFormScheduleComponent {
         lunchStartTime: this.normalizeTime(saturday.lunchStartTime),
         lunchEndTime: this.normalizeTime(saturday.lunchEndTime),
         closingTime: this.normalizeTime(saturday.closingTime),
-        barbershopId: 4
+        barbershopId: barbershop
       },
 
       {
@@ -109,7 +112,7 @@ export class PerfilBarbershopFormScheduleComponent {
         lunchStartTime: this.normalizeTime(sunday.lunchStartTime),
         lunchEndTime: this.normalizeTime(sunday.lunchEndTime),
         closingTime: this.normalizeTime(sunday.closingTime),
-        barbershopId: 4
+        barbershopId: barbershop
       }
     ];
   }
@@ -118,5 +121,10 @@ export class PerfilBarbershopFormScheduleComponent {
     if (!time) return time;
     return time.length === 5 ? `${time}:00` : time;
   }
+
+  get overrideGroup(): FormGroup {
+    return this.scheduleForm.get('weekOverrides') as FormGroup;
+  }
+
 }
 

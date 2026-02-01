@@ -1,3 +1,46 @@
+
+
+
+
+-- #########################################
+-- SERVIÇOS DE UMA BARBEA
+-- #########################################
+-- CREATE VIEW view_services_barbershop AS 
+--     SELECT b.id AS barbershop_id, 
+-- 		   s.service_description, 
+-- 		   s.service_value, 
+-- 		   s.duration, 
+-- 		   s.category 
+-- 	FROM services s 
+-- 	JOIN barbershops b ON b.id = s.barbershop_id 
+-- 	WHERE s.service_active = TRUE;
+
+CREATE VIEW view_services_barbershop_dashboard AS
+	SELECT
+	    s.barbershop_id,
+	
+	    COUNT(DISTINCT s.id) AS total_services,
+	    ROUND(AVG(s.service_value)::numeric, 2) AS avg_value,
+	    ROUND(AVG(s.duration))::int AS avg_duration,
+	
+	    (
+	        SELECT s2.service_description
+	        FROM service_appointments sa
+	        JOIN appointments a
+	            ON a.id = sa.appointment_id
+	        JOIN services s2
+	            ON s2.id = sa.service_id
+	        WHERE a.barbershop_id = s.barbershop_id
+	          AND a.appointment_status = 'FINALIZADO'
+	        GROUP BY s2.service_description
+	        ORDER BY COUNT(*) DESC
+	        LIMIT 1
+	    ) AS service_most_popular
+	FROM services s
+	WHERE s.service_active = TRUE
+	GROUP BY s.barbershop_id;
+
+		   
 -- -- AGENDA
 -- 		-- info: retona os horário agendados de um barbeiro
 -- 		-- 		 com o o nome do cliente e o valor

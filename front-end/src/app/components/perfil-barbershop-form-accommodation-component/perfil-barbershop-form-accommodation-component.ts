@@ -43,5 +43,19 @@ export class PerfilBarbershopFormAccommodationComponent implements OnInit{
   getAccomodationForm() : NewAccommodationModel {
     return this.accommodationForm.value as NewAccommodationModel;
   }
+
+
+  // Lista de acomodações
+  amenities = [
+    { name: 'Wi-Fi', icon: 'bi-wifi', selected: false },
+    { name: 'Estacionamento', icon: 'bi-car-front', selected: false },
+    { name: 'Climatizado', icon: 'bi-wind', selected: false },
+    { name: 'Banheiro', icon: 'bi-water', selected: false },
+  ];
+
+  // Seleção de acomodações
+  toggleAmenity(amenity: any) {
+    amenity.selected = !amenity.selected;
+  }
 }
 
