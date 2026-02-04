@@ -18,6 +18,7 @@ import com.awsft.knifeandmustache.model.Service;
 import com.awsft.knifeandmustache.new_dto.NewServiceDTO;
 import com.awsft.knifeandmustache.service.ServiceService;
 import com.awsft.knifeandmustache.update_dto.UpdateServiceDTO;
+import com.awsft.knifeandmustache.view_dto.ServicePageViewDTO;
 
 
 @RestController
@@ -97,5 +98,11 @@ public class ServiceController implements  ICrud<Service>{
     public ResponseEntity<?> delete(@PathVariable("id") Long id){
         service.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/page/{id}")
+    public ResponseEntity<ServicePageViewDTO> servicePage(@PathVariable("id") Long id) {
+        ServicePageViewDTO record = service.servicePage(id);
+        return new ResponseEntity<>(record, HttpStatus.OK);
     }
 }

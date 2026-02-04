@@ -6,16 +6,25 @@ import com.awsft.knifeandmustache.dto.ServiceDTO;
 import com.awsft.knifeandmustache.model.Barbershop;
 import com.awsft.knifeandmustache.model.Service;
 import com.awsft.knifeandmustache.new_dto.NewServiceDTO;
+import com.awsft.knifeandmustache.repository.ServiceDashboardViewRepository;
+import com.awsft.knifeandmustache.repository.ServiceListViewRepository;
 import com.awsft.knifeandmustache.repository.ServiceRepository;
 import com.awsft.knifeandmustache.update_dto.UpdateServiceDTO;
+import com.awsft.knifeandmustache.view_dto.ServiceDashboardViewDTO;
+import com.awsft.knifeandmustache.view_dto.ServiceListViewDTO;
+import com.awsft.knifeandmustache.view_dto.ServicePageViewDTO;
 
 @org.springframework.stereotype.Service
 public class ServiceService implements ICrud<Service>{
 
     private final ServiceRepository repo;
+    private final ServiceDashboardViewRepository serviceDashboardViewRepository;
+    private final ServiceListViewRepository serviceListViewRepository;
   
-    public ServiceService(ServiceRepository repo){
+    public ServiceService(ServiceRepository repo, ServiceDashboardViewRepository serviceDashboardViewRepository, ServiceListViewRepository serviceListViewRepository){
         this.repo = repo;
+        this.serviceDashboardViewRepository = serviceDashboardViewRepository;
+        this.serviceListViewRepository = serviceListViewRepository;
     }
 
     public Service save(Service obj){
@@ -84,6 +93,11 @@ public class ServiceService implements ICrud<Service>{
         repo.save(obj);
     }
 
-
+    public ServicePageViewDTO servicePage(Long id){
+        ServiceDashboardViewDTO dashboard = serviceDashboardViewRepository.findByBarbershopId(id);
+        List<ServiceListViewDTO> services = serviceListViewRepository.findByBarbershopId(id);
+        
+        return ServicePageViewDTO.fromView(dashboard, services);
+    }
 }
 
