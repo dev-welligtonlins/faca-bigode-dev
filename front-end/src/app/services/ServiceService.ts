@@ -3,19 +3,19 @@ import { ServiceModel } from "../models/service.model";
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment.dev";
-import { DashboardServiceModel } from "../models/dashboard-service-model";
+import { ServicePageModel } from "../models/page-service-model";
 
 @Injectable({
     providedIn: 'root'
 })
 export class sService {
 
-    private baseUrl = `${environment.apiUrl}dashboard/dto/`;
+    private baseUrl = `${environment.apiUrl}services/`;
 
     constructor(private http: HttpClient) {}
 
-    getAllServices(id: number) {
-        return this.http.get<DashboardServiceModel>(`${this.baseUrl}service/${id}`);
+    getPage(id: number) {
+        return this.http.get<ServicePageModel>(`${this.baseUrl}page/${id}`);
     }
 
     private servicesSubject = new BehaviorSubject<ServiceModel[]>([]);

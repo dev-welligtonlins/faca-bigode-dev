@@ -23,7 +23,7 @@ export const routes: Routes = [
 
       // ROTAS FILHAS (Componentes de Rota Agora em 'pages/')
       {
-        path: 'servicos',
+        path: 'servicos/:id',
         loadComponent: () => import('./components/services-component/services-component').then(m => m.ServicesComponent) // Caminho presumido corrigido
       },
       { path: 'Barbeiros',

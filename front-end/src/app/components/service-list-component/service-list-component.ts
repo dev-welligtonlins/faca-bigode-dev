@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ServiceModel } from '../../models/service.model';
-import { sService } from '../../services/sService';
+import { sService } from '../../services/ServiceService';
 import { NgForm } from '@angular/forms';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 
