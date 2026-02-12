@@ -18,6 +18,8 @@ import com.awsft.knifeandmustache.model.Barber;
 import com.awsft.knifeandmustache.new_dto.NewBarberDTO;
 import com.awsft.knifeandmustache.service.BarberService;
 import com.awsft.knifeandmustache.update_dto.UpdateBarberDTO;
+import com.awsft.knifeandmustache.view_dto.BarberPageViewDTO;
+import com.awsft.knifeandmustache.view_dto.ServicePageViewDTO;
 
 @RestController
 @RequestMapping("/barbers")
@@ -106,5 +108,11 @@ public class BarberController implements  ICrud<Barber>{
         List<BarberDTO> allRecors = service.findByBarbershopIdAndBarberActiveTrue(id);
         return new ResponseEntity<>(allRecors, HttpStatus.OK);
     }
+
+    @GetMapping("/page/{id}")
+    public ResponseEntity<BarberPageViewDTO> servicePage(@PathVariable("id") Long id) {
+        BarberPageViewDTO record = service.barberPage(id);
+        return new ResponseEntity<>(record, HttpStatus.OK);
+    }    
 
 }

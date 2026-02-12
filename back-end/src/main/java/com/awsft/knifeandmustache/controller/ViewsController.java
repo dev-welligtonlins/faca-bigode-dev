@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.awsft.knifeandmustache.service.BarberDashboardViewService;
+import com.awsft.knifeandmustache.service.BarberListViewService;
 import com.awsft.knifeandmustache.service.ServiceDashboardViewService;
 import com.awsft.knifeandmustache.service.ServiceListViewService;
 import com.awsft.knifeandmustache.view_dto.BarberDashboardViewDTO;
+import com.awsft.knifeandmustache.view_dto.BarberListViewDTO;
 import com.awsft.knifeandmustache.view_dto.ServiceDashboardViewDTO;
 import com.awsft.knifeandmustache.view_dto.ServiceListViewDTO;
 
@@ -25,15 +27,18 @@ public class ViewsController {
 
     // BARBEIROS
     private final BarberDashboardViewService barberDashboardViewService;
+    private final BarberListViewService barberListViewService;
+
 
     public ViewsController(
         ServiceDashboardViewService serviceDashboardViewService, ServiceListViewService serviceListViewService,
-        BarberDashboardViewService barberDashboardViewService
+        BarberDashboardViewService barberDashboardViewService, BarberListViewService barberListViewService
     ){
         this.serviceDashboardViewService = serviceDashboardViewService;
         this.serviceListViewService = serviceListViewService;
 
         this.barberDashboardViewService = barberDashboardViewService;
+        this.barberListViewService = barberListViewService;
     }
 
     // SERVIÇOS DASHBOARD
@@ -55,6 +60,12 @@ public class ViewsController {
     public ResponseEntity<BarberDashboardViewDTO> findBarberDashboardByBarbershopId(@PathVariable("id") Long id) {
         BarberDashboardViewDTO record = barberDashboardViewService.findByBarbershopId(id);
         return new ResponseEntity<>(record, HttpStatus.OK);
+    }
+    // BARBEIROS LISTA
+    @GetMapping("/dto/barber-list/{id}")
+    public ResponseEntity<List<BarberListViewDTO>> findBarbersByBarbershopId(@PathVariable("id") Long id) {
+        List<BarberListViewDTO> records = barberListViewService.findByBarbershopId(id);
+        return new ResponseEntity<>(records, HttpStatus.OK);
     }
 
 }

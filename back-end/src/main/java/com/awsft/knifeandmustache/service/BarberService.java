@@ -8,16 +8,27 @@ import com.awsft.knifeandmustache.dto.BarberDTO;
 import com.awsft.knifeandmustache.model.Barber;
 import com.awsft.knifeandmustache.model.Barbershop;
 import com.awsft.knifeandmustache.new_dto.NewBarberDTO;
+import com.awsft.knifeandmustache.repository.BarberDashboardViewRepository;
+import com.awsft.knifeandmustache.repository.BarberListViewRepository;
 import com.awsft.knifeandmustache.repository.BarberRepository;
 import com.awsft.knifeandmustache.update_dto.UpdateBarberDTO;
+import com.awsft.knifeandmustache.view_dto.BarberDashboardViewDTO;
+import com.awsft.knifeandmustache.view_dto.BarberListViewDTO;
+import com.awsft.knifeandmustache.view_dto.BarberPageViewDTO;
 
 @Service
 public class BarberService implements ICrud<Barber>{
 
     private final BarberRepository repo;
+    private final BarberDashboardViewRepository barberDashboardViewRepository;
+    private final BarberListViewRepository barberListViewRepository;
   
-    public BarberService(BarberRepository repo){
+    public BarberService(BarberRepository repo, 
+                         BarberDashboardViewRepository barberDashboardViewRepository,
+                         BarberListViewRepository barberListViewRepository){
         this.repo = repo;
+        this.barberDashboardViewRepository = barberDashboardViewRepository;
+        this.barberListViewRepository = barberListViewRepository;
     }
 
     public Barber save(Barber obj){
@@ -93,6 +104,14 @@ public class BarberService implements ICrud<Barber>{
         Barber obj = repo.findById(id).orElse(null);
         obj.setBarberActive(false);
         repo.save(obj);
+    }
+
+
+    public BarberPageViewDTO barberPage(Long id){
+        BarberDashboardViewDTO dashboard = barberDashboardViewRepository.findByBarbershopId(id);
+        List<BarberListViewDTO> barbers = barberListViewRepository.findByBarbershopId(id);
+        
+        return BarberPageViewDTO.fromView(dashboard, barbers);
     }
 }
 

@@ -6,15 +6,29 @@
 -- #########################################
 -- SERVIÇOS DE UMA BARBEA
 -- #########################################
--- CREATE VIEW view_services_barbershop AS 
---     SELECT b.id AS barbershop_id, 
--- 		   s.service_description, 
--- 		   s.service_value, 
--- 		   s.duration, 
--- 		   s.category 
--- 	FROM services s 
--- 	JOIN barbershops b ON b.id = s.barbershop_id 
--- 	WHERE s.service_active = TRUE;
+CREATE VIEW view_services_barbershop AS 
+    SELECT b.id AS barbershop_id, 
+		   s.service_description, 
+		   s.service_value, 
+		   s.duration, 
+		   s.category 
+	FROM services s 
+	JOIN barbershops b ON b.id = s.barbershop_id 
+	WHERE s.service_active = TRUE;
+
+-- #########################################
+-- BARBEIROS DE UMA BARBEA
+-- #########################################
+CREATE VIEW view_barbers_barbershop AS 
+    SELECT bs.id AS barbershop_id, 
+		   b.barber_name, 
+		   b.url_social, 
+		   b.is_hair, 
+		   b.is_beard 
+	FROM barbers b 
+	JOIN barbershops bs ON bs.id = b.barbershop_id 
+	WHERE b.barber_active = TRUE;
+	
 
 CREATE VIEW view_services_barbershop_dashboard AS
 	SELECT
@@ -23,7 +37,7 @@ CREATE VIEW view_services_barbershop_dashboard AS
 		COALESCE(s.total_services, 0) AS total_services,
 		COALESCE(s.avg_value, 0) AS avg_value,
 		COALESCE(s.avg_duration, 0) AS avg_duration,		
-		service_pop.service_description AS 	service_most_pop
+		service_pop.service_description AS 	service_most_popular
 
 	FROM barbershops bs
 	LEFT JOIN (
@@ -50,27 +64,27 @@ CREATE VIEW view_services_barbershop_dashboard AS
 
 
 
--- CREATE VIEW view_barbers_barbershop_dashboard AS
--- 	SELECT
--- 		bs.id AS barbershop_id,
--- 		COALESCE(b.total_barbers, 0) AS total_barbers,
--- 		COALESCE(total_value_day.total_value, 0) AS total_value_day
--- 	FROM barbershops bs
--- 	LEFT JOIN (
--- 		SELECT barbershop_id, COUNT(*) AS total_barbers
--- 		FROM barbers
--- 		WHERE barber_active = TRUE
--- 		GROUP BY barbershop_id
--- 	) b ON b.barbershop_id = bs.id
+CREATE VIEW view_barbers_barbershop_dashboard AS
+	SELECT
+		bs.id AS barbershop_id,
+		COALESCE(b.total_barbers, 0) AS total_barbers,
+		COALESCE(total_value_day.total_value, 0) AS total_value_day
+	FROM barbershops bs
+	LEFT JOIN (
+		SELECT barbershop_id, COUNT(*) AS total_barbers
+		FROM barbers
+		WHERE barber_active = TRUE
+		GROUP BY barbershop_id
+	) b ON b.barbershop_id = bs.id
 
--- 	LEFT JOIN (
--- 		SELECT a.barbershop_id, ROUND(SUM(s.service_value)::numeric, 2) AS total_value
--- 			FROM appointments a
--- 			JOIN service_appointments sa ON a.id = sa.appointment_id
--- 			JOIN services s ON s.id = sa.service_id
--- 			WHERE a.appointment_status IN ('FINALIZADO', 'AGENDADO')
--- 			GROUP BY a.barbershop_id
--- 	) total_value_day ON total_value_day.barbershop_id = bs.id;
+	LEFT JOIN (
+		SELECT a.barbershop_id, ROUND(SUM(s.service_value)::numeric, 2) AS total_value
+			FROM appointments a
+			JOIN service_appointments sa ON a.id = sa.appointment_id
+			JOIN services s ON s.id = sa.service_id
+			WHERE a.appointment_status IN ('FINALIZADO', 'AGENDADO')
+			GROUP BY a.barbershop_id
+	) total_value_day ON total_value_day.barbershop_id = bs.id;
 
 
 
