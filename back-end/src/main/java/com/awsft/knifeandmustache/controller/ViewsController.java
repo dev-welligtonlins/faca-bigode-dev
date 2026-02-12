@@ -9,42 +9,52 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.awsft.knifeandmustache.dto.BarberDashboardDTO;
+import com.awsft.knifeandmustache.service.BarberDashboardViewService;
 import com.awsft.knifeandmustache.service.ServiceDashboardViewService;
 import com.awsft.knifeandmustache.service.ServiceListViewService;
+import com.awsft.knifeandmustache.view_dto.BarberDashboardViewDTO;
 import com.awsft.knifeandmustache.view_dto.ServiceDashboardViewDTO;
 import com.awsft.knifeandmustache.view_dto.ServiceListViewDTO;
 
 @RestController
 @RequestMapping("/views")
 public class ViewsController {
-       
+    // SERVIÇOS
     private final ServiceDashboardViewService serviceDashboardViewService;
     private final ServiceListViewService serviceListViewService;
-    // private final ServiceDashboardService serviceDashService;
 
-    public ViewsController(ServiceDashboardViewService serviceDashboardViewService,
-                            ServiceListViewService serviceListViewService
+    // BARBEIROS
+    private final BarberDashboardViewService barberDashboardViewService;
+
+    public ViewsController(
+        ServiceDashboardViewService serviceDashboardViewService, ServiceListViewService serviceListViewService,
+        BarberDashboardViewService barberDashboardViewService
     ){
         this.serviceDashboardViewService = serviceDashboardViewService;
         this.serviceListViewService = serviceListViewService;
+
+        this.barberDashboardViewService = barberDashboardViewService;
     }
 
+    // SERVIÇOS DASHBOARD
     @GetMapping("/dto/service-dashboard/{id}")
-    public ResponseEntity<ServiceDashboardViewDTO> findByBarbershopId(@PathVariable("id") Long id) {
+    public ResponseEntity<ServiceDashboardViewDTO> findServiceDashboardByBarbershopId(@PathVariable("id") Long id) {
         ServiceDashboardViewDTO record = serviceDashboardViewService.findByBarbershopId(id);
         return new ResponseEntity<>(record, HttpStatus.OK);
     }
-
+    // SERVIÇOS LISTA
     @GetMapping("/dto/service-list/{id}")
     public ResponseEntity<List<ServiceListViewDTO>> findServicesByBarbershopId(@PathVariable("id") Long id) {
         List<ServiceListViewDTO> records = serviceListViewService.findByBarbershopId(id);
         return new ResponseEntity<>(records, HttpStatus.OK);
     }
-    // @GetMapping("/dto/service/{id}")
-    // public ResponseEntity<ServiceDashboardDTO> findServiceByBarbershop(@PathVariable("id") Long id) {
-    //     ServiceDashboardDTO record = serviceDashService.getServiceDash(id);
-    //     return new ResponseEntity<>(record, HttpStatus.OK);
-    // }
+
+
+    // BARBEIROS DASHBOARD
+    @GetMapping("/dto/barber-dashboard/{id}")
+    public ResponseEntity<BarberDashboardViewDTO> findBarberDashboardByBarbershopId(@PathVariable("id") Long id) {
+        BarberDashboardViewDTO record = barberDashboardViewService.findByBarbershopId(id);
+        return new ResponseEntity<>(record, HttpStatus.OK);
+    }
 
 }

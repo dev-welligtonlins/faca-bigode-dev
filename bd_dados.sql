@@ -137,10 +137,10 @@ INSERT INTO service_appointments (barber_id, service_id, appointment_id, service
 
 
 INSERT INTO service_appointments (barber_id, service_id, appointment_id, service_time)
-		VALUES (4, 4, 5, '16:00');
+		VALUES (4, 9, 5, '16:00');
 
 INSERT INTO service_appointments (barber_id, service_id, appointment_id, service_time)
-		VALUES (5, 2, 6, '14:00');
+		VALUES (5, 10, 6, '14:00');
 
 
 
@@ -179,6 +179,12 @@ INSERT INTO payments (appointment_id, payment_value, payment_method, payment_sta
 INSERT INTO payments (appointment_id, payment_value, payment_method, payment_status)
 		VALUES (4, 1, 'PIX', FALSE);
 
+
+INSERT INTO payments (appointment_id, payment_value, payment_method, payment_status)
+		VALUES (5, 1, 'PIX', FALSE);
+
+INSERT INTO payments (appointment_id, payment_value, payment_method, payment_status)
+		VALUES (6, 1, 'PIX', FALSE);
 
 
 

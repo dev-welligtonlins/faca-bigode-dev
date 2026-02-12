@@ -2,6 +2,7 @@
 
 
 
+
 -- #########################################
 -- SERVIÇOS DE UMA BARBEA
 -- #########################################
@@ -17,30 +18,62 @@
 
 CREATE VIEW view_services_barbershop_dashboard AS
 	SELECT
-	    s.barbershop_id,
+	    bs.id AS barbershop_id,
 	
-	    COUNT(DISTINCT s.id) AS total_services,
-	    ROUND(AVG(s.service_value)::numeric, 2) AS avg_value,
-	    ROUND(AVG(s.duration))::int AS avg_duration,
-	
-	    (
-	        SELECT s2.service_description
-	        FROM service_appointments sa
-	        JOIN appointments a
-	            ON a.id = sa.appointment_id
-	        JOIN services s2
-	            ON s2.id = sa.service_id
-	        WHERE a.barbershop_id = s.barbershop_id
-	          AND a.appointment_status = 'FINALIZADO'
-	        GROUP BY s2.service_description
-	        ORDER BY COUNT(*) DESC
-	        LIMIT 1
-	    ) AS service_most_popular
-	FROM services s
-	WHERE s.service_active = TRUE
-	GROUP BY s.barbershop_id;
+		COALESCE(s.total_services, 0) AS total_services,
+		COALESCE(s.avg_value, 0) AS avg_value,
+		COALESCE(s.avg_duration, 0) AS avg_duration,		
+		service_pop.service_description AS 	service_most_pop
 
-		   
+	FROM barbershops bs
+	LEFT JOIN (
+		SELECT barbershop_id, COUNT(*) AS total_services,
+		    ROUND(AVG(service_value)::numeric, 2) AS avg_value,
+		    ROUND(AVG(duration))::int AS avg_duration
+		FROM services
+		WHERE service_active = TRUE
+		GROUP BY barbershop_id
+	) s ON s.barbershop_id = bs.id
+	
+	LEFT JOIN (
+		SELECT DISTINCT ON (a.barbershop_id) a.barbershop_id, 
+			s.service_description, 
+			COUNT(sa.id) AS total_use
+		FROM appointments a
+		JOIN service_appointments sa ON sa.appointment_id = a.id
+		JOIN services s ON s.id = sa.service_id
+		WHERE a.appointment_status = 'FINALIZADO'
+		GROUP BY a.barbershop_id, s.service_description
+		ORDER BY a.barbershop_id, COUNT(sa.id) DESC
+	) service_pop ON service_pop.barbershop_id = bs.id;
+
+
+
+
+-- CREATE VIEW view_barbers_barbershop_dashboard AS
+-- 	SELECT
+-- 		bs.id AS barbershop_id,
+-- 		COALESCE(b.total_barbers, 0) AS total_barbers,
+-- 		COALESCE(total_value_day.total_value, 0) AS total_value_day
+-- 	FROM barbershops bs
+-- 	LEFT JOIN (
+-- 		SELECT barbershop_id, COUNT(*) AS total_barbers
+-- 		FROM barbers
+-- 		WHERE barber_active = TRUE
+-- 		GROUP BY barbershop_id
+-- 	) b ON b.barbershop_id = bs.id
+
+-- 	LEFT JOIN (
+-- 		SELECT a.barbershop_id, ROUND(SUM(s.service_value)::numeric, 2) AS total_value
+-- 			FROM appointments a
+-- 			JOIN service_appointments sa ON a.id = sa.appointment_id
+-- 			JOIN services s ON s.id = sa.service_id
+-- 			WHERE a.appointment_status IN ('FINALIZADO', 'AGENDADO')
+-- 			GROUP BY a.barbershop_id
+-- 	) total_value_day ON total_value_day.barbershop_id = bs.id;
+
+
+
 -- -- AGENDA
 -- 		-- info: retona os horário agendados de um barbeiro
 -- 		-- 		 com o o nome do cliente e o valor

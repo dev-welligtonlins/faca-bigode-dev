@@ -155,6 +155,7 @@ CREATE TABLE IF NOT EXISTS agenda (
 
 -- PAGAMENTOS
 CREATE TABLE IF NOT EXISTS payments (
+	id SERIAL PRIMARY KEY,
 	appointment_id INT NOT NULL,
 	payment_value FLOAT NOT NULL,
 	payment_method VARCHAR(15) NOT NULL,
