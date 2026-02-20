@@ -4,7 +4,8 @@ export interface BarberPageModel {
     dashboard: {
         barbershopId: number,
         totalBarbers: number,
-        totalValueDay: number
+        totalValueDay: number,
+        totalAppointmentsDay: number
     },
     barbers:   [{
       barbershopId: number,

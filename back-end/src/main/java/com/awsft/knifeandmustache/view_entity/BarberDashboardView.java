@@ -20,6 +20,8 @@ public class BarberDashboardView {
     private Long totalBarbers;
     @Column(name = "total_value_day")
     private BigDecimal totalValueDay;
+    @Column(name = "total_appointments_day")
+    private Long totalAppointmentsDay;
 
     public Long getBarbershopId() {
         return barbershopId;
@@ -30,6 +32,8 @@ public class BarberDashboardView {
     public BigDecimal getTotalValueDay() {
         return totalValueDay;
     }
-
+    public Long getTotalAppointmentsDay() {
+        return totalAppointmentsDay;
+    }
     
 }
