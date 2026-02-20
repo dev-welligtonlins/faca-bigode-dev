@@ -3,6 +3,8 @@
 
 
 
+
+
 -- #########################################
 -- SERVIÇOS DE UMA BARBEA
 -- #########################################
@@ -30,6 +32,9 @@ CREATE VIEW view_barbers_barbershop AS
 	WHERE b.barber_active = TRUE;
 	
 
+-- #########################################
+-- SERVIÇOS DASHBOARD
+-- #########################################
 CREATE VIEW view_services_barbershop_dashboard AS
 	SELECT
 	    bs.id AS barbershop_id,
@@ -62,13 +67,15 @@ CREATE VIEW view_services_barbershop_dashboard AS
 	) service_pop ON service_pop.barbershop_id = bs.id;
 
 
-
-
+-- #########################################
+-- BARBEIROS DASHBOARD
+-- #########################################
 CREATE VIEW view_barbers_barbershop_dashboard AS
 	SELECT
 		bs.id AS barbershop_id,
 		COALESCE(b.total_barbers, 0) AS total_barbers,
-		COALESCE(total_value_day.total_value, 0) AS total_value_day
+		COALESCE(total_value_day.total_value, 0) AS total_value_day,
+		COALESCE(total_value_day.total_appointments, 0) AS total_appointments_day
 	FROM barbershops bs
 	LEFT JOIN (
 		SELECT barbershop_id, COUNT(*) AS total_barbers
@@ -78,13 +85,98 @@ CREATE VIEW view_barbers_barbershop_dashboard AS
 	) b ON b.barbershop_id = bs.id
 
 	LEFT JOIN (
-		SELECT a.barbershop_id, ROUND(SUM(s.service_value)::numeric, 2) AS total_value
+		SELECT a.barbershop_id, COUNT(DISTINCT a.id) AS total_appointments, ROUND(SUM(s.service_value)::numeric, 2) AS total_value
 			FROM appointments a
 			JOIN service_appointments sa ON a.id = sa.appointment_id
 			JOIN services s ON s.id = sa.service_id
 			WHERE a.appointment_status IN ('FINALIZADO', 'AGENDADO')
 			GROUP BY a.barbershop_id
 	) total_value_day ON total_value_day.barbershop_id = bs.id;
+
+
+
+-- #########################################
+-- ATENDIMENTOS DOS BARBEIROS
+-- #########################################
+CREATE VIEW view_appointments_agender_barbers AS
+	SELECT 
+		bs.id AS barbershop_id,
+		barbers_schedules.appointment_id,
+		barbers_schedules.appointment_time,
+		barbers_schedules.barber_name, 
+		barbers_schedules.schedules, 
+		barbers_schedules.appointment_status
+	FROM barbershops bs
+
+	LEFT JOIN (
+		SELECT 
+			a.barbershop_id,
+			a.id AS appointment_id, 
+			a.appointment_time, 
+			b.barber_name,
+			sa.service_time AS schedules, 
+			a.appointment_status
+		FROM appointments a
+		JOIN service_appointments sa ON sa.appointment_id = a.id
+		JOIN barbers b ON sa.barber_id = b.id
+		WHERE a.appointment_status IN ('FINALIZADO', 'AGENDADO')
+		GROUP BY a.barbershop_id, a.id, a.appointment_time, b.barber_name, sa.service_time, a.appointment_status 
+	) barbers_schedules ON barbers_schedules.barbershop_id = bs.id;
+
+
+
+
+CREATE VIEW view_appointments_day_barbershop AS
+	SELECT
+	    bs.id AS barbershop_id,
+		appointments_day.client_name AS client_name,
+		COALESCE(appointments_day.total_value, 0) AS total_value,
+		COALESCE(appointments_day.total_duration, 0) AS total_duration
+	FROM barbershops bs
+	
+	LEFT JOIN (
+		SELECT 
+			a.barbershop_id, a.client_name,
+	    	ROUND(SUM(s.duration)::numeric, 2) AS total_duration,
+	    	ROUND(SUM(s.service_value)::numeric, 2) AS total_value
+		FROM appointments a
+		JOIN service_appointments sa ON sa.appointment_id = a.id
+		JOIN services s ON s.id = sa.service_id
+		WHERE a.appointment_status = 'AGENDADO'
+		GROUP BY a.barbershop_id, a.client_name
+		ORDER BY a.barbershop_id
+	) appointments_day ON appointments_day.barbershop_id = bs.id;
+
+
+
+
+CREATE VIEW view_appointments_day_barbershop AS
+	SELECT
+	    bs.id AS barbershop_id,
+		service_barber.appointment_id AS appointment_id,
+		COALESCE(service_barber.total_category, 0) AS total_category,
+		service_barber.category AS category
+	FROM barbershops bs
+	
+	LEFT JOIN (
+		SELECT
+			a.barbershop_id, 
+			a.id AS appointment_id,
+			COUNT(s.category)  AS total_category, 
+			s.category
+		FROM appointments a
+		JOIN service_appointments sa ON sa.appointment_id = a.id
+		JOIN services s ON s.id = sa.service_id
+		WHERE a.appointment_status IN ('FINALIZADO', 'AGENDADO')
+		GROUP BY a.barbershop_id, a.id, s.category
+	) service_barber ON service_barber.barbershop_id = bs.id;
+
+
+
+
+
+
+
 
 
 

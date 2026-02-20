@@ -26,7 +26,7 @@ export const routes: Routes = [
         path: 'servicos/:id',
         loadComponent: () => import('./components/services-component/services-component').then(m => m.ServicesComponent) // Caminho presumido corrigido
       },
-      { path: 'Barbeiros',
+      { path: 'barbeiros/:id',
         loadComponent: () => import('./components/barbeiros-component/barbeiros-component').then(m => m.BarbeirosComponent) // Caminho presumido corrigido
       },
       { path: 'Clientes',
