@@ -9,10 +9,10 @@
 </div>
 
 <div class="row">
-    <div class="col-12 col-md-6 col-lg-3 mb-4">
+    <div class="col-12 col-md-4">
         <div class="card-body">
             <div class="header-group">
-                <h1>Receita Total</h1>
+                <h5 class="metricas-titulo">Receita Total</h5>
                 <div class="icon-wrapper bg-primary-light"><i class="bi bi-graph-up-arrow"></i></div>
             </div>
             <!-- <h2 *ngIf="servicePage">{{ servicePage.dashboard.totalServices}}</h2> -->
@@ -20,25 +20,190 @@
         </div>
     </div>
 
-    <div class="col-12 col-md-6 col-lg-3 mb-4">
+    <div class="col-12 col-md-4">
         <div class="card-body">
             <div class="header-group">
-                <h1>Despesas</h1>
+                <h5 class="metricas-titulo">Despesas Total</h5>
                 <div class="icon-red bg-primary-light"><i class="bi bi-graph-down-arrow"></i></div>
             </div>
-            <i class="bi bi-graph-up-arrow"></i>
+            <div class="icon-arrow-red"><i class="bi bi-graph-down-arrow"></i></div>
         </div>
     </div>
 
-    <div class="col-12 col-md-6 col-lg-3 mb-4">
+    <div class="col-12 col-md-4">
         <div class="card-body">
             <div class="header-group">
-                <h1>Lucro Líquido</h1>
+                <h5 class="metricas-titulo">Lucro Líquido</h5>
                 <div class="icon-profit bg-primary-light"><i class="bi bi-currency-dollar"></i></div>
             </div>
             <i class="bi bi-graph-up-arrow"></i>
         </div>
     </div>
- </div>
+</div>
 
- 
+<div class="row">
+    <div class="col-12 col-md-4">
+        <div class="card card-metricas">
+
+            <div class="card-header-pro">
+                <h5 class="metricas-titulo">Receitas</h5>
+            </div>
+
+            <div class="card-body-pro">
+                <div class="formas-pagamento-section">
+                    <div class="lista-progresso">
+
+                        <div class="progresso-item">
+                            <span class="mes">Jan</span>
+                            <div class="flex-grow-1">
+                                <div class="progress-container-pro">
+                                    <div class="bar-fill bar-verde" style="width: 65%;"></div>
+                                </div>
+                            </div>
+                            <span class="cash-receitas">R$0.00</span>
+                        </div>
+
+
+                        <div class="progresso-item">
+                            <span class="mes">Fev</span>
+                            <div class="flex-grow-1">
+                                <div class="progress-container-pro">
+                                    <div class="bar-fill bar-verde" style="width: 25%;"></div>
+                                </div>
+                            </div>
+                            <span class="cash-receitas">R$0.00</span>
+                        </div>
+
+                        <div class="progresso-item">
+                            <span class="mes">Mar</span>
+                            <div class="flex-grow-1">
+                                <div class="progress-container-pro">
+                                    <div class="bar-fill bar-verde" style="width: 10%;"></div>
+                                </div>
+                            </div>
+                            <span class="cash-receitas">R$0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-4">
+        <div class="card card-metricas">
+
+            <div class="card-header-pro">
+                <h5 class="metricas-titulo">Despesas</h5>
+            </div>
+
+            <div class="card-body-pro">
+                <div class="formas-pagamento-section">
+                    <div class="lista-progresso">
+                        <div class="progresso-item">
+                            <span class="mes">Jan</span>
+                            <div class="flex-grow-1">
+                                <div class="progress-container-pro">
+                                    <div class="bar-fill bar-red" style="width: 65%;"></div>
+                                </div>
+                            </div>
+                            <span class="cash-despesas">R$0.00</span>
+                        </div>
+
+
+                        <div class="progresso-item">
+                            <span class="mes">Fev</span>
+                            <div class="flex-grow-1">
+                                <div class="progress-container-pro">
+                                    <div class="bar-fill bar-red" style="width: 25%;"></div>
+                                </div>
+                            </div>
+                            <span class="cash-despesas">R$0.00</span>
+                        </div>
+
+                        <div class="progresso-item">
+                            <span class="mes">Mar</span>
+                            <div class="flex-grow-1">
+                                <div class="progress-container-pro">
+                                    <div class="bar-fill bar-red" style="width: 10%;"></div>
+                                </div>
+                            </div>
+                            <span class="cash-despesas">R$0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-4">
+        <div class="card card-metricas">
+           
+            <div class="card-header-pro">
+                <h5 class="metricas-titulo">Metricas</h5>
+            </div>
+
+            <div class="card-body-pro">
+
+                
+                <div class="indicador-item d-flex justify-content-between align-items-center mb-4">
+                    <div class="texto-indicador">
+                        <span class="label-indicador">Ticket Médio</span>
+                        <h3 class="valor-indicador">R$ 0,00</h3>
+                    </div>
+                    <div class="icone-indicador">
+                        <i class="bi bi-ticket-perforated"></i>
+                    </div>
+                </div>
+
+                
+                <div class="indicador-item d-flex justify-content-between align-items-center mb-5">
+                    <div class="texto-indicador">
+                        <span class="label-indicador">Total de Transações</span>
+                        <h3 class="valor-indicador">0</h3>
+                    </div>
+                    <div class="icone-indicador">
+                        <i class="bi bi-credit-card-2-front"></i>
+                    </div>
+                </div>
+               
+                <div class="formas-pagamento-section">
+                    <h6 class="titulo-sessao mb-3">Formas de Pagamento</h6>
+
+                    <div class="lista-progresso">
+
+                        <div class="progresso-item d-flex align-items-center mb-3">
+                            <span class="nome-metodo">Pix</span>
+                            <div class="flex-grow-1 mx-3">
+                                <div class="progress-container-pro">
+                                    <div class="bar-fill bar-verde" style="width: 0%;"></div>
+                                </div>
+                            </div>
+                            <span class="percentual-texto">0%</span>
+                        </div>
+
+                        <div class="progresso-item d-flex align-items-center mb-3">
+                            <span class="nome-metodo">Dinheiro</span>
+                            <div class="flex-grow-1 mx-3">
+                                <div class="progress-container-pro">
+                                    <div class="bar-fill bar-azul" style="width: 0%;"></div>
+                                </div>
+                            </div>
+                            <span class="percentual-texto">0%</span>
+                        </div>
+
+                        <div class="progresso-item d-flex align-items-center">
+                            <span class="nome-metodo">Cartão</span>
+                            <div class="flex-grow-1 mx-3">
+                                <div class="progress-container-pro">
+                                    <div class="bar-fill bar-roxo" style="width: 0%;"></div>
+                                </div>
+                            </div>
+                            <span class="percentual-texto">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<small class="text-white-50">Dados atualizados nos últimos 30 dias</small>
