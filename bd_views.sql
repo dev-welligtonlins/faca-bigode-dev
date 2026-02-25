@@ -126,7 +126,7 @@ CREATE VIEW view_appointments_agender_barbers AS
 
 
 
-CREATE VIEW view_appointments_day_barbershop AS
+CREATE VIEW view_appointments_dashboard_barbershop AS
 	SELECT
 	    bs.id AS barbershop_id,
 		appointments_day.client_name AS client_name,
