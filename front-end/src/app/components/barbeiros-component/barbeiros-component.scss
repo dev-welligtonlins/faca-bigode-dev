@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.5rem;
-  
+
   h1 {
     margin-top: 0;
     margin-bottom: 0;
@@ -27,6 +27,8 @@
       background-color: #5d49ac;
     }
   }
+
+
 }
 
 .row {
@@ -225,15 +227,102 @@
 .row-services {
   margin-bottom: 0;
 
+  .profile-foto {
+    gap: 1rem;
+    width: 40px;
+    height: 40px;
+
+    .profile-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid rgba(224, 224, 224, 0.76);
+    }
+  }
+
   .card-service {
+    align-items: center;
     color: #ffffff;
     border-radius: 8px;
     padding: 14px;
     background-color: #d9d9d92c;
 
+    .teste {
+      display: flex;
+      gap: 1rem;
+
+      .avaliação {
+
+        .bi-star {
+          color: #CDA906;
+          font-size: 12px;
+        }
+
+        .text {
+          font-size: 11px;
+          color: #CDA906;
+        }
+      }
+    }
+
+    .contato {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+
+      .bi-envelope {
+        color: #fafafa;
+        font-size: 12px;
+        gap: 0.5rem;
+      }
+
+      .text {
+        color: #ffffff;
+        font-size: 12px;
+      }
+    }
+
+    .especialidades {
+     
+
+      h5 {
+        color: #ffffff;
+        font-size: 14px;
+        margin-top: -0.5rem;
+      }
+
+      .text {
+        background-color: #7f62f559;
+        border-radius: 5px;
+        color: #7F62F5;
+        font-size: 10px;
+        padding: 2px 6px;
+      }
+    }
+
+    .time {
+
+      h5 {
+        color: #ffffff;
+        font-size: 14px;
+        margin-top: 1rem;
+      }
+
+      .text {
+        background-color: #7F62F5;
+        border-radius: 5px;
+        color: #ffffff;
+        font-size: 10px;
+        padding: 2px 6px;
+        margin-bottom: 1rem;
+      }
+    }
+
 
     h6 {
       font-size: 20px;
+      margin-top: 0rem;
     }
 
     .small {
@@ -270,32 +359,31 @@
       gap: 1px;
     }
 
-    .btn {
+    .btn-group {
       display: flex;
-      align-items: center;
       gap: 8px;
       border: none;
+      margin-top: 0.5rem;
 
-      .btn-editar {
+      .btn {
         width: 60px;
         height: 28px;
-        color: #8877d2;
+        color: #f8f8f8;
         font-size: 11px;
-        border-radius: 0.2rem;
+        border-radius: 1rem;
         background-color: #4d3d8b;
-        text-align: center;
         line-height: 4px;
       }
 
-      .btn-delet {
+      .btn-danger {
         text-align: center;
         line-height: 4px;
         width: 60px;
         height: 27px;
-        color: #C62A2A;
+        color: #ffffff;
         font-size: 11px;
-        border-radius: 0.2rem;
-        background-color: #DEB3B3;
+        border-radius: 1rem;
+        background-color: #cf0a0a;
       }
     }
   }
