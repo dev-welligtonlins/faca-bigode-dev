@@ -1,7 +1,7 @@
+# Apresentação
+    Nosso projeto "Faca&Bigode" é um sistema para gerenciar atendimentos de barbearias, incluindo, registro de barbeiros e serviços/produtos, agenda exclusiva para barbeiros, controle de caixa (entradas/saídas), demonstração do desempenho das barbearias por meio de relatórios e indicadores.
 
-
-
-
+    Nosso
 
 ## Extensões
     Thunder Client
@@ -18,8 +18,14 @@
     user: postgres password: root
 
 
+## Front-end
+    cd fron-end
+    npm i
+    
+    caso necessário: npm install -g @angular/cli
 
-# FERRAMENTAS
+
+# INSTALAÇÃO DAS FERRAMENTAS
 
 ## JAVA
     Acesse: https://www.oracle.com/br/java/technologies/downloads/#java21
@@ -75,7 +81,22 @@
     Teste 
         postgres --version
             
-            
+## NODE
+
+    Acesse: https://nodejs.org/pt-br/download
+
+    Versão estável 20.20
+        Instalador: https://nodejs.org/dist/v20.20.1/node-v20.20.1-x64.msi
+
+    Tutorial
+        https://blog.formacao.dev/como-instalar-o-node-js-no-windows-2025/
+
+    Teste 
+        node -v
+
+    ### CLIENT ANGULAR
+        npm install -g @angular/cli
+             
             
 
 ## Fedora
