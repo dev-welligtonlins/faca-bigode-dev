@@ -12,6 +12,10 @@ import { CommonModule } from '@angular/common';
 })
 export class BarbeirosComponent implements OnInit {
 
+    perfil = {
+    fotoUrl: 'front-end/src/assets/img/perfil.png', 
+  };
+
   barbershopId!: number;
   barberPage!: BarberPageModel;
 
