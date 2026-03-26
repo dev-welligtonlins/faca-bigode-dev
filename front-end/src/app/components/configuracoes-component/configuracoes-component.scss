@@ -1,0 +1,51 @@
+
+.card-header-conta {
+    background-color: #2a2d31;
+    padding: 12px 20px;
+}
+
+.user-label {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.body-conta {
+    padding: 25px 20px;
+    background-color: #1a1c1e;
+}
+
+.info-email {
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 1.05rem;
+    display: block;
+}
+
+.info-senha {
+    color: #ffffff;
+    font-size: 0.95rem;
+    display: block;
+}
+
+.footer-conta {
+    text-align: center;
+    color: #33DDFF;
+    background-color: #1a1c1e;
+    padding: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-gerenciar {
+    color: #00a3ff;
+    /* Azul vibrante da imagem */
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: opacity 0.2s;
+}
+
+.btn-gerenciar:hover {
+    opacity: 0.8;
+    color: #00a3ff;
+}
