@@ -1,18 +1,29 @@
-
-.card-header-conta {
+.card-header {
     background-color: #2a2d31;
     padding: 12px 20px;
-}
 
-.user-label {
-    color: #ffffff;
-    font-weight: 600;
-    font-size: 0.95rem;
+    .text-header {
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 0.95rem;
+    }
 }
 
 .body-conta {
     padding: 25px 20px;
     background-color: #1a1c1e;
+
+    .info-plano {
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 0.95rem;
+    }
+
+    .text-ifons {
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 0.95rem;
+    }
 }
 
 .info-email {
@@ -48,4 +59,36 @@
 .btn-gerenciar:hover {
     opacity: 0.8;
     color: #00a3ff;
+}
+
+.historico {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.card-plano {
+    margin-top: 2rem;
+
+    .plano {
+        padding: 5px;
+        background-color: #1a1c1e;
+        display: flex;
+        gap: 25rem;
+
+        .text-assinatura {
+            color: #ffffff;
+        }
+
+        .text-assinante {
+            color: #ffffff;
+            border-radius: 50px;
+            padding: 4px;
+            background: linear-gradient(to right, #7F62F5, #372A6D);
+        }
+    }
+}
+
+.card-outros {
+    margin-top: 2rem;
 }
