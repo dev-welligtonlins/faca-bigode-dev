@@ -1,3 +1,10 @@
+.configurações {
+    align-items: center;
+    max-width: 500px;
+    width: 100%;
+
+}
+
 .card-header {
     background-color: #2a2d31;
     padding: 12px 20px;
@@ -10,7 +17,7 @@
 }
 
 .body-conta {
-    padding: 25px 20px;
+    padding: 15px;
     background-color: #1a1c1e;
 
     .info-plano {
@@ -61,20 +68,16 @@
     color: #00a3ff;
 }
 
-.historico {
-    color: #ffffff;
-    font-weight: 600;
-    font-size: 0.95rem;
-}
-
 .card-plano {
     margin-top: 2rem;
 
     .plano {
-        padding: 5px;
-        background-color: #1a1c1e;
         display: flex;
-        gap: 25rem;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10rem;
+        padding: 15px;
+        background-color: #1a1c1e;
 
         .text-assinatura {
             color: #ffffff;
@@ -87,8 +90,44 @@
             background: linear-gradient(to right, #7F62F5, #372A6D);
         }
     }
+
+    .info-plano-atual {
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 0.95rem;
+        padding: 0 15px 10px 15px;
+        background-color: #1a1c1e;
+    }
+
+    .text-renovacao {
+        color: #ffffff;
+        font-size: 0.7rem;
+        margin-top: 0.4rem;
+    }
+
+    .info-historico {
+        padding: 15px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 0.95rem;
+        background-color: #1a1c1e;
+    }
 }
 
 .card-outros {
     margin-top: 2rem;
+    margin-bottom: 3rem;
+
+    .outras-info {
+        background-color: #1a1c1e;
+
+        .info-row {
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    }
 }
