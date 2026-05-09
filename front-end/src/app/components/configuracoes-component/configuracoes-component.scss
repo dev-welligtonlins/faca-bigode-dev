@@ -1,8 +1,7 @@
 .configurações {
-    align-items: center;
-    max-width: 500px;
-    width: 100%;
-
+    // align-items: center;
+    // max-width: 500px;
+    // width: 100%;
 }
 
 .card-header {
@@ -19,18 +18,6 @@
 .body-conta {
     padding: 15px;
     background-color: #1a1c1e;
-
-    .info-plano {
-        color: #ffffff;
-        font-weight: 600;
-        font-size: 0.95rem;
-    }
-
-    .text-ifons {
-        color: #ffffff;
-        font-weight: 600;
-        font-size: 0.95rem;
-    }
 }
 
 .info-email {
@@ -46,72 +33,24 @@
     display: block;
 }
 
-.footer-conta {
+.footer-gerenciar-conta {
     text-align: center;
-    color: #33DDFF;
     background-color: #1a1c1e;
     padding: 15px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
 
-.btn-gerenciar {
-    color: #00a3ff;
-    /* Azul vibrante da imagem */
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: opacity 0.2s;
-}
-
-.btn-gerenciar:hover {
-    opacity: 0.8;
-    color: #00a3ff;
-}
-
-.card-plano {
-    margin-top: 2rem;
-
-    .plano {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 10rem;
-        padding: 15px;
-        background-color: #1a1c1e;
-
-        .text-assinatura {
-            color: #ffffff;
-        }
-
-        .text-assinante {
-            color: #ffffff;
-            border-radius: 50px;
-            padding: 4px;
-            background: linear-gradient(to right, #7F62F5, #372A6D);
-        }
-    }
-
-    .info-plano-atual {
+    .btn-gerenciar-conta {
         color: #ffffff;
-        font-weight: 600;
+        font-weight: 500;
         font-size: 0.95rem;
-        padding: 0 15px 10px 15px;
-        background-color: #1a1c1e;
-    }
+        background-color: transparent;
+        border: none;
+        padding: 0;
+        cursor: pointer;
 
-    .text-renovacao {
-        color: #ffffff;
-        font-size: 0.7rem;
-        margin-top: 0.4rem;
-    }
-
-    .info-historico {
-        padding: 15px;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        color: #ffffff;
-        font-weight: 600;
-        font-size: 0.95rem;
-        background-color: #1a1c1e;
+        &:hover {
+            color: #33DDFF;
+        }
     }
 }
 
@@ -123,11 +62,17 @@
         background-color: #1a1c1e;
 
         .info-row {
-            color: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
             font-weight: 600;
             font-size: 0.95rem;
-            padding: 15px;
+            width: 100%;
+            border: -0;
+            color: #fcfcfc;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: #2a2d3100;
         }
     }
 }

@@ -1,0 +1,32 @@
+<div class="modal fade" id="modalEndereco" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content bg-dark text-white border-secondary modal-endereco p-4">
+            <div class="modal-header border-0 p-0 mb-3">
+                <h5 class="modal-title fw-bold">Endereço da barbearia</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-0">
+                <div class="row g-4">
+                    <div class="col-md-7">
+                        <div class="row g-2">
+                            <div class="col-4"><label class="form-label">Cep</label><input type="text" class="form-control" placeholder="00000-000"></div>
+                            <div class="col-3"><label class="form-label">Nº</label><input type="text" class="form-control" placeholder="123"></div>
+                            <div class="col-5"><label class="form-label">Compl.</label><input type="text" class="form-control" placeholder="Apt..."></div>
+                            <div class="col-12"><label class="form-label">Rua</label><input type="text" class="form-control" placeholder="Rua..."></div>
+                            <div class="col-5"><label class="form-label">Bairro</label><input type="text" class="form-control" placeholder="Bairro"></div>
+                            <div class="col-5"><label class="form-label">Cidade</label><input type="text" class="form-control" placeholder="Cidade"></div>
+                            <div class="col-2"><label class="form-label">UF</label><input type="text" class="form-control" placeholder="RJ"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="map-container h-100"><img src="https://maps.googleapis.com/maps/api/staticmap?center=-22.9068,-43.1729&zoom=14&size=400x400" alt="Mapa"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer border-0 p-0 mt-4 d-flex justify-content-end gap-3">
+                <button type="button" class="btn btn-link text-white text-decoration-none fw-bold" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn-manter rounded-pill px-4 fw-bold py-2">Manter</button>
+            </div>
+        </div>
+    </div>
+</div>
