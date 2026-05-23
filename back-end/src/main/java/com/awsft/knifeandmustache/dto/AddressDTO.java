@@ -4,18 +4,22 @@ import com.awsft.knifeandmustache.model.Address;
 
 public class AddressDTO {
     private Long id;
+    private String cep;
     private String road;
     private Long number;
     private String neighborhood;
     private String city;
+    private String state;
 
     public static AddressDTO fromEntity(Address address) {
         AddressDTO dto = new AddressDTO();
         dto.id = address.getId();
+        dto.cep = address.getCep();
         dto.road = address.getRoad();
         dto.number = address.getNumber();
         dto.neighborhood = address.getNeighborhood();
         dto.city = address.getCity();
+        dto.state = address.getState();
 
         return dto;
     }
@@ -49,5 +53,23 @@ public class AddressDTO {
     }
     public void setCity(String city) {
         this.city = city;
-    }   
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }  
+
+    
 }

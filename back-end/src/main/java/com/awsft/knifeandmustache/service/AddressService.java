@@ -1,81 +1,79 @@
-package com.awsft.knifeandmustache.service;
-
-import java.util.List;
+    package com.awsft.knifeandmustache.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.awsft.knifeandmustache.dto.AddressDTO;
+import com.awsft.knifeandmustache.exception.custom.ConflictException;
+import com.awsft.knifeandmustache.exception.custom.NotFoundException;
 import com.awsft.knifeandmustache.model.Address;
 import com.awsft.knifeandmustache.model.Barbershop;
 import com.awsft.knifeandmustache.new_dto.NewAddressDTO;
 import com.awsft.knifeandmustache.repository.AddressRepository;
+import com.awsft.knifeandmustache.repository.BarbershopRepository;
 import com.awsft.knifeandmustache.update_dto.UpdateAddressDTO;
 
-@Service
-public class AddressService implements ICrud<Address>{
 
-    private final AddressRepository repo;
+@org.springframework.stereotype.Service
+public class AddressService{
+
+    private final AddressRepository addressRepository;
+    private final BarbershopRepository barbershopRepository;
   
-    public AddressService(AddressRepository repo){
-        this.repo = repo;
-    }
-
-    public Address save(Address obj){
-        return repo.save(obj);
+    public AddressService(AddressRepository addressRepository, BarbershopRepository barbershopRepository){
+        this.addressRepository = addressRepository;
+        this.barbershopRepository = barbershopRepository;
     }
  
-    @Override
-    public List<Address> findAll(){
-        return repo.findAll();
-    }
 
-    public Address getById(Long id){
-        return repo.findById(id).orElse(null);
-    }
-
-    // retorna o endereço da barbearia
-    public AddressDTO findIdDTO(Long id) {
-        Address address = repo.findByBarbershopId(id);
+    public AddressDTO findByBarbershopId(Long barbershopId) {
+        Address address = addressRepository.findByBarbershopId(barbershopId).orElseThrow(() -> new NotFoundException("Endereço da barbearia não encontrado"));
         return AddressDTO.fromEntity(address);
     }
 
-    // adiciona endereço da barbearia
-    public AddressDTO newDto(NewAddressDTO dto){
-        Address newObj = new Address();
-        newObj.setCep(dto.getCep());
-        newObj.setRoad(dto.getRoad());
-        newObj.setNumber(dto.getNumber());
-        newObj.setNeighborhood(dto.getNeighborhood());
-        newObj.setComplement(dto.getComplement());
-        newObj.setCity(dto.getCity());
-        newObj.setState(dto.getState());
-        Barbershop barbershop = new Barbershop();
-        barbershop.setId(dto.getBarbershopId());
-        newObj.setBarbershop(barbershop);
+    @Transactional
+    public AddressDTO createAdress(Long barbershopId, NewAddressDTO data){
 
-        repo.save(newObj);
-        Address address = repo.findById(newObj.getId()).orElseThrow(() -> new RuntimeException("Endereço not found"));
+        Barbershop barbershop = barbershopRepository.findById(barbershopId).orElseThrow(() -> new NotFoundException("Barbearia não encontrada!"));
+        if (barbershop.getAddress() != null ) { 
+            throw new ConflictException("Barbearia já possui endereço!");
+        }
+
+        Address address = new Address();
+        address.setCep(data.getCep());
+        address.setRoad(data.getRoad());
+        address.setNumber(data.getNumber());
+        address.setNeighborhood(data.getNeighborhood());
+        address.setComplement(data.getComplement());
+        address.setCity(data.getCity());
+        address.setState(data.getState());
+        address.setBarbershop(barbershop);
+        barbershop.setAddress(address);
+
+        addressRepository.save(address);
         return AddressDTO.fromEntity(address);
     }
 
-    // atualiza endereço
-    public AddressDTO updateDto(Long id, UpdateAddressDTO dto) {
-        Address updateObj = getById(id);
-        updateObj.setCep(dto.getCep());
-        updateObj.setRoad(dto.getRoad());
-        updateObj.setNumber(dto.getNumber());
-        updateObj.setNeighborhood(dto.getNeighborhood());
-        updateObj.setComplement(dto.getComplement());
-        updateObj.setCity(dto.getCity());
-        updateObj.setState(dto.getState());
-        repo.save(updateObj);
-        return AddressDTO.fromEntity(updateObj);
+    @Transactional
+    public AddressDTO updateAdress(Long barbershopId, UpdateAddressDTO data) {
+        Address updateAddress = addressRepository.findByBarbershopId(barbershopId).orElseThrow(() -> new NotFoundException("Endereço da barbearia não encontrado!"));
+
+        updateAddress.setCep(data.getCep());
+        updateAddress.setRoad(data.getRoad());
+        updateAddress.setNumber(data.getNumber());
+        updateAddress.setNeighborhood(data.getNeighborhood());
+        updateAddress.setComplement(data.getComplement());
+        updateAddress.setCity(data.getCity());
+        updateAddress.setState(data.getState());
+        return AddressDTO.fromEntity(updateAddress);
     }
 
-    @Override
-    public void delete(Long id){
-        Address obj = repo.findById(id).orElse(null);
-        repo.delete(obj);
+    @Transactional
+    public void deleteAdress(Long barbershopId){
+        Barbershop barbershop = barbershopRepository.findById(barbershopId).orElseThrow(() -> new NotFoundException("Barbearia não encontrada!"));
+        if(barbershop.getAddress() == null)
+            throw new ConflictException("Não existe endereço para a barbearia!");
+        barbershop.setAddress(null);    
     }
 }
 

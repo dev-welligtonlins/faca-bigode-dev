@@ -5,14 +5,12 @@ public class NewAccommodationDTO {
     private Boolean parking;
     private Boolean bath;
     private Boolean airConditioner;
-    private Long barbershopId;
     
-    public NewAccommodationDTO(Boolean wifi, Boolean parking, Boolean bath, Boolean airConditioner, Long barbershopId) {
+    public NewAccommodationDTO(Boolean wifi, Boolean parking, Boolean bath, Boolean airConditioner) {
         this.wifi = wifi;
         this.parking = parking;
         this.bath = bath;
         this.airConditioner = airConditioner;
-        this.barbershopId = barbershopId;
     }
 
     public Boolean getWifi() {
@@ -39,10 +37,5 @@ public class NewAccommodationDTO {
     public void setAirConditioner(Boolean airConditioner) {
         this.airConditioner = airConditioner;
     }
-    public Long getBarbershopId() {
-        return barbershopId;
-    }
-    public void setBarbershopId(Long barbershopId) {
-        this.barbershopId = barbershopId;
-    }
+
 }

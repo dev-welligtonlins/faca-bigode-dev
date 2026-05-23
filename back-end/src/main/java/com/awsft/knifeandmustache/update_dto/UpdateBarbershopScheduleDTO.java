@@ -6,16 +6,14 @@ import com.awsft.knifeandmustache.model.EDayWeek;
 
 public class UpdateBarbershopScheduleDTO {
     private Long id;
-    private EDayWeek dayWeek;
     private LocalTime openingTime;
     private LocalTime lunchStartTime;
     private LocalTime lunchEndTime; 
     private LocalTime closingTime;
 
-    public UpdateBarbershopScheduleDTO(Long id, EDayWeek dayWeek, LocalTime openingTime, LocalTime lunchStartTime,
+    public UpdateBarbershopScheduleDTO(Long id, LocalTime openingTime, LocalTime lunchStartTime,
             LocalTime lunchEndTime, LocalTime closingTime) {
         this.id = id;
-        this.dayWeek = dayWeek;
         this.openingTime = openingTime;
         this.lunchStartTime = lunchStartTime;
         this.lunchEndTime = lunchEndTime;
@@ -27,12 +25,6 @@ public class UpdateBarbershopScheduleDTO {
     }
     public void setId(Long id) {
         this.id = id;
-    }
-    public EDayWeek getDayWeek() {
-        return dayWeek;
-    }
-    public void setDayWeek(EDayWeek dayWeek) {
-        this.dayWeek = dayWeek;
     }
     public LocalTime getOpeningTime() {
         return openingTime;

@@ -58,5 +58,11 @@ public class PaymentController implements  ICrud<Payment>{
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @GetMapping("/findAppointment/{appointmentId}")
+    public ResponseEntity<List<Payment>> findByAppointmentId(Long appointmentId){
+        List<Payment> allRecors = service.findByAppointmentId(appointmentId);
+        return new ResponseEntity<>(allRecors, HttpStatus.OK);
+    }
+
     
 }

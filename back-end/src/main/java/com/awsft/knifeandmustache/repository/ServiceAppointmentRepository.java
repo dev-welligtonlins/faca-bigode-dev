@@ -22,5 +22,6 @@ public interface ServiceAppointmentRepository extends JpaRepository<ServiceAppoi
     List<ServiceAppointment> findByBarbershopId(Long id);
 
     
+    List<ServiceAppointment> findByAppointmentId(Long appointmentId);
 } 
 

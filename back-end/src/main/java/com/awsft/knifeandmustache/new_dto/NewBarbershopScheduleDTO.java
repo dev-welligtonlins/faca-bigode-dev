@@ -11,16 +11,13 @@ public class NewBarbershopScheduleDTO {
     private LocalTime lunchEndTime; 
     private LocalTime closingTime;
 
-    private Long barbershopId;
-
     public NewBarbershopScheduleDTO(EDayWeek dayWeek, LocalTime openingTime, LocalTime lunchStartTime,
-            LocalTime lunchEndTime, LocalTime closingTime, Long barbershopId) {
+            LocalTime lunchEndTime, LocalTime closingTime) {
         this.dayWeek = dayWeek;
         this.openingTime = openingTime;
         this.lunchStartTime = lunchStartTime;
         this.lunchEndTime = lunchEndTime;
         this.closingTime = closingTime;
-        this.barbershopId = barbershopId;
     }
 
     public EDayWeek getDayWeek() {
@@ -53,10 +50,5 @@ public class NewBarbershopScheduleDTO {
     public void setClosingTime(LocalTime closingTime) {
         this.closingTime = closingTime;
     }
-    public Long getBarbershopId() {
-        return barbershopId;
-    }
-    public void setBarbershopId(Long barbershopId) {
-        this.barbershopId = barbershopId;
-    }
+
 }

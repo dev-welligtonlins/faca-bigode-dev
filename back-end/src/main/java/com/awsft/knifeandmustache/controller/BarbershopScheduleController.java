@@ -15,14 +15,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.awsft.knifeandmustache.dto.BarbershopScheduleDTO;
 import com.awsft.knifeandmustache.model.BarbershopSchedule;
+import com.awsft.knifeandmustache.model.EDayWeek;
 import com.awsft.knifeandmustache.new_dto.NewBarbershopScheduleDTO;
 import com.awsft.knifeandmustache.service.BarbershopScheduleService;
 import com.awsft.knifeandmustache.update_dto.UpdateBarbershopScheduleDTO;
+import com.awsft.knifeandmustache.update_dto.UpdateServiceDTO;
 
 
 @RestController
 @RequestMapping("/barbershop_schedules")
-public class BarbershopScheduleController implements  ICrud<BarbershopSchedule>{
+public class BarbershopScheduleController {
        
     private final BarbershopScheduleService service;
 
@@ -30,58 +32,34 @@ public class BarbershopScheduleController implements  ICrud<BarbershopSchedule>{
         this.service = service;
     }
 
-    @PostMapping("/")
-    public ResponseEntity<BarbershopSchedule> insert(@RequestBody BarbershopSchedule obj){
-        BarbershopSchedule record = service.save(obj);
-        return new ResponseEntity<>(record, HttpStatus.CREATED);
+
+    @GetMapping("/findBarbershopSchedule/{barbershopId}/{eDayWeek}")
+    public ResponseEntity<BarbershopScheduleDTO> findByDayWeekAndBarbershopId(@PathVariable("barbershopId") Long barbershopId, @PathVariable("eDayWeek") EDayWeek eDayWeek) {
+        BarbershopScheduleDTO record = service.findByDayWeekAndBarbershopId(barbershopId, eDayWeek);
+        return new ResponseEntity<>(record, HttpStatus.OK);
     }
 
-    @GetMapping("/")
-    public ResponseEntity<List<BarbershopSchedule>> findAll(){
-        List<BarbershopSchedule> allRecors = service.findAll();
+    @GetMapping("/find/{barbershopId}")
+    public ResponseEntity<List<BarbershopScheduleDTO>> findByBarbershopId(@PathVariable("barbershopId") Long barbershopId){
+        List<BarbershopScheduleDTO> allRecors = service.findByBarbershopId(barbershopId);
         return new ResponseEntity<>(allRecors, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<BarbershopSchedule> getById(@PathVariable("id") Long id){
-        BarbershopSchedule record = service.getById(id);
-        return new ResponseEntity<>(record, HttpStatus.OK);
-    }
-
-    @PutMapping("/")
-    public ResponseEntity<BarbershopSchedule> update(@RequestBody BarbershopSchedule obj){
-        BarbershopSchedule record = service.save(obj);
-        return new ResponseEntity<>(record, HttpStatus.OK);
-    }
-
-    @GetMapping("/dto/{id}")
-    public ResponseEntity<BarbershopScheduleDTO> findIdDTO(@PathVariable("id") Long id) {
-        BarbershopScheduleDTO record = service.findIdDTO(id);
-        return new ResponseEntity<>(record, HttpStatus.OK);
-    }
-
-    @GetMapping("/dto/barbershop/{id}")
-    public ResponseEntity<List<BarbershopScheduleDTO>> findByBarbershopId(@PathVariable("id") Long id){
-        List<BarbershopScheduleDTO> allRecors = service.findByBarbershopId(id);
-        return new ResponseEntity<>(allRecors, HttpStatus.OK);
-    }
-
-    @PostMapping("/dto/new-barbershop_schedule/")
-    public ResponseEntity<List<BarbershopScheduleDTO>> newDto(@RequestBody List<NewBarbershopScheduleDTO> dto){
-        List<BarbershopScheduleDTO> allRecors = service.newDto(dto);
+    @PostMapping("/create/{barbershopId}")
+    public ResponseEntity<List<BarbershopScheduleDTO>> createBarbershopSchedule(@PathVariable("barbershopId") Long barbershopId, @RequestBody List<NewBarbershopScheduleDTO> data){
+        List<BarbershopScheduleDTO> allRecors = service.createBarbershopSchedule(barbershopId ,data);
         return new ResponseEntity<>(allRecors, HttpStatus.CREATED);
     }
 
-    @PutMapping("/dto/update-barbershop_schedule/{id}")
-    public ResponseEntity<BarbershopScheduleDTO> updateDto(@PathVariable("id") Long id, @RequestBody UpdateBarbershopScheduleDTO dto){
-        BarbershopScheduleDTO record = service.updateDto(id, dto);
+    @PutMapping("/update/{barbershopId}")
+    public ResponseEntity<BarbershopScheduleDTO> updateBarbershopSchedule(@PathVariable("barbershopId") Long barbershopId, @RequestBody UpdateBarbershopScheduleDTO data){
+        BarbershopScheduleDTO record = service.updateBarbershopSchedule(barbershopId, data);
         return new ResponseEntity<>(record, HttpStatus.OK);
     }
     
-    @Override
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") Long id){
-        service.delete(id);
+    @DeleteMapping("/delete/{barbershopId}/{dayWeek}")
+    public ResponseEntity<?> deleteBarbershopSchedule(@PathVariable("barbershopId") Long barbershopId, @PathVariable("dayWeek") EDayWeek dayWeek){
+        service.deleteBarbershopSchedule(barbershopId, dayWeek);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

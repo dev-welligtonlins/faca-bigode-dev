@@ -5,14 +5,12 @@ public class NewBarberDTO {
     private String barberUrlSocial;
     private Boolean isHair;
     private Boolean isBeard;
-    private Long barbershopId;
     
     public NewBarberDTO(String barberName, String barberUrlSocial, Boolean isHair, Boolean isBeard, Long barbershopId) {
         this.barberName = barberName;
         this.barberUrlSocial = barberUrlSocial;
         this.isHair = isHair;
         this.isBeard = isBeard;
-        this.barbershopId = barbershopId;
     }
 
     public String getBarberName() {
@@ -47,11 +45,4 @@ public class NewBarberDTO {
         this.isBeard = isBeard;
     }
 
-    public Long getBarbershopId() {
-        return barbershopId;
-    }
-
-    public void setBarbershopId(Long barbershopId) {
-        this.barbershopId = barbershopId;
-    }
 }

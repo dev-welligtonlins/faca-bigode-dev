@@ -5,85 +5,87 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.awsft.knifeandmustache.dto.BarbershopScheduleDTO;
+import com.awsft.knifeandmustache.exception.custom.ConflictException;
+import com.awsft.knifeandmustache.exception.custom.ForbiddenException;
+import com.awsft.knifeandmustache.exception.custom.NotFoundException;
 import com.awsft.knifeandmustache.model.Barbershop;
 import com.awsft.knifeandmustache.model.BarbershopSchedule;
+import com.awsft.knifeandmustache.model.EDayWeek;
 import com.awsft.knifeandmustache.new_dto.NewBarbershopScheduleDTO;
+import com.awsft.knifeandmustache.repository.BarbershopRepository;
 import com.awsft.knifeandmustache.repository.BarbershopScheduleRepository;
 import com.awsft.knifeandmustache.update_dto.UpdateBarbershopScheduleDTO;
 
-@Service
-public class BarbershopScheduleService implements ICrud<BarbershopSchedule>{
+@org.springframework.stereotype.Service
+public class BarbershopScheduleService{
 
-    private final BarbershopScheduleRepository repo;
+    private final BarbershopScheduleRepository barbershopScheduleRepository;
+    private final BarbershopRepository barbershopRepository;
   
-    public BarbershopScheduleService(BarbershopScheduleRepository repo){
-        this.repo = repo;
-    }
-
-    public BarbershopSchedule save(BarbershopSchedule obj){
-        return repo.save(obj);
-    }
- 
-    @Override
-    public List<BarbershopSchedule> findAll(){
-        return repo.findAll();
-    }
-
-    public BarbershopSchedule getById(Long id){
-        return repo.findById(id).orElse(null);
+    public BarbershopScheduleService(BarbershopRepository barbershopRepository, BarbershopScheduleRepository barbershopScheduleRepository){
+        this.barbershopScheduleRepository = barbershopScheduleRepository;
+        this.barbershopRepository = barbershopRepository;
     }
 
     // retorna um horário da barbearia
-    public BarbershopScheduleDTO findIdDTO(Long id) {
-        BarbershopSchedule barbershopSchedule = repo.findById(id).orElseThrow(() -> new RuntimeException("Horário/Dia não encontrado"));
+    public BarbershopScheduleDTO findByDayWeekAndBarbershopId(Long barbershopId, EDayWeek dayWeek) {
+        BarbershopSchedule barbershopSchedule = barbershopScheduleRepository.findByDayWeekAndBarbershopId(dayWeek, barbershopId).orElseThrow(() -> new NotFoundException("Horário/Dia não encontrado!"));
         return BarbershopScheduleDTO.fromEntity(barbershopSchedule);
     }
 
     // retorna todos horários da barbearia
-    public List<BarbershopScheduleDTO> findByBarbershopId(Long id) {
-        List<BarbershopSchedule> barbershopSchedules = repo.findByBarbershopId(id);
+    public List<BarbershopScheduleDTO> findByBarbershopId(Long barbershopId) {
+        List<BarbershopSchedule> barbershopSchedules = barbershopScheduleRepository.findByBarbershopId(barbershopId);
+        if(barbershopSchedules.isEmpty()) {
+            throw new NotFoundException("Barbearia não possui horários!");
+        } 
         return barbershopSchedules.stream().map(BarbershopScheduleDTO::fromEntity).toList();
     }
 
-    // adiciona horário para barbearia
-    public List<BarbershopScheduleDTO> newDto(List<NewBarbershopScheduleDTO> dto){
-        Set<BarbershopSchedule> schedules = dto.stream().map(sc -> {
+    @Transactional
+    public List<BarbershopScheduleDTO> createBarbershopSchedule(Long barbershopId, List<NewBarbershopScheduleDTO> data){
+        Barbershop barbershop = barbershopRepository.findById(barbershopId).orElseThrow(() -> new NotFoundException("Barbearia não encontrada"));       
+               
+        Set<BarbershopSchedule> schedules = data.stream().map(obj -> {
             BarbershopSchedule schedule = new BarbershopSchedule();
-            schedule.setDayWeek(sc.getDayWeek());
-            schedule.setOpeningTime(sc.getOpeningTime());
-            schedule.setLunchStartTime(sc.getLunchStartTime());
-            schedule.setLunchEndTime(sc.getLunchEndTime());
-            schedule.setClosingTime(sc.getClosingTime());
+            schedule.setDayWeek(obj.getDayWeek());
+            schedule.setOpeningTime(obj.getOpeningTime());
+            schedule.setLunchStartTime(obj.getLunchStartTime());
+            schedule.setLunchEndTime(obj.getLunchEndTime());
+            schedule.setClosingTime(obj.getClosingTime());
 
-            Barbershop barbershop = new Barbershop();
-            barbershop.setId(sc.getBarbershopId());
+
             schedule.setBarbershop(barbershop);
-
+            barbershop.getBarbershopSchedules().add(schedule);
             return schedule;
         }).collect(Collectors.toSet());
 
-        repo.saveAll(schedules);
+        barbershopScheduleRepository.saveAll(schedules);
         return schedules.stream().map(BarbershopScheduleDTO::fromEntity).toList();
     }
 
-    // atualiza endereço
-    public BarbershopScheduleDTO updateDto(Long id, UpdateBarbershopScheduleDTO dto) {
-        BarbershopSchedule updateObj = getById(id);
-        updateObj.setDayWeek(dto.getDayWeek());
-        updateObj.setOpeningTime(dto.getOpeningTime());
-        updateObj.setLunchStartTime(dto.getLunchStartTime());
-        updateObj.setLunchEndTime(dto.getLunchEndTime());
-        updateObj.setClosingTime(dto.getClosingTime());
-        repo.save(updateObj);
-        return BarbershopScheduleDTO.fromEntity(updateObj);
+    @Transactional
+    public BarbershopScheduleDTO updateBarbershopSchedule(Long barbershopId, UpdateBarbershopScheduleDTO data) {
+        BarbershopSchedule barbershopSchedule = barbershopScheduleRepository.findById(data.getId()).orElseThrow(() -> new NotFoundException("Horário não encontrado!"));
+        if(!barbershopSchedule.getBarbershop().getId().equals(barbershopId))
+            throw new ForbiddenException("Horário não pertence à barbearia!");  
+                barbershopSchedule.setOpeningTime(data.getOpeningTime());
+        barbershopSchedule.setLunchStartTime(data.getLunchStartTime());
+        barbershopSchedule.setLunchEndTime(data.getLunchEndTime());
+        barbershopSchedule.setClosingTime(data.getClosingTime());
+        return BarbershopScheduleDTO.fromEntity(barbershopSchedule);
     }
 
-    @Override
-    public void delete(Long id){
-        BarbershopSchedule obj = repo.findById(id).orElse(null);
-        repo.delete(obj);
+    public void deleteBarbershopSchedule(Long barbershopId, EDayWeek dayWeek){
+        BarbershopSchedule barbershopSchedule = barbershopScheduleRepository.findByDayWeekAndBarbershopId(dayWeek, barbershopId).orElseThrow(() -> new NotFoundException("Horário/Dia não encontrado!"));
+        barbershopSchedule.setOpeningTime(null);
+        barbershopSchedule.setLunchStartTime(null);
+        barbershopSchedule.setLunchEndTime(null);
+        barbershopSchedule.setClosingTime(null);   
+
     }
 }
 

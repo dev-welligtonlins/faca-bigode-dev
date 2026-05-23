@@ -8,7 +8,7 @@ import com.awsft.knifeandmustache.model.Payment;
 import com.awsft.knifeandmustache.repository.PaymentRepository;
 
 @Service
-public class PaymentService implements ICrud<Payment>{
+public class PaymentService{
 
     private final PaymentRepository repo;
   
@@ -20,7 +20,6 @@ public class PaymentService implements ICrud<Payment>{
         return repo.save(obj);
     }
  
-    @Override
     public List<Payment> findAll(){
         return repo.findAll();
     }
@@ -29,10 +28,13 @@ public class PaymentService implements ICrud<Payment>{
         return repo.findById(id).orElse(null);
     }
 
-    @Override
     public void delete(Long id){
         Payment obj = repo.findById(id).orElse(null);
         repo.delete(obj);
+    }
+
+    public List<Payment> findByAppointmentId(Long appointmentId){
+        return repo.findByAppointmentId(appointmentId);
     }
 
 }

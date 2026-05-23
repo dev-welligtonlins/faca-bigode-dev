@@ -22,7 +22,7 @@ import com.awsft.knifeandmustache.update_dto.UpdateBarbershopDTO;
 
 @RestController
 @RequestMapping("/barbershops")
-public class BarbershopController implements  ICrud<Barbershop>{
+public class BarbershopController{
        
     private final BarbershopService service;
 
@@ -30,60 +30,33 @@ public class BarbershopController implements  ICrud<Barbershop>{
         this.service = service;
     }
 
-    @PostMapping("/")
-    public ResponseEntity<Barbershop> insert(@RequestBody Barbershop obj){
-        Barbershop record = service.save(obj);
+    @PostMapping("/create")
+    public ResponseEntity<BarbershopDTO> createBarbershop(@RequestBody NewBarbershopDTO data){
+        BarbershopDTO record = service.createBarbershop(data);
         return new ResponseEntity<>(record, HttpStatus.CREATED);
-    }
-
-    @GetMapping("/")
-    public ResponseEntity<List<Barbershop>> findAll(){
-        List<Barbershop> allRecors = service.findAll();
-        return new ResponseEntity<>(allRecors, HttpStatus.OK);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Barbershop> getById(@PathVariable("id") Long id){
-        Barbershop record = service.getById(id);
-        return new ResponseEntity<>(record, HttpStatus.OK);
-    }
-
-    @PutMapping("/")
-    public ResponseEntity<Barbershop> update(@RequestBody Barbershop obj){
-        Barbershop record = service.save(obj);
-        return new ResponseEntity<>(record, HttpStatus.OK);
-    }
-
-    @Override
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") Long id){
-        service.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
     
-    //(5) retorna um barbeiro pelo barber.id
-    @GetMapping("/dto/{id}")
-    public ResponseEntity<BarbershopDTO> findIdDTO(@PathVariable("id") Long id) {
-        BarbershopDTO record = service.findIdDTO(id);
+    @GetMapping("/find/{barbershopId}")
+    public ResponseEntity<BarbershopDTO> findById(@PathVariable("barbershopId") Long barbershopId) {
+        BarbershopDTO record = service.findById(barbershopId);
         return new ResponseEntity<>(record, HttpStatus.OK);
     }
 
-    //(6) retorna todos barbeiros ativos da barbearia.id
-    @GetMapping("/dto/")
-    public ResponseEntity<List<BarbershopDTO>> findAllDTO() {
-        List<BarbershopDTO> allRecors = service.findAllDTO();
+    @GetMapping("/findAll")
+    public ResponseEntity<List<BarbershopDTO>> findAll() {
+        List<BarbershopDTO> allRecors = service.findAll();
         return new ResponseEntity<>(allRecors, HttpStatus.OK);
     }
 
-    @PostMapping("/dto/new-barbershop/")
-    public ResponseEntity<BarbershopDTO> newDto(@RequestBody NewBarbershopDTO dto){
-        BarbershopDTO record = service.newDto(dto);
-        return new ResponseEntity<>(record, HttpStatus.CREATED);
+    @PutMapping("/update")
+    public ResponseEntity<BarbershopDTO> updateBarbershop(@RequestBody UpdateBarbershopDTO data){
+        BarbershopDTO record = service.updateBarbershop(data.getId(), data);
+        return new ResponseEntity<>(record, HttpStatus.OK);
     }
 
-    @PutMapping("/dto/update-barbershop/{id}")
-    public ResponseEntity<BarbershopDTO> updateDto(@PathVariable("id") Long id, @RequestBody UpdateBarbershopDTO dto){
-        BarbershopDTO record = service.updateDto(id, dto);
-        return new ResponseEntity<>(record, HttpStatus.OK);
+    @DeleteMapping("/delete/{barbershopId}")
+    public ResponseEntity<?> deleteBarbershop(@PathVariable("barbershopId") Long barbershopId){
+        service.deleteBarbershop(barbershopId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

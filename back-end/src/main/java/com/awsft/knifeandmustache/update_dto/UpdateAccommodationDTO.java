@@ -1,24 +1,16 @@
 package com.awsft.knifeandmustache.update_dto;
 
 public class UpdateAccommodationDTO {
-    private Long id;
     private Boolean wifi;
     private Boolean parking;
     private Boolean bath;
     private Boolean airConditioner;
     
-    public UpdateAccommodationDTO(Long id, Boolean wifi, Boolean parking, Boolean bath, Boolean airConditioner) {
-        this.id = id;
+    public UpdateAccommodationDTO(Boolean wifi, Boolean parking, Boolean bath, Boolean airConditioner) {
         this.wifi = wifi;
         this.parking = parking;
         this.bath = bath;
         this.airConditioner = airConditioner;
-    }
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
     }
     public Boolean getWifi() {
         return wifi;

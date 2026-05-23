@@ -3,80 +3,70 @@ package com.awsft.knifeandmustache.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.awsft.knifeandmustache.dto.AccommodationDTO;
+import com.awsft.knifeandmustache.exception.custom.ConflictException;
+import com.awsft.knifeandmustache.exception.custom.NotFoundException;
 import com.awsft.knifeandmustache.model.Accommodation;
 import com.awsft.knifeandmustache.model.Barbershop;
 import com.awsft.knifeandmustache.new_dto.NewAccommodationDTO;
 import com.awsft.knifeandmustache.repository.AccommodationRepository;
+import com.awsft.knifeandmustache.repository.BarbershopRepository;
 import com.awsft.knifeandmustache.update_dto.UpdateAccommodationDTO;
 
 @Service
-public class AccommodationService implements ICrud<Accommodation>{
+public class AccommodationService {
 
-    private final AccommodationRepository repo;
+    private final AccommodationRepository accommodationRepository;
+    private final BarbershopRepository barbershopRepository;
   
-    public AccommodationService(AccommodationRepository repo){
-        this.repo = repo;
-    }
-
-    public Accommodation save(Accommodation obj){
-        return repo.save(obj);
-    }
- 
-    @Override
-    public List<Accommodation> findAll(){
-        return repo.findAll();
-    }
-
-    public Accommodation getById(Long id){
-        return repo.findById(id).orElse(null);
-    }
-
-    // retorna uma acomodação da barbearia pelo accommodation.id
-    public AccommodationDTO findIdDTO(Long id) {
-        Accommodation accommodation= repo.findById(id).orElseThrow(() -> new RuntimeException("accommodation não encontrado"));
-        return AccommodationDTO.fromEntity(accommodation);
+    public AccommodationService(AccommodationRepository accommodationRepository, BarbershopRepository barbershopRepository){
+        this.accommodationRepository = accommodationRepository;
+        this.barbershopRepository = barbershopRepository;
     }
 
     // retorna as acomodações da barbearia.id
-    public List<AccommodationDTO> findByBarbershopId(Long id) {
-        List<Accommodation> accommodations = repo.findByBarbershopId(id);
-        return accommodations.stream().map(AccommodationDTO::fromEntity).toList();
+    public AccommodationDTO findByBarbershopId(Long barbershopId) {
+        Accommodation accommodations = accommodationRepository.findByBarbershopId(barbershopId).orElseThrow(() -> new NotFoundException("Barbearia não tem acomodações!"));
+        return AccommodationDTO.fromEntity(accommodations);
     }
     
-    // adiciona as acomodações da barbearia
-    public AccommodationDTO newDto(NewAccommodationDTO dto){
-        Accommodation newObj = new Accommodation();
-        newObj.setWifi(dto.getWifi());
-        newObj.setParking(dto.getParking());
-        newObj.setBath(dto.getBath());
-        newObj.setAirConditioner(dto.getAirConditioner());
+    @Transactional
+    public AccommodationDTO createAccommodation(Long barbershopId, NewAccommodationDTO data){
+        Barbershop barbershop = barbershopRepository.findById(barbershopId).orElseThrow(() -> new NotFoundException("Barbearia não encontrada!"));
+        if (barbershop.getAccommodation() != null) {
+            throw new ConflictException("Barbearia já possui Acomodações!");
+        }
+        Accommodation accommodation = new Accommodation();
+        accommodation.setWifi(data.getWifi());
+        accommodation.setParking(data.getParking());
+        accommodation.setBath(data.getBath());
+        accommodation.setAirConditioner(data.getAirConditioner());
 
-        Barbershop barbershop = new Barbershop();
-        barbershop.setId(dto.getBarbershopId());
-        newObj.setBarbershop(barbershop);
+        accommodation.setBarbershop(barbershop);
+        barbershop.setAccommodation(accommodation);
 
-        repo.save(newObj);
-        Accommodation accommodation = repo.findById(newObj.getId()).orElseThrow(() -> new RuntimeException("Endereço not found"));
+        accommodationRepository.save(accommodation);
         return AccommodationDTO.fromEntity(accommodation);
     }
 
-    // atualiza acomodações da barbearia
-    public AccommodationDTO updateDto(Long id, UpdateAccommodationDTO dto) {
-        Accommodation updateObj = getById(id);
-        updateObj.setWifi(dto.getWifi());
-        updateObj.setParking(dto.getParking());
-        updateObj.setBath(dto.getBath());
-        updateObj.setAirConditioner(dto.getAirConditioner());
-        repo.save(updateObj);
-        return AccommodationDTO.fromEntity(updateObj);
+    @Transactional
+    public AccommodationDTO updateAccommodation(Long barbershopId, UpdateAccommodationDTO data) {
+        Accommodation updateAccommodation = accommodationRepository.findByBarbershopId(barbershopId).orElseThrow(() -> new NotFoundException("Acomodações da barbearia não encontrada!"));
+        updateAccommodation.setWifi(data.getWifi());
+        updateAccommodation.setParking(data.getParking());
+        updateAccommodation.setBath(data.getBath());
+        updateAccommodation.setAirConditioner(data.getAirConditioner());
+        return AccommodationDTO.fromEntity(updateAccommodation);
     }
 
-    @Override
-    public void delete(Long id){
-        Accommodation obj = repo.findById(id).orElse(null);
-        repo.delete(obj);
+    @Transactional
+    public void deleteAccommodation(Long barbershopId){
+        Barbershop barbershop = barbershopRepository.findById(barbershopId).orElseThrow(() -> new NotFoundException("Barbearia não encontrada!"));
+        if(barbershop.getAccommodation() == null)
+            {throw new NotFoundException("Não existe acomodações para a barbearia!");}
+        barbershop.setAccommodation(null);
     }
 }
 

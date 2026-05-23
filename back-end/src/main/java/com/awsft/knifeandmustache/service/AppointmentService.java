@@ -8,7 +8,12 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.awsft.knifeandmustache.dto.AppointmentDTO;
+import com.awsft.knifeandmustache.exception.custom.ConflictException;
+import com.awsft.knifeandmustache.exception.custom.ForbiddenException;
+import com.awsft.knifeandmustache.exception.custom.NotFoundException;
 import com.awsft.knifeandmustache.model.Appointment;
 import com.awsft.knifeandmustache.model.Barber;
 import com.awsft.knifeandmustache.model.Barbershop;
@@ -19,134 +24,130 @@ import com.awsft.knifeandmustache.model.ServiceAppointment;
 import com.awsft.knifeandmustache.new_dto.NewAppointmentDTO;
 import com.awsft.knifeandmustache.repository.AppointmentRepository;
 import com.awsft.knifeandmustache.repository.BarberRepository;
+import com.awsft.knifeandmustache.repository.BarbershopRepository;
 import com.awsft.knifeandmustache.repository.ServiceRepository;
 import com.awsft.knifeandmustache.update_dto.UpdateAppointmentDTO;
 
-
 @org.springframework.stereotype.Service
-public class AppointmentService implements ICrud<Appointment>{
+public class AppointmentService {
 
-    private final AppointmentRepository repo;
-    private final BarberRepository repoBarber;
-    private final ServiceRepository repoService;
-    
-    public AppointmentService(AppointmentRepository repo, BarberRepository repoBarber, ServiceRepository repoService){
-        this.repo = repo;
-        this.repoBarber = repoBarber;
-        this.repoService = repoService;
+    private final AppointmentRepository appointmentRepository;
+    private final BarberRepository barberRepository;
+    private final ServiceRepository serviceRepository;
+    private final BarbershopRepository barbershopRepository;
+
+    public AppointmentService(AppointmentRepository appointmentRepository, BarberRepository barberRepository,
+            ServiceRepository serviceRepository, BarbershopRepository barbershopRepository) {
+        this.appointmentRepository = appointmentRepository;
+        this.barberRepository = barberRepository;
+        this.serviceRepository = serviceRepository;
+        this.barbershopRepository = barbershopRepository;
     }
 
-    public Appointment save(Appointment obj){
-        return repo.save(obj);
-    }
- 
-    @Override
-    public List<Appointment> findAll(){
-        return repo.findAll();
+    // retorna todos atendimentos de barbearia.id
+    public List<AppointmentDTO> findByBarbershopId(Long barbershopId) {
+        List<Appointment> appointments = appointmentRepository.findByBarbershopId(barbershopId);
+        if(appointments.isEmpty()) {
+            throw new NotFoundException("Barbearia não possui Atendimentos!");
+        }
+
+        return appointments.stream().map(AppointmentDTO::fromEntity).toList();
     }
 
-    public Appointment getById(Long id){
-        return repo.findById(id).orElse(null);
-    }
-
-    @Override
-    public void delete(Long id){
-        Appointment obj = repo.findById(id).orElse(null);
-        repo.delete(obj);
-    }
-
-    public List<ServiceAppointment> findBarbersByAppointments(Long id){
-        return repo.findBarbersAppointments(id);
-    }
-
-    public List<Appointment> findByDayOfWeek(Long dayOfWeek) {
-        return repo.findByDayOfWeek(dayOfWeek);
-    }
-
-    public List<ServiceAppointment> findServiceAppointmentsByBarberIdAndDayOfWeek(Long id, Long dayOfWeek){
-        return repo.findServiceAppointmentsByBarberIdAndDayOfWeek(id, dayOfWeek);
-    }
-
-    //  retorna todos atendimentos de barbearia.id
-    public List<AppointmentDTO> findByBarbershopId(Long id) {
-        List<Appointment> list = repo.findByBarbershopId(id);
-
-        return list.stream().map(AppointmentDTO::fromEntity).toList();
-    }
-    
     // retorna um atendimento.id
-    public AppointmentDTO findIdDTO(Long id) {
-        Appointment appointment = repo.findById(id).orElseThrow(() -> new RuntimeException("Atendimento não encontrado"));
+    public AppointmentDTO findById(Long barbershopId, Long appointmentId) {
+        Appointment appointment = appointmentRepository.findById(appointmentId).orElseThrow(() -> new NotFoundException("Atendimento não encontrado!"));
+        if(!appointment.getBarbershop().getId().equals(barbershopId)) {
+            throw new ForbiddenException("Atendimento não pertence à barbearia!");
+        }
         return AppointmentDTO.fromEntity(appointment);
     }
 
-    // adiciona novo atendimento
-    public AppointmentDTO newDto(NewAppointmentDTO dto){
-        Appointment newObj = new Appointment();
-        newObj.setClienteName(dto.getClientName());
-        newObj.setAppointmentTime(dto.getAppointmentTime());
-        newObj.setAppointmentStatus(EAppointmentStatus.AGENDADO);
+    @Transactional
+    public AppointmentDTO createAppointment(Long barbershopId, NewAppointmentDTO data) {
+        Barbershop barbershop = barbershopRepository.findById(barbershopId)
+                                .orElseThrow(() -> new NotFoundException("Barbearia não encontrada!"));
 
-        Set<ServiceAppointment> serviceAppointments = dto.getServiceAppointments().stream().map(sa -> {
+        Appointment appointment = new Appointment();
+        appointment.setClienteName(data.getClientName());
+        appointment.setAppointmentTime(data.getAppointmentTime());
+        appointment.setAppointmentStatus(EAppointmentStatus.AGENDADO);
+
+        Set<ServiceAppointment> serviceAppointments = data.getServiceAppointments().stream().map(sa -> {
             ServiceAppointment serviceAppointment = new ServiceAppointment();
-            serviceAppointment.setAppointment(newObj);
             serviceAppointment.setTime(sa.getTime());
 
-            Barber barber = repoBarber.getReferenceById(sa.getBarberId());  
+            Barber barber = barberRepository.findById(sa.getBarberId()).orElseThrow(() -> new NotFoundException("Barbeiro não encontrado!"));
+            if (!barber.getBarbershop().getId().equals(barbershopId))
+                throw new ForbiddenException("Barbeiro não pertence à barbearia!");
             serviceAppointment.setBarber(barber);
 
-            Service service = repoService.getReferenceById(sa.getServiceId());
+            Service service = serviceRepository.findById(sa.getServiceId()).orElseThrow(() -> new NotFoundException("Serviço não encontrado!"));
+            if (!service.getBarbershop().getId().equals(barbershopId))
+                throw new ForbiddenException("Serviço não pertence à barbearia!");
             serviceAppointment.setService(service);
+
+            serviceAppointment.setAppointment(appointment);
+            appointment.getServiceAppointments().add(serviceAppointment);
 
             return serviceAppointment;
         }).collect(Collectors.toSet());
 
-        Set<Payment> payments = dto.getPayments().stream().map(p -> {
+        Set<Payment> payments = data.getPayments().stream().map(p -> {
             Payment pay = new Payment();
-            pay.setAppointment(newObj);
             pay.setPaymentMethod(p.getPaymentMethod());
             pay.setPaymentStatus(p.getPaymentStatus());
             pay.setValue(0.0);
+
+            pay.setAppointment(appointment);
+            appointment.getPayments().add(pay);
+
             return pay;
         }).collect(Collectors.toSet());
 
         BigDecimal valueTotal = serviceAppointments.stream().map(sa -> sa.getService().getValue())
-            .reduce(BigDecimal.ZERO, BigDecimal::add);
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        newObj.setValue(valueTotal);
-        newObj.setServiceAppointments(serviceAppointments);
-        newObj.setPayments(payments);
+        appointment.setValue(valueTotal);
+        appointment.setServiceAppointments(serviceAppointments);
+        appointment.setPayments(payments);
 
-        Barbershop barbershop = new Barbershop();
-        barbershop.setId(dto.getBarbershopId());
-        newObj.setBarbershop(barbershop);
+        appointment.setBarbershop(barbershop);
+        barbershop.getAppointments().add(appointment);
 
-        repo.save(newObj);
-        Appointment appointment = repo.findById(newObj.getId()).orElseThrow(() -> new RuntimeException("Appointment not found"));
+        appointmentRepository.save(appointment);
+
         return AppointmentDTO.fromEntity(appointment);
     }
 
-    public AppointmentDTO updateDto(Long id, UpdateAppointmentDTO dto) {
-        Appointment updateObj = getById(id);
-        updateObj.setClienteName(dto.getClientName());
-        updateObj.setAppointmentTime(dto.getAppointmentTime());
-        // o Map vai receber os pagamentos já registrados no atendimento 
+    @Transactional
+    public AppointmentDTO updateAppointment(Long barbershopId, UpdateAppointmentDTO data) {
+        Appointment appointment = appointmentRepository.findById(data.getId())
+                .orElseThrow(() -> new NotFoundException("Atendimento não encontrado!"));
+
+        if (!appointment.getBarbershop().getId().equals(barbershopId))
+            throw new ForbiddenException("Atendimento não pertence à barbearia!");
+
+        if (!appointment.getAppointmentStatus().equals(EAppointmentStatus.AGENDADO))
+            throw new ConflictException("Não é possível alterar atendimento finalizado ou cancelado!");
+
+        appointment.setClienteName(data.getClientName());
+        appointment.setAppointmentTime(data.getAppointmentTime());
+        // o Map vai receber os pagamentos já registrados no atendimento
         // o id do pagamento diferente de nulo vai ser registrado em
         // existingPayments. Verifica riscos de id de outros atendimentos
-        Map<Long, Payment> existingPayments = updateObj.getPayments().stream()
-            .filter(p -> p.getId() != null) 
-            .collect(Collectors.toMap(Payment::getId, Function.identity()));
+        Map<Long, Payment> existingPayments = appointment.getPayments().stream()
+                .filter(p -> p.getId() != null)
+                .collect(Collectors.toMap(Payment::getId, Function.identity()));
 
-        Set<Payment> payments =
-            dto.getPayments().stream()
+        Set<Payment> payments = data.getPayments().stream()
                 .map(p -> {
 
-                    Payment payment =
-                        Optional.ofNullable(p.getId())
+                    Payment payment = Optional.ofNullable(p.getId())
                             .map(existingPayments::get)
                             .orElseGet(() -> {
                                 Payment newPay = new Payment();
-                                newPay.setAppointment(updateObj);
+                                newPay.setAppointment(appointment);
                                 return newPay;
                             });
 
@@ -157,44 +158,63 @@ public class AppointmentService implements ICrud<Appointment>{
                     return payment;
                 })
                 .collect(Collectors.toSet());
-        
-        updateObj.getPayments().clear();
-        payments.forEach(updateObj.getPayments()::add);
 
-        Map<Long, ServiceAppointment> existingServiceAppointments =
-            updateObj.getServiceAppointments().stream()
+        appointment.getPayments().clear();
+        payments.forEach(appointment.getPayments()::add);
+
+        Map<Long, ServiceAppointment> existingServiceAppointments = appointment.getServiceAppointments().stream()
                 .filter(sa -> sa.getId() != null)
                 .collect(Collectors.toMap(ServiceAppointment::getId, Function.identity()));
 
-        Set<ServiceAppointment> serviceAppointments =
-            dto.getServiceAppointments().stream()
+        Set<ServiceAppointment> serviceAppointments = data.getServiceAppointments().stream()
                 .map(sa -> {
 
-                    ServiceAppointment serviceAppointment =
-                        Optional.ofNullable(sa.getId())
+                    ServiceAppointment serviceAppointment = Optional.ofNullable(sa.getId())
                             .map(existingServiceAppointments::get)
                             .orElseGet(() -> {
                                 ServiceAppointment s = new ServiceAppointment();
-                                s.setAppointment(updateObj);
+                                s.setAppointment(appointment);
                                 return s;
                             });
 
                     serviceAppointment.setTime(sa.getTime());
-                    serviceAppointment.setBarber(repoBarber.getReferenceById(sa.getBarberId()));
-                    serviceAppointment.setService(repoService.getReferenceById(sa.getServiceId()));
+                    Barber barber = barberRepository.findById(sa.getBarberId()).orElseThrow(() -> new NotFoundException("Barbeiro não encontrado!"));
+                    if (!barber.getBarbershop().getId().equals(barbershopId))
+                        throw new ForbiddenException("Barbeiro não pertence à barbearia!");
+                    serviceAppointment.setBarber(barber);
+
+                    Service service = serviceRepository.findById(sa.getServiceId()).orElseThrow(() -> new NotFoundException("Serviço não encontrado!"));
+                    if (!service.getBarbershop().getId().equals(barbershopId))
+                        throw new ForbiddenException("Serviço não pertence à barbearia!");
+                    serviceAppointment.setService(service);
 
                     return serviceAppointment;
                 })
                 .collect(Collectors.toSet());
 
-        updateObj.getServiceAppointments().clear();
-        serviceAppointments.forEach(updateObj.getServiceAppointments()::add);
+        appointment.getServiceAppointments().clear();
+        serviceAppointments.forEach(appointment.getServiceAppointments()::add);
         // Percorre os serviços do atendimento e soma os valores
-        BigDecimal valueTotal = updateObj.getServiceAppointments().stream().map(sa -> sa.getService().getValue()).reduce(BigDecimal.ZERO, BigDecimal::add);
-        updateObj.setValue(valueTotal);
+        BigDecimal valueTotal = appointment.getServiceAppointments().stream().map(sa -> sa.getService().getValue())
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        appointment.setValue(valueTotal);
 
-        repo.save(updateObj);
-        Appointment appointment = repo.findById(updateObj.getId()).orElseThrow(() -> new RuntimeException("Appointment not found"));
+        appointmentRepository.flush();
         return AppointmentDTO.fromEntity(appointment);
+    }
+
+    @Transactional
+    public void deleteAppointment(Long barbershopId, Long appointmentId ) {
+        Appointment appointment = appointmentRepository.findById(appointmentId)
+                .orElseThrow(() -> new NotFoundException("Atendimento não encontrado!"));
+
+        if (!appointment.getBarbershop().getId().equals(barbershopId))
+            throw new ForbiddenException("Atendimento não pertence à barbearia!");
+
+        if (!appointment.getAppointmentStatus().equals(EAppointmentStatus.AGENDADO))
+            throw new ConflictException("Não é possível alterar atendimento finalizado ou cancelado!");
+
+        appointment.setAppointmentStatus(EAppointmentStatus.CANCELADO);
+
     }
 }

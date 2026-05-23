@@ -9,7 +9,6 @@ public class NewServiceDTO {
     private Integer duration;
     private BigDecimal value;
     private ECategoryService serviceCategory;
-    private Long barbershopId;
 
     public NewServiceDTO(String serviceDescription, Integer duration, BigDecimal value, ECategoryService serviceCategory,
             Long barbershopId) {
@@ -17,7 +16,6 @@ public class NewServiceDTO {
         this.duration = duration;
         this.value = value;
         this.serviceCategory = serviceCategory;
-        this.barbershopId = barbershopId;
     }
 
     public String getServiceDescription() {
@@ -50,13 +48,5 @@ public class NewServiceDTO {
 
     public void setServiceCategory(ECategoryService serviceCategory) {
         this.serviceCategory = serviceCategory;
-    }
-
-    public Long getBarbershopId() {
-        return barbershopId;
-    }
-
-    public void setBarbershopId(Long barbershopId) {
-        this.barbershopId = barbershopId;
-    }    
+    }  
 }

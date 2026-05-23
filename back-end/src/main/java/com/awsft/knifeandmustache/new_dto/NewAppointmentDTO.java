@@ -12,15 +12,14 @@ public class NewAppointmentDTO {
     private LocalDateTime appointmentTime; 
     private List<NewPaymentDTO> payments;
     private List<NewServiceAppointmentDTO> serviceAppointments;
-    private Long barbershopId;
+
     
     public NewAppointmentDTO(String clientName, LocalDateTime appointmentTime, List<NewPaymentDTO> payments,
-            List<NewServiceAppointmentDTO> serviceAppointments, Long barbershopId) {
+            List<NewServiceAppointmentDTO> serviceAppointments) {
         this.clientName = clientName;
         this.appointmentTime = appointmentTime;
         this.payments = payments;
         this.serviceAppointments = serviceAppointments;
-        this.barbershopId = barbershopId;
     }
 
     public String getClientName() {
@@ -45,14 +44,6 @@ public class NewAppointmentDTO {
 
     public void setServiceAppointments(List<NewServiceAppointmentDTO> serviceAppointments) {
         this.serviceAppointments = serviceAppointments;
-    }
-
-    public Long getBarbershopId() {
-        return barbershopId;
-    }
-
-    public void setBarbershopId(Long barbershopId) {
-        this.barbershopId = barbershopId;
     }
 
     public LocalDateTime getAppointmentTime() {

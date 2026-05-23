@@ -1,7 +1,6 @@
 package com.awsft.knifeandmustache.update_dto;
 
 public class UpdateAddressDTO {
-    private Long id;
     private String cep;
     private String road;
     private Long number;
@@ -10,9 +9,8 @@ public class UpdateAddressDTO {
     private String city;
     private String state;
     
-    public UpdateAddressDTO(Long id, String cep, String road, Long number, String neighborhood, String complement,
+    public UpdateAddressDTO(String cep, String road, Long number, String neighborhood, String complement,
             String city, String state) {
-        this.id = id;
         this.cep = cep;
         this.road = road;
         this.number = number;
@@ -21,12 +19,7 @@ public class UpdateAddressDTO {
         this.city = city;
         this.state = state;
     }
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
+
     public String getCep() {
         return cep;
     }

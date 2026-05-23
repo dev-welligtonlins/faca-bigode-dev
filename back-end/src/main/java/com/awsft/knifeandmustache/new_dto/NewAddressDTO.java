@@ -8,7 +8,6 @@ public class NewAddressDTO {
     private String complement;
     private String city;
     private String state;
-    private Long barbershopId;
     
     public NewAddressDTO(String cep, String road, Long number, String neighborhood, String complement, String city,
             String state, Long barbershopId) {
@@ -19,7 +18,6 @@ public class NewAddressDTO {
         this.complement = complement;
         this.city = city;
         this.state = state;
-        this.barbershopId = barbershopId;
     }
 
     public String getCep() {
@@ -64,10 +62,5 @@ public class NewAddressDTO {
     public void setState(String state) {
         this.state = state;
     }
-    public Long getBarbershopId() {
-        return barbershopId;
-    }
-    public void setBarbershopId(Long barbershopId) {
-        this.barbershopId = barbershopId;
-    }
+
 }

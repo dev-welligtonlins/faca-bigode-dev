@@ -8,6 +8,7 @@ public class UpdateBarberDTO {
     private Boolean isBeard;
 
     public UpdateBarberDTO(Long id, String barberName, String barberUrlSocial, Boolean isHair, Boolean isBeard) {
+        this.id = id;
         this.barberName = barberName;
         this.barberUrlSocial = barberUrlSocial;
         this.isHair = isHair;

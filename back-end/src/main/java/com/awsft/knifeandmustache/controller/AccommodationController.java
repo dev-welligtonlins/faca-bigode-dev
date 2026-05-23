@@ -22,7 +22,7 @@ import com.awsft.knifeandmustache.update_dto.UpdateAccommodationDTO;
 
 @RestController
 @RequestMapping("/accommodations")
-public class AccommodationController implements  ICrud<Accommodation>{
+public class AccommodationController {
        
     private final AccommodationService service;
 
@@ -30,58 +30,29 @@ public class AccommodationController implements  ICrud<Accommodation>{
         this.service = service;
     }
 
-    @PostMapping("/")
-    public ResponseEntity<Accommodation> insert(@RequestBody Accommodation obj){
-        Accommodation record = service.save(obj);
+ 
+
+    @GetMapping("/find/{barberhopId}")
+    public ResponseEntity<AccommodationDTO> findByBarbershopId(@PathVariable("barberhopId") Long barberhopId){
+        AccommodationDTO record = service.findByBarbershopId(barberhopId);
+        return new ResponseEntity<>(record, HttpStatus.OK);
+    }
+
+    @PostMapping("/create/{barbershopId}")
+    public ResponseEntity<AccommodationDTO> createAccommodation(@PathVariable("barbershopId") Long barbershopId, @RequestBody NewAccommodationDTO data){
+        AccommodationDTO record = service.createAccommodation(barbershopId, data);
         return new ResponseEntity<>(record, HttpStatus.CREATED);
     }
-
-    @GetMapping("/")
-    public ResponseEntity<List<Accommodation>> findAll(){
-        List<Accommodation> allRecors = service.findAll();
-        return new ResponseEntity<>(allRecors, HttpStatus.OK);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Accommodation> getById(@PathVariable("id") Long id){
-        Accommodation record = service.getById(id);
+ 
+    @PutMapping("/update/{barbershopId}")
+    public ResponseEntity<AccommodationDTO> updateAccommodation(@PathVariable("barbershopId") Long barbershopId, @RequestBody UpdateAccommodationDTO data){
+        AccommodationDTO record = service.updateAccommodation(barbershopId, data);
         return new ResponseEntity<>(record, HttpStatus.OK);
     }
 
-    @PutMapping("/")
-    public ResponseEntity<Accommodation> update(@RequestBody Accommodation obj){
-        Accommodation record = service.save(obj);
-        return new ResponseEntity<>(record, HttpStatus.OK);
-    }
-
-    @GetMapping("/dto/{id}")
-    public ResponseEntity<AccommodationDTO> findIdDTO(@PathVariable("id") Long id) {
-        AccommodationDTO record = service.findIdDTO(id);
-        return new ResponseEntity<>(record, HttpStatus.OK);
-    }
-
-    @GetMapping("/dto/barbershop/{id}")
-    public ResponseEntity<List<AccommodationDTO>> findByBarbershopId(@PathVariable("id") Long id){
-        List<AccommodationDTO> allRecors = service.findByBarbershopId(id);
-        return new ResponseEntity<>(allRecors, HttpStatus.OK);
-    }
-
-    @PostMapping("/dto/new-accommodation/")
-    public ResponseEntity<AccommodationDTO> newDto(@RequestBody NewAccommodationDTO dto){
-        AccommodationDTO record = service.newDto(dto);
-        return new ResponseEntity<>(record, HttpStatus.CREATED);
-    }
-
-    @PutMapping("/dto/update-accommodation/{id}")
-    public ResponseEntity<AccommodationDTO> updateDto(@PathVariable("id") Long id, @RequestBody UpdateAccommodationDTO dto){
-        AccommodationDTO record = service.updateDto(id, dto);
-        return new ResponseEntity<>(record, HttpStatus.OK);
-    }
-
-    @Override
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") Long id){
-        service.delete(id);
+    @DeleteMapping("/delete/{barbershopId}")
+    public ResponseEntity<?> deleteAccommodation(@PathVariable("barbershopId") Long barbershopId){
+        service.deleteAccommodation(barbershopId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     
