@@ -1,0 +1,50 @@
+<div class="modal fade" id="modalHorarios" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content bg-dark text-white border-secondary p-4">
+            <div class="modal-header border-0 p-0 mb-3">
+                <h5 class="modal-title fw-bold">Horário de atendimento</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-0">
+                <select class="form-select bg-secondary bg-opacity-10 text-white border-secondary mb-4 py-2">
+                    <option>Aberto durante as horas indicadas</option>
+                    <option>Sempre aberto</option>
+                    <option>Fechado temporariamente</option>
+                </select>
+                <div class="d-flex flex-column gap-3">
+                    <div class="dia-row align-items-center row gx-2">
+                        <div class="col-md-3 col-12"><span class="fw-bold">Segunda-feira</span></div>
+                        <div class="col-md-7 col-10">
+                            <div class="d-flex align-items-center gap-2">
+                                <input type="time" class="form-control form-control-sm bg-secondary bg-opacity-10 text-white border-secondary" value="09:00">
+                                <span class="text-secondary small">às</span>
+                                <input type="time" class="form-control form-control-sm bg-secondary bg-opacity-10 text-white border-secondary" value="18:00">
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-2 d-flex justify-content-end">
+                            <div class="form-check form-switch"><input class="form-check-input custom-switch" type="checkbox" checked></div>
+                        </div>
+                    </div>
+                    <hr class="border-secondary opacity-25 my-1">
+                    <div class="dia-row align-items-center row gx-2">
+                        <div class="col-md-3 col-12"><span class="text-secondary">Domingo</span></div>
+                        <div class="col-md-7 col-10">
+                            <div class="d-flex align-items-center gap-2">
+                                <input type="time" class="form-control form-control-sm bg-secondary bg-opacity-10 text-white border-secondary" disabled>
+                                <span class="text-secondary small">às</span>
+                                <input type="time" class="form-control form-control-sm bg-secondary bg-opacity-10 text-white border-secondary" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-2 d-flex justify-content-end">
+                            <div class="form-check form-switch"><input class="form-check-input custom-switch" type="checkbox"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer border-0 p-0 mt-4 d-flex justify-content-end gap-3">
+                <button type="button" class="btn btn-link text-white text-decoration-none fw-bold" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-manter rounded-pill px-4 fw-bold">Manter</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -6,71 +6,50 @@
 </div>
 
 <div class="configurações">
-
     <div class="card-conta">
-        <div class="card-header">
-            <span class="text-header">user.barbe</span>
-        </div>
-
+        <div class="card-header"><span class="text-header">user.barbe</span></div>
         <div class="body-conta">
-            <div class="info-row">
-                <span class="info-email">example@gmail.com</span>
-            </div>
-            <div class="info-row mt-1">
-                <span class="info-senha">Senha: ******</span>
-            </div>
+            <div class="info-row"><span class="info-email">example@gmail.com</span></div>
+            <div class="info-row"><span class="info-senha">Senha: ******</span></div>
         </div>
-
-        <div class="footer-conta">
-            <a><!-- <a href="javascript:void(0)" (click)="abrirGerenciarConta()" class="btn-gerenciar"> -->
-                Gerenciar conta
-            </a>
+        <div class="footer-gerenciar-conta">
+            <button type="button" class="btn-gerenciar-conta"
+                data-bs-toggle="modal" data-bs-target="#modalGerenciarConta">Gerenciar conta</button>
         </div>
-    </div>
-
-    <div class="card-plano">
-        <div class="card-header">
-            <span class="text-header">Seus planos e cobranças</span>
-        </div>
-
-        <div class="plano">
-            <span class="text-assinatura">Assinaturas</span>
-            <span class="text-assinante">Assinante desde 17/09/2025</span>
-        </div>
-
-        <div class="info-plano-atual">
-            <span class="info-plano">Bigode Premium (anual) <i class="bi bi-chevron-right"></i> </span>
-            <p class="text-renovacao">A assinatura será renovada em 27 de março de 2026</p>
-        </div>
-
-        <div class="info-historico">
-            <span class="historico">Histórico de cobranças <i class="bi bi-chevron-right"></i> </span>
-        </div>
-
     </div>
 
     <div class="card-outros">
-        <div class="card-header">
-            <span class="text-header">Outras configurações</span>
-        </div>
+        <div class="card-header"><span class="text-header">Seus planos e cobranças</span></div>
 
         <div class="outras-info">
-            <div class="info-row">
-                <span class="info-outros">Horarios de funcionamento<i class="bi bi-chevron-right"></i></span>
-            </div>
+            <button type="button" class="info-row" data-bs-toggle="modal"
+                data-bs-target="#modalDetalhesPlano"><span>Detalhes do plano</span><i
+                    class="bi bi-chevron-right"></i></button>
+            <button type="button" class="info-row" data-bs-toggle="modal"
+                data-bs-target="#modalHistoricoCobrancas"><span>Histórico de cobranças</span><i
+                    class="bi bi-chevron-right"></i></button>
+        </div>
+    </div>
 
-            <div class="info-row">
-                <span class="info-outros">Formas de pagamento<i class="bi bi-chevron-right"></i></span>
-            </div>
-
-            <div class="info-row">
-                <span class="info-outros">Acomodações<i class="bi bi-chevron-right"></i></span>
-            </div>
-
-            <div class="info-row">
-                <span class="info-outros">Endereço<i class="bi bi-chevron-right"></i></span>
-            </div>
-
+    <div class="card-outros">
+        <div class="card-header"><span class="text-header">Outras configurações</span></div>
+        <div class="outras-info">
+            <button type="button" class="info-row" data-bs-toggle="modal" data-bs-target="#modalHorarios"><span
+                    class="info-outros">Horários de funcionamento</span><i class="bi bi-chevron-right"></i></button>
+            <button type="button" class="info-row" data-bs-toggle="modal" data-bs-target="#modalPagamento"><span
+                    class="info-outros">Formas de pagamento</span><i class="bi bi-chevron-right"></i></button>
+            <button type="button" class="info-row" data-bs-toggle="modal" data-bs-target="#modalAcomodacoes"><span
+                    class="info-outros">Acomodações</span><i class="bi bi-chevron-right"></i></button>
+            <button type="button" class="info-row" data-bs-toggle="modal" data-bs-target="#modalEndereco"><span
+                    class="info-outros">Endereço</span><i class="bi bi-chevron-right"></i></button>
         </div>
     </div>
 </div>
+
+<app-modal-gerenciar-conta-component></app-modal-gerenciar-conta-component>
+<app-modal-detalhes-plano-component></app-modal-detalhes-plano-component>
+<app-modal-historico-cobrancas-component></app-modal-historico-cobrancas-component>
+<app-modal-horarios-component></app-modal-horarios-component>
+<app-modal-pagamento-component></app-modal-pagamento-component>
+<app-modal-acomodacoes-component></app-modal-acomodacoes-component>
+<app-modal-endereco-component></app-modal-endereco-component>
